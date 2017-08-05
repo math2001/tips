@@ -1,0 +1,42 @@
+[
+    {
+        "title": "The string module",
+        "slug": "the-string-module",
+        "tags": ["python", "itsbuiltin"],
+        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "author": "math2001",
+        "timestamp": 1501912165517
+    },
+    {
+        "title": "The string module1",
+        "slug": "the-string-module1",
+        "tags": ["python", "itsbuiltin"],
+        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "author": "math2001",
+        "timestamp": 1501912165517
+    },
+    {
+        "title": "The string module2",
+        "slug": "the-string-module2",
+        "tags": ["python", "itsbuiltin"],
+        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "author": "math2001",
+        "timestamp": 1501912165517
+    },
+    {
+        "title": "The string module3",
+        "slug": "the-string-module3",
+        "tags": ["python", "itsbuiltin"],
+        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "author": "math2001",
+        "timestamp": 1501912165517
+    },
+    {
+        "title": "The string module4",
+        "slug": "the-string-module4",
+        "tags": ["python", "itsbuiltin"],
+        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "author": "math2001",
+        "timestamp": 1501912165517
+    }
+]
