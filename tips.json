@@ -8,35 +8,28 @@
         "timestamp": 1501912165517
     },
     {
-        "title": "The string module1",
-        "slug": "the-string-module1",
-        "tags": ["python", "itsbuiltin"],
-        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "title": "first tip",
+        "slug": "first-tip",
+        "tags": ["python"],
+        "content": "This is my first tip",
         "author": "math2001",
-        "timestamp": 1501912165517
+        "timestamp": 1501973959
     },
     {
-        "title": "The string module2",
-        "slug": "the-string-module2",
-        "tags": ["python", "itsbuiltin"],
-        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "title": "second tip",
+        "slug": "second-tip",
+        "tags": ["javascript"],
+        "content": "No need for brackets!",
         "author": "math2001",
-        "timestamp": 1501912165517
+        "timestamp": 1501974012
     },
     {
-        "title": "The string module3",
-        "slug": "the-string-module3",
-        "tags": ["python", "itsbuiltin"],
-        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "title": "third tip",
+        "slug": "third-tip",
+        "tags": ["bash"],
+        "content": "A cool PS1",
         "author": "math2001",
-        "timestamp": 1501912165517
-    },
-    {
-        "title": "The string module4",
-        "slug": "the-string-module4",
-        "tags": ["python", "itsbuiltin"],
-        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
-        "author": "math2001",
-        "timestamp": 1501912165517
+        "timestamp": 1501974048
     }
+
 ]
