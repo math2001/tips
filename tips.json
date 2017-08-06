@@ -4,7 +4,6 @@
         "slug": "the-string-module",
         "tags": ["python", "itsbuiltin"],
         "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
-        "author": "math2001",
         "timestamp": 1501912165517
     },
     {
@@ -12,7 +11,6 @@
         "slug": "first-tip",
         "tags": ["python"],
         "content": "This is my first tip",
-        "author": "math2001",
         "timestamp": 1501985697828.895
     },
     {
@@ -20,7 +18,6 @@
         "slug": "second-tip",
         "tags": ["javascript"],
         "content": "No need for brackets!",
-        "author": "math2001",
         "timestamp": 1501986713497.71
     },
     {
@@ -28,7 +25,6 @@
         "slug": "third-tip",
         "tags": ["bash"],
         "content": "A cool PS1",
-        "author": "math2001",
         "timestamp": 1501986723981.2168
     }
 

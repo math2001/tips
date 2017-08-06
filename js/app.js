@@ -31,14 +31,10 @@ function filterTips(tips, params) {
             return false
         }
         if (args.contains !== undefined
-            && (tip.title + tip.content + tip.author).indexOf(args.contains) === -1) {
+            && (tip.title + tip.content).indexOf(args.contains) === -1) {
             return false
         }
 
-        if (args.by !== undefined
-            && tip.author !== args.by) {
-            return false
-        }
         return true
     })
 }
