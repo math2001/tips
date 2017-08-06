@@ -34,6 +34,19 @@ code {
     padding: 3px 5px;
 }
 
+.tips {
+    padding: 10px;
+    width: 750px;
+    margin: auto;
+    max-width: 100%;
+    transition: all .1s;
+    opacity: 1;
+}
+
+.tips.fadeOut {
+    opacity: 0;
+}
+
 .arrow {
     margin-right: 5px;
 }
@@ -48,18 +61,11 @@ code {
     border-left: none;
     border-bottom: none;
     transform: rotate(45deg);
-    transition: all .4s;
+    transition: all .2s;
 }
 
 .tip-title.active .arrow::after {
     transform: rotate(135deg);
-}
-
-.tips {
-    padding: 10px;
-    width: 750px;
-    margin: auto;
-    max-width: 100%;
 }
 
 .tip-title {

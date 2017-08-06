@@ -33,6 +33,7 @@ const markdownToHTML = (function () {
 })()
 
 function renderTips(tips) {
+    tipsElement.classList.add('fadeOut')
     let html = ''
     tips.some(tip => {
         tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
@@ -40,8 +41,10 @@ function renderTips(tips) {
         html += Mustache.render(tip_template, Object.assign({baseurl: baseurl}, tip))
     })
 
-    tipsElement.innerHTML = html
-
+    setTimeout(function () {
+        tipsElement.innerHTML = html
+        tipsElement.classList.remove('fadeOut')
+    }, 100)
 }
 
 function filterTips(tips, params) {
