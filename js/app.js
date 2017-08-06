@@ -38,17 +38,21 @@ class Tips {
         this.bindEvent()
     }
 
+    static updateTipPanel(tip) {
+        const panel = tip.nextElementSibling
+        if (!tip.classList.contains('active')){
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+    }
+
     static bindDOM() {
 
-        document.body.addEventListener('click', function (e) {
+        document.body.addEventListener('click', (e) => {
             if (e.target.classList.contains('tip-title')) {
                 e.target.classList.toggle('active')
-                const panel = e.target.nextElementSibling
-                if (panel.style.maxHeight){
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
+                this.updateTipPanel(e.target)
             }
         })
     }
@@ -64,12 +68,18 @@ class Tips {
     static render(tips) {
         this.element.classList.add('fadeOut')
         let html = ''
+        const pathname = getLocationObject().pathname()
         tips.some(tip => {
-            html += Mustache.render(this.template, Object.assign({baseurl: baseurl}, tip))
+            html += Mustache.render(this.template, Object.assign({baseurl,
+                active: tip.slug === pathname ? ' active' : ''}, tip))
         })
 
         setTimeout(() => {
             this.element.innerHTML = html
+            const tips = document.querySelectorAll('.tip-title.active')
+            for (var i = tips.length - 1; i >= 0; i--) {
+                this.updateTipPanel(tips[i])
+            }
             this.element.classList.remove('fadeOut')
         }, 100)
     }
