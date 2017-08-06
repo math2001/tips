@@ -132,7 +132,6 @@ class Tips {
                 reRender = true
             } else if (args.hashLocation.search() !== args.previousHashLocation.search()) {
                 reRender = true
-                debugger
             }
             this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
         })

@@ -3,7 +3,6 @@
 class Search {
 
     static init() {
-        return
         this.input = document.getElementById('search-input')
         this.help = document.getElementById('search-help')
         this.bindDOM()
@@ -17,20 +16,20 @@ class Search {
         })
     }
 
-    static objectToString(obj) {
+    static objectToString(hashLocation) {
+        let params = hashLocation.search(true)
         let text = '';
-        text += '[' + (obj.tags).join('][') + '] '
-        text += obj.contains
+        let tags = params.withtag
+        if (tags !== undefined) {
+            text += '[' + tags.split(',').join('][') + '] '
+        }
+        text += params.contains !== undefined ? params.contains : ''
         return text
     }
 
     static bindEvent() {
-        EM.on('navigage', (text) => {
-            if (typeof text !== String) {
-                text = getLocationObject().this.objectToString(text)
-            }
-            this.input.value = text
-            // this.navigate(text)
+        EM.on('navigated', (args) => {
+            this.input.value = this.objectToString(args.hashLocation)
         })
     }
 
@@ -68,9 +67,9 @@ class Search {
     }
 
     static navigate(search) {
-        const uri = getLocationObject()
+        const uri = getHashLocation()
         uri.search(this.searchToObject(search))
-        location.hash = '#' + uri.toString()
+        EM.fire('navigate', uri)
     } 
 
 }
