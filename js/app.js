@@ -51,9 +51,16 @@ class Tips {
 
         document.body.addEventListener('click', (e) => {
             if (e.target.classList.contains('tip-title')) {
-                const uri = getHashLocation()
-                uri.pathname(e.target.getAttribute('data-slug'))
-                EM.fire('navigate',uri)
+                if (e.target.classList.contains('active')) {
+                    e.target.classList.remove('active')
+                    this.updateTipPanel(e.target)
+                    const tip = this.element.querySelector('.tip-title.active')
+                    EM.fire('navigate', getHashLocation().pathname(tip === null ? '' : tip.getAttribute('data-slug')))
+                } else {
+                    const uri = getHashLocation()
+                    uri.pathname(e.target.getAttribute('data-slug'))
+                    EM.fire('navigate', uri)
+                }
             }
         })
     }
@@ -70,6 +77,7 @@ class Tips {
         if (!reRender) {
             const slug = hashLocation.pathname().replace('"', '\\"')
             const tip = this.element.querySelector(`[data-slug="${slug}"]`)
+            if (tip === null) return
             tip.classList.add('active')
             this.updateTipPanel(tip)
             return
