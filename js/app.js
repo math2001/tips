@@ -1,9 +1,6 @@
 "use strict";
 
-const tip_template = document.getElementById('tip-template').textContent
-const tipsElement = document.getElementById('tips')
 const baseurl = '/tips/#'
-let tips
 
 function getLocationObject() {
     return new URI(location.hash.substring(1))
@@ -32,66 +29,86 @@ const markdownToHTML = (function () {
     }
 })()
 
-function formatTips(tips) {
-    tips.some(tip => {
-        tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
-        tip.content = markdownToHTML(tip.content)
-    })
-    return tips
-}
+class Tips {
 
-function renderTips(tips) {
-    tipsElement.classList.add('fadeOut')
-    let html = ''
-    tips.some(tip => {
-        html += Mustache.render(tip_template, Object.assign({baseurl: baseurl}, tip))
-    })
-
-    setTimeout(function () {
-        tipsElement.innerHTML = html
-        tipsElement.classList.remove('fadeOut')
-    }, 100)
-}
-
-function filterTips(tips, params) {
-    const args = params.search(true)
-    if (args.withtag !== undefined) {
-        args.withtag = args.withtag.split(',')
+    static init() {
+        this.template = document.getElementById('tip-template').textContent
+        this.element = document.getElementById('tips')
+        this.bindDOM()
+        this.bindEvent()
     }
-    return tips.filter(tip => {
-        if (args.withtag !== undefined
-            && args.withtag.every(tag => tip.tags.indexOf(tag) === -1)) {
-            return false
-        }
-        if (args.contains !== undefined
-            && (tip.title + tip.content).indexOf(args.contains) === -1) {
-            return false
-        }
 
-        return true
-    })
+    static bindDOM() {
+
+        document.body.addEventListener('click', function (e) {
+            if (e.target.classList.contains('tip-title')) {
+                e.target.classList.toggle('active')
+                const panel = e.target.nextElementSibling
+                if (panel.style.maxHeight){
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            }
+        })
+    }
+
+    static format(tips) {
+        tips.some(tip => {
+            tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
+            tip.content = markdownToHTML(tip.content)
+        })
+        return tips
+    }
+
+    static render(tips) {
+        this.element.classList.add('fadeOut')
+        let html = ''
+        tips.some(tip => {
+            html += Mustache.render(this.template, Object.assign({baseurl: baseurl}, tip))
+        })
+
+        setTimeout(() => {
+            this.element.innerHTML = html
+            this.element.classList.remove('fadeOut')
+        }, 100)
+    }
+
+    static getAvailableTips() {
+        const args = getLocationObject().search(true)
+        if (args.withtag !== undefined) {
+            args.withtag = args.withtag.split(',')
+        }
+        return this.tips.filter(tip => {
+            if (args.withtag !== undefined
+                && args.withtag.every(tag => tip.tags.indexOf(tag) === -1)) {
+                return false
+            }
+            if (args.contains !== undefined
+                && (tip.title + tip.content).indexOf(args.contains) === -1) {
+                return false
+            }
+
+            return true
+        })
+    }
+
+    static bindEvent() {
+
+        EM.on('tips-received', tips => {
+            this.tips = this.format(tips)
+            EM.fire('navigate')
+        })
+
+        EM.on('navigate', () => {
+            this.render(this.getAvailableTips())
+        })
+    }
+
 }
 
-document.body.addEventListener('click', function (e) {
-    if (e.target.classList.contains('tip-title')) {
-        e.target.classList.toggle('active')
-        const panel = e.target.nextElementSibling
-        if (panel.style.maxHeight){
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        } 
-    }
-})
 
-EM.on('tips-received', function (_tips) {
-    tips = formatTips(_tips)
-    EM.fire('navigate')
-})
-
-EM.on('navigate', function () {
-    renderTips(filterTips(tips, getLocationObject()))
-})
+Tips.init()
 
 window.addEventListener('hashchange', function () {
     EM.fire('navigate')
