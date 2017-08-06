@@ -1,0 +1,63 @@
+/* Anaheim Andika */
+
+body {
+    font-family: Roboto;
+    margin: 0;
+}
+
+header {
+    background-color: #eee;
+    padding: 10px;
+}
+
+.header-description {
+    font-style: italic;
+    font-size: .9rem;
+    font-family: Inconsolata;
+}
+
+h1 {
+    margin: 0;
+}
+
+h1, h2, h3 {
+    font-family: "Carme";
+    font-weight: normal;
+}
+
+.tip-title small {
+    font-weight: normal;
+    color: #333;
+    position: relative;
+}
+
+.tips {
+    padding: 10px;
+}
+
+.tip-tags {
+    vertical-align: middle;
+    margin: 0;
+    font-size: .8rem;
+    font-weight: normal;
+    font-family: Inconsolata;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+}
+
+.tip-tag {
+    display: inline-block;
+    background-color: hsl(197, 84%, 96%);
+    border: 1px solid #6ebad8;
+    padding: 3px 5px;
+}
+
+.tip-tag:hover {
+    background-color: hsla(197, 69%, 90%, 1);
+}
+
+.tip-tag a {
+    color: #444;
+    text-decoration: none;
+}
