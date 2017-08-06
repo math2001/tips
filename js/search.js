@@ -40,6 +40,9 @@ class Search {
                 contains += char
             }
         }
+        if (isInBracket) {
+            contains += '[' + tags.pop()
+        }
         const obj = {}
         if (contains !== '') obj.contains = contains.trim()
         if (tags.length !== 0) obj.withtag = tags.join(',')
@@ -80,6 +83,7 @@ function testSearchToObject() {
 
     const argAndResult = [
         ['hello', {'contains': 'hello'}],
+        ['[hello', {'contains': '[hello'}],
         ['hello world', {'contains': 'hello world'}],
         ['hello [python]', {'contains': 'hello', 'withtag': 'python'}],
         ['hello [python][itsbuiltin]', {'contains': 'hello', 'withtag': 'python,itsbuiltin'}],
@@ -87,8 +91,9 @@ function testSearchToObject() {
         ['[itsbuiltin] hello [python]', {'contains': 'hello', 'withtag': 'itsbuiltin,python'}],
         ['[itsbuiltin]', {'withtag': 'itsbuiltin'}],
         ['\\[itsbuiltin\\]', {'contains': '[itsbuiltin]'}],
+        ['\\[itsbuiltin\\][', {'contains': '[itsbuiltin]['}],
         ['\\[itsbuiltin\\][python]', {'contains': '[itsbuiltin]', 'withtag': 'python'}],
-        ['\\[itsbuiltin\\][python] hello world', {'contains': '[itsbuiltin] hello world', 'withtag': 'python'}]
+        ['\\[itsbuiltin\\][python] hello world', {'contains': '[itsbuiltin] hello world', 'withtag': 'python'}],
     ]
 
     let arg, result, expectedResult;
