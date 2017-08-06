@@ -25,7 +25,7 @@
                 {{ #tags }}<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ . }}">{{ . }}</a></li> {{ /tags }}
             </ul>
         </h3>
-        <div class="tip-content">{{ content }}</div>
+        <div class="tip-content">{{{ content }}}</div>
         <p class="tip-date">— Published on {{ formated_date }}</p>
     </script>
     

@@ -9,10 +9,18 @@ function getLocationObject() {
     return new URI(location.hash.substring(1))
 }
 
+const markdownToHTML = (function () {
+    const converter = new showdown.Converter()
+    return function (markdown) {
+        return converter.makeHtml(markdown)
+    }
+})()
+
 function renderTips(tips) {
     let html = ''
     tips.some(tip => {
         tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
+        tip.content = markdownToHTML(tip.content)
         html += Mustache.render(tip_template, Object.assign({baseurl: baseurl}, tip))
     })
 
