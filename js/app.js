@@ -32,12 +32,18 @@ const markdownToHTML = (function () {
     }
 })()
 
+function formatTips(tips) {
+    tips.some(tip => {
+        tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
+        tip.content = markdownToHTML(tip.content)
+    })
+    return tips
+}
+
 function renderTips(tips) {
     tipsElement.classList.add('fadeOut')
     let html = ''
     tips.some(tip => {
-        tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
-        tip.content = markdownToHTML(tip.content)
         html += Mustache.render(tip_template, Object.assign({baseurl: baseurl}, tip))
     })
 
@@ -79,8 +85,8 @@ document.body.addEventListener('click', function (e) {
 })
 
 EM.on('tips-received', function (_tips) {
-    tips = _tips
-    renderTips(filterTips(_tips, getLocationObject()))
+    tips = formatTips(_tips)
+    EM.fire('navigate')
 })
 
 EM.on('navigate', function () {
