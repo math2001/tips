@@ -3,14 +3,14 @@
         "title": "The string module",
         "slug": "the-string-module",
         "tags": ["python", "itsbuiltin"],
-        "content": "If you want the list of every letter, just to\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
+        "content": "If you want the list of every letter, just do\n\n```python\nimport string\nprint(string.ascii_uppercase)\n```",
         "timestamp": 1501912165517
     },
     {
         "title": "first tip",
         "slug": "first-tip",
         "tags": ["python"],
-        "content": "This is my first tip",
+        "content": "This is my first tip. `from __future__ import braces`",
         "timestamp": 1501985697828.895
     },
     {
