@@ -3,16 +3,34 @@
 class Search {
 
     static init() {
+        return
         this.input = document.getElementById('search-input')
         this.help = document.getElementById('search-help')
         this.bindDOM()
+        this.bindEvent()
     }
 
     static bindDOM() {
         this.input.addEventListener('input', e => {this.navigate(e.target.value)})
         this.help.addEventListener('click', () => {
-            this.input.value = '[help]'
-            this.navigate(this.input.value)
+            EM.emit('search', '[help]')
+        })
+    }
+
+    static objectToString(obj) {
+        let text = '';
+        text += '[' + (obj.tags).join('][') + '] '
+        text += obj.contains
+        return text
+    }
+
+    static bindEvent() {
+        EM.on('navigage', (text) => {
+            if (typeof text !== String) {
+                text = getLocationObject().this.objectToString(text)
+            }
+            this.input.value = text
+            // this.navigate(text)
         })
     }
 

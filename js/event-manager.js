@@ -26,12 +26,13 @@ EM = (function() {
       return console.error("Unknown event '" + eventName + "'");
     }
     if (typeof data === 'string') {
-      dataToRender = data.wrap();
+      dataToRender = `"${data}"`;
     } else {
       dataToRender = data;
     }
     if (this.debug) {
-      console.info('fire', eventName.wrap(), 'with', dataToRender);
+      console.info('fire', `"${eventName}"`, 'with', dataToRender);
+      console.trace()
     }
     ref = this.listeners[eventName];
     for (i = 0, len = ref.length; i < len; i++) {

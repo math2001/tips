@@ -24,7 +24,7 @@
     </div>
 
     <script type="text/mustache" id="tip-template">
-        <h3 class="tip-title{{ active }}"><span class="arrow"></span> {{ title }}
+        <h3 class="tip-title{{ active }}" data-slug="{{ slug }}"><span class="arrow"></span> {{ title }}
             <ul class="tip-tags">
                 {{ #tags }}<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ . }}">{{ . }}</a></li> {{ /tags }}
             </ul>

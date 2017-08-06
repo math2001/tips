@@ -2,7 +2,7 @@
 
 const baseurl = '/tips/#'
 
-function getLocationObject() {
+function getHashLocation() {
     return new URI(location.hash.substring(1))
 }
 
@@ -51,8 +51,9 @@ class Tips {
 
         document.body.addEventListener('click', (e) => {
             if (e.target.classList.contains('tip-title')) {
-                e.target.classList.toggle('active')
-                this.updateTipPanel(e.target)
+                const uri = getHashLocation()
+                uri.pathname(e.target.getAttribute('data-slug'))
+                EM.fire('navigate',uri)
             }
         })
     }
@@ -65,10 +66,17 @@ class Tips {
         return tips
     }
 
-    static render(tips) {
+    static render(tips, hashLocation, reRender) {
+        if (!reRender) {
+            const slug = hashLocation.pathname().replace('"', '\\"')
+            const tip = this.element.querySelector(`[data-slug="${slug}"]`)
+            tip.classList.add('active')
+            this.updateTipPanel(tip)
+            return
+        }
         this.element.classList.add('fadeOut')
         let html = ''
-        const pathname = getLocationObject().pathname()
+        const pathname = hashLocation.pathname()
         tips.some(tip => {
             html += Mustache.render(this.template, Object.assign({baseurl,
                 active: tip.slug === pathname ? ' active' : ''}, tip))
@@ -84,8 +92,8 @@ class Tips {
         }, 100)
     }
 
-    static getAvailableTips() {
-        const args = getLocationObject().search(true)
+    static getAvailableTips(hashLocation) {
+        const args = hashLocation.search(true)
         if (args.withtag !== undefined) {
             args.withtag = args.withtag.split(',')
         }
@@ -107,23 +115,35 @@ class Tips {
 
         EM.on('tips-received', tips => {
             this.tips = this.format(tips)
-            EM.fire('navigate')
+            EM.fire('navigated', {hashLocation: getHashLocation()})
         })
 
-        EM.on('navigate', () => {
-            this.render(this.getAvailableTips())
+        EM.on('navigated', args => {
+            let reRender = false
+            if (typeof args.previousHashLocation === 'undefined') {
+                reRender = true
+            } else if (args.hashLocation.search() !== args.previousHashLocation.search()) {
+                reRender = true
+                debugger
+            }
+            this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
         })
     }
 
 }
 
 
+EM.on('navigate', newHashLocation => {
+    location.hash = '#' + newHashLocation.toString()
+})
+
 Tips.init()
 Search.init()
 
-window.addEventListener('hashchange', function () {
-    EM.fire('navigate')
+window.addEventListener('hashchange', function (e) {
+    EM.fire('navigated', {hashLocation: getHashLocation(), previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))})
 })
+
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'tips.json')
