@@ -13,7 +13,7 @@
         "tags": ["python"],
         "content": "This is my first tip",
         "author": "math2001",
-        "timestamp": 1501973959
+        "timestamp": 1501985697828.895
     },
     {
         "title": "second tip",
@@ -21,7 +21,7 @@
         "tags": ["javascript"],
         "content": "No need for brackets!",
         "author": "math2001",
-        "timestamp": 1501974012
+        "timestamp": 1501986713497.71
     },
     {
         "title": "third tip",
@@ -29,7 +29,7 @@
         "tags": ["bash"],
         "content": "A cool PS1",
         "author": "math2001",
-        "timestamp": 1501974048
+        "timestamp": 1501986723981.2168
     }
 
 ]
