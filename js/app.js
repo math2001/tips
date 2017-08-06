@@ -63,6 +63,18 @@ function filterTips(tips, params) {
     })
 }
 
+document.body.addEventListener('click', function (e) {
+    if (e.target.classList.contains('tip-title')) {
+        e.target.classList.toggle('active')
+        const panel = e.target.nextElementSibling
+        if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+    }
+})
+
 EM.on('tips-received', function (_tips) {
     tips = _tips
     renderTips(filterTips(_tips, getLocationObject()))

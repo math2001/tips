@@ -21,13 +21,15 @@
     </div>
 
     <script type="text/mustache" id="tip-template">
-        <h3 class="tip-title">{{ title }}
+        <h3 class="tip-title"><span class="arrow"></span> {{ title }}
             <ul class="tip-tags">
                 {{ #tags }}<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ . }}">{{ . }}</a></li> {{ /tags }}
             </ul>
         </h3>
-        <div class="tip-content">{{{ content }}}</div>
-        <p class="tip-date">— Published on {{ formated_date }}</p>
+        <div class="tip-panel">
+            <div class="tip-content">{{{ content }}}</div>
+            <p class="tip-date">— Published on {{ formated_date }}</p>
+        </div>
     </script>
     
 
