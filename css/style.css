@@ -17,6 +17,7 @@ h1 {
 h1, h2, h3 {
     font-family: "Carme";
     font-weight: normal;
+    position: relative;
 }
 
 pre {
@@ -32,6 +33,44 @@ pre code {
 code {
     background-color: #F5F5F5;
     padding: 3px 5px;
+}
+
+.header-search {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    vertical-align: middle;
+}
+
+.search-help {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-family: Inconsolata;
+    border-radius: 100%;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-help:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.search-input {
+    font-size: 1rem;
+    font-family: Inconsolata;
+    background: none;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    width: 150px;
+    transition: all .3s;
+}
+
+.search-input:focus {
+    width: 200px;
 }
 
 .tips {
@@ -72,7 +111,6 @@ code {
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     cursor: pointer;
-    position: relative;
 }
 
 .tip-panel {
