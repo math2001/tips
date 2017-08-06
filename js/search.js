@@ -4,11 +4,16 @@ class Search {
 
     static init() {
         this.input = document.getElementById('search-input')
+        this.help = document.getElementById('search-help')
         this.bindDOM()
     }
 
     static bindDOM() {
-        this.input.addEventListener('input', (e) => {this.navigate(e.target.value)})
+        this.input.addEventListener('input', e => {this.navigate(e.target.value)})
+        this.help.addEventListener('click', () => {
+            this.input.value = '[help]'
+            this.navigate(this.input.value)
+        })
     }
 
     static searchToObject(string) {
