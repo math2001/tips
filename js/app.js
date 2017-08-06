@@ -109,6 +109,7 @@ class Tips {
 
 
 Tips.init()
+Search.init()
 
 window.addEventListener('hashchange', function () {
     EM.fire('navigate')

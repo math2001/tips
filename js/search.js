@@ -8,7 +8,7 @@ class Search {
     }
 
     static bindDOM() {
-        this.input.addEventListener('input', (e) => {this.navigate(e.value)})
+        this.input.addEventListener('input', (e) => {this.navigate(e.target.value)})
     }
 
     static searchToObject(string) {
@@ -42,7 +42,9 @@ class Search {
     }
 
     static navigate(search) {
-        this.searchToObject(search)
+        const uri = getLocationObject()
+        uri.search(this.searchToObject(search))
+        location.hash = '#' + uri.toString()
     } 
 
 }
