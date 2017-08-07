@@ -69,6 +69,7 @@ class Search {
     static navigate(search) {
         const uri = getHashLocation()
         uri.search(this.searchToObject(search))
+        uri.pathname('')
         EM.fire('navigate', uri)
     } 
 
