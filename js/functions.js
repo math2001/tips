@@ -22,3 +22,23 @@ const markdownToHTML = (function () {
         return nodes.body.innerHTML
     }
 })()
+
+var copyToClipboard = (function () {
+
+    const textarea = document.createElement('textarea')
+    // hide the textarea (since we can't use display: none, it's a bit long)
+    textarea.style.opacity = 0
+    textarea.style.width = 0
+    textarea.style.height = 0
+    textarea.style.position = 'absolute'
+    textarea.style.bottom = '-100%'
+    textarea.style.left = '-100%'
+    textarea.style.margin = 0
+    document.body.appendChild(textarea)
+
+    return function (text) {
+        textarea.value = text
+        textarea.select()
+        document.execCommand('copy')
+    }
+})()
