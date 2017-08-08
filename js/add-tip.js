@@ -32,6 +32,12 @@ class AddTip {
                 e.target.value = ''
             }
         })
+
+        this.elements.tagsList.addEventListener('click', e => {
+            if (e.target.classList.contains('close')) {
+                e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+            }
+        })
     }
 
     static bindEvent() {
