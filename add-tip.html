@@ -20,8 +20,7 @@
             <input type="text" id="form-tip-slug" class="form-tip-slug" placeholder="slug">
         </p>
         <div class="form-tip-tags">
-            <ul class="form-tip-tags-list">
-                <li class="tip-tag tip-tag-placeholder">No tags yet</li>
+            <ul class="form-tip-tags-list" id="form-tip-tags-list">
             </ul>
             <input type="text" id="form-tip-tag" class="form-tip-tag" placeholder="Add a tag">
         </div>
@@ -32,6 +31,11 @@
         </p>
     </form>
     
+    <script type="text/mustache" id="tag-template">
+        <li class="tip-tag">{{ tag }} <span class="close">&times;</span></li>
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
     <script type="text/javascript" src="js/add-tip.js"></script>
 
 </body>
