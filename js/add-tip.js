@@ -11,10 +11,11 @@ class AddTip {
             content: document.querySelector('#form-tip-content'),
             getJson: document.querySelector('#form-get-json'),
             preview: document.querySelector('#form-preview'),
+            previewBlock: document.querySelector('#form-preview-block'),
         }
 
         this.templates = {
-            tag: document.querySelector('#tag-template').innerHTML
+            tag: document.querySelector('#tag-template').innerHTML,
         }
 
         this.bindDOM()
@@ -38,6 +39,23 @@ class AddTip {
                 e.target.parentNode.parentNode.removeChild(e.target.parentNode)
             }
         })
+
+        this.elements.preview.addEventListener('click', () => {
+            this.preview(this.elements.content.value)
+        })
+    }
+
+    static getTipObject() {
+        return {
+            title: this.elements.title.value,
+            slug: this.elements.slug.value,
+            tags: Array.from(this.elements.tagsList.querySelectorAll('.tip-tag')).map(li => li.textContent),
+            content: this.elements.content.value
+        }
+    }
+
+    static preview(markdown) {
+        this.elements.previewBlock.innerHTML = markdownToHTML(markdown)
     }
 
     static bindEvent() {
