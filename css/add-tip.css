@@ -64,3 +64,11 @@ textarea {
 .form-buttons {
     text-align: right;
 }
+
+.tip-tag .close {
+    cursor: pointer;
+    border-left: 1px solid #6ebad8;
+    text-align: center;
+    display: inline-block;
+    padding-left: 4px;
+}
