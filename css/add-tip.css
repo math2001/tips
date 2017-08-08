@@ -75,4 +75,5 @@ textarea {
 
 .form-tip-content {
     resize: vertical;
+    height: 200px;
 }
