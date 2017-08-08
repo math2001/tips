@@ -72,3 +72,7 @@ textarea {
     display: inline-block;
     padding-left: 4px;
 }
+
+.form-tip-content {
+    resize: vertical;
+}
