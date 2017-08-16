@@ -38,29 +38,13 @@ class Tips {
         this.bindEvent()
     }
 
-    static updateTipPanel(tip) {
-        const panel = tip.nextElementSibling
-        if (!tip.classList.contains('active')){
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        } 
-    }
-
     static bindDOM() {
 
         document.body.addEventListener('click', (e) => {
             if (e.target.classList.contains('tip-title')) {
-                if (e.target.classList.contains('active')) {
-                    e.target.classList.remove('active')
-                    this.updateTipPanel(e.target)
-                    const tip = this.element.querySelector('.tip-title.active')
-                    EM.fire('navigate', getHashLocation().pathname(tip === null ? '' : tip.getAttribute('data-slug')))
-                } else {
-                    const uri = getHashLocation()
-                    uri.pathname(e.target.getAttribute('data-slug'))
-                    EM.fire('navigate', uri)
-                }
+                const uri = getHashLocation()
+                uri.pathname(e.target.getAttribute('data-slug'))
+                EM.fire('navigate', uri)
             }
         })
     }
@@ -79,7 +63,6 @@ class Tips {
             const tip = this.element.querySelector(`[data-slug="${slug}"]`)
             if (tip === null) return
             tip.classList.add('active')
-            this.updateTipPanel(tip)
             return
         }
         this.element.classList.add('fadeOut')
@@ -91,12 +74,8 @@ class Tips {
         })
 
         setTimeout(() => {
-            this.element.innerHTML = html
-            const tips = document.querySelectorAll('.tip-title.active')
-            for (var i = tips.length - 1; i >= 0; i--) {
-                this.updateTipPanel(tips[i])
-            }
             this.element.classList.remove('fadeOut')
+            this.element.innerHTML = html
         }, 100)
     }
 
@@ -121,11 +100,6 @@ class Tips {
 
     static bindEvent() {
 
-        EM.on('tips-received', tips => {
-            this.tips = this.format(tips)
-            EM.fire('navigated', {hashLocation: getHashLocation()})
-        })
-
         EM.on('navigated', args => {
             let reRender = false
             if (typeof args.previousHashLocation === 'undefined') {
@@ -134,6 +108,11 @@ class Tips {
                 reRender = true
             }
             this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
+        })
+
+        EM.on('tips-received', tips => {
+            this.tips = this.format(tips)
+            EM.fire('navigated', {hashLocation: getHashLocation()})
         })
     }
 
