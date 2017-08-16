@@ -113,17 +113,6 @@ code {
     cursor: pointer;
 }
 
-.tip-panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: all .4s;
-    opacity: 0;
-}
-
-.tip-title.active + .tip-panel {
-    opacity: 1;
-}
-
 .tip-title:hover,
 .tip-title.focused {
     border-color: #555;

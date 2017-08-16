@@ -24,7 +24,7 @@
     </div>
 
     <script type="text/mustache" id="tip-template">
-        <h3 class="tip-title{{ active }}" data-slug="{{ slug }}"><span class="arrow"></span> {{ title }}
+        <h3 class="tip-title{{ active }}" data-slug="{{ slug }}">{{ title }}
             <ul class="tip-tags">
                 {{ #tags }}<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ . }}">{{ . }}</a></li> {{ /tags }}
             </ul>
@@ -35,7 +35,6 @@
         </div>
     </script>
     
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
     <script type="text/javascript" src="js/strftime.js"></script>
