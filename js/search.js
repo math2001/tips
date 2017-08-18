@@ -31,6 +31,9 @@ class Search {
         EM.on('navigated', (args) => {
             this.input.value = this.objectToString(args.hashLocation)
         })
+        EM.on('focus-search', () => {
+            this.input.focus()
+        })
     }
 
     static searchToObject(string) {

@@ -138,6 +138,7 @@ EM.on('navigate', newHashLocation => {
 
 Tips.init()
 Search.init()
+Shortcuts.init()
 
 window.addEventListener('hashchange', function (e) {
     EM.fire('navigated', {hashLocation: getHashLocation(), previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))})
