@@ -26,6 +26,12 @@
         "tags": ["bash"],
         "content": "A cool PS1",
         "timestamp": 1501986723981.2168
+    },
+    {
+        "title": "fourth tip",
+        "slug": "fourth-tip",
+        "tags": ["bash"],
+        "content": "Run task in background",
+        "timestamp": 1503046043000 
     }
-
 ]

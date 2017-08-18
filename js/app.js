@@ -68,6 +68,7 @@ class Tips {
         this.element.classList.add('fadeOut')
         let html = ''
         const pathname = hashLocation.pathname()
+        let activeTip
         tips.some(tip => {
             html += Mustache.render(this.template, Object.assign({baseurl,
                 active: tip.slug === pathname ? ' active' : ''}, tip))
@@ -76,6 +77,11 @@ class Tips {
         setTimeout(() => {
             this.element.classList.remove('fadeOut')
             this.element.innerHTML = html
+            // scroll the the element
+            const slug = getHashLocation().pathname().replace('""', '\\"')
+            if (slug === "") return 
+            const tip = document.querySelector('.tip-title[data-slug="%s"]'.replace('%s', slug))
+            tip.scrollIntoView(true)
         }, 100)
     }
 
