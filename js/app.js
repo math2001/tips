@@ -57,12 +57,23 @@ class Tips {
         return tips
     }
 
+    static scrollToActiveTip() {
+        const slug = getHashLocation().pathname().replace('""', '\\"')
+        if (slug === "") {
+            return 
+        }
+        const tip = document.querySelector('.tip-title[data-slug="%s"]'.replace('%s', slug))
+        tip.scrollIntoView(true)
+        
+    }
+
     static render(tips, hashLocation, reRender) {
         if (!reRender) {
             const slug = hashLocation.pathname().replace('"', '\\"')
             const tip = this.element.querySelector(`[data-slug="${slug}"]`)
             if (tip === null) return
             tip.classList.add('active')
+            this.scrollToActiveTip()
             return
         }
         this.element.classList.add('fadeOut')
@@ -77,11 +88,7 @@ class Tips {
         setTimeout(() => {
             this.element.classList.remove('fadeOut')
             this.element.innerHTML = html
-            // scroll the the element
-            const slug = getHashLocation().pathname().replace('""', '\\"')
-            if (slug === "") return 
-            const tip = document.querySelector('.tip-title[data-slug="%s"]'.replace('%s', slug))
-            tip.scrollIntoView(true)
+            this.scrollToActiveTip()
         }, 100)
     }
 
