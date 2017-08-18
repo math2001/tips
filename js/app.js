@@ -63,6 +63,9 @@ class Tips {
             return 
         }
         const tip = document.querySelector('.tip-title[data-slug="%s"]'.replace('%s', slug))
+        if (tip === null) {
+            return 
+        }
         tip.scrollIntoView(true)
         
     }
