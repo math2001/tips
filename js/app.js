@@ -48,7 +48,9 @@ class Tips {
         if (tip === null) {
             return 
         }
-        tip.scrollIntoView(true)
+        tip.scrollIntoView({
+            behavior: "smooth"
+        })
         tip.classList.add('active')
     }
 
