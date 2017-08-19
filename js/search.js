@@ -31,7 +31,8 @@ class Search {
         EM.on('navigated', (args) => {
             this.input.value = this.objectToString(args.hashLocation)
         })
-        EM.on('focus-search', () => {
+        EM.on('focus-search', e => {
+            e.preventDefault()
             this.input.focus()
         })
     }

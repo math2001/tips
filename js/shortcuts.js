@@ -7,9 +7,9 @@ const Shortcuts = {
     bindDOM() {
         document.body.addEventListener('keydown', e => {
             if (e.which === 191) {
-                EM.fire('focus-search')
+                EM.fire('focus-search', e)
             }
-        })
+        }, false)
     }
 
 }
