@@ -63,7 +63,7 @@ class AddTip {
         return {
             title: this.elements.title.value,
             slug: this.elements.slug.value,
-            tags: Array.from(this.elements.tagsList.querySelectorAll('.tip-tag')).map(li => li.textContent),
+            tags: Array.from(this.elements.tagsList.querySelectorAll('.tip-tag')).map(li => li.firstChild.textContent.trim()),
             content: this.elements.content.value,
             timestamp: new Date().getTime()
         }
