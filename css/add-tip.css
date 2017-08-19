@@ -1,0 +1,79 @@
+.form-tip {
+    width: 650px;
+    max-width: 100%;
+    margin: 40px auto;
+    font-family: Inconsolata;
+    position: relative;
+    /* outline: 1px solid; */
+}
+
+input, textarea {
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    font-family: inherit;
+}
+
+textarea {
+    width: 100%;
+}
+
+.form-tip-title-slug {
+    text-align: center;
+}
+
+.form-tip-title,
+.form-tip-slug {
+    width: 45%;
+    margin: 1%;
+}
+
+.btn {
+    border: none;
+    background: #eee;
+    color: black;
+    font-size: 1rem;
+    font-family: Inconsolata;
+    padding: 6px 9px;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn:hover { background: #ddd; }
+
+.btn-primary { background-color: hsl(197, 74%, 77%); }
+
+.btn-primary:hover { background-color: hsl(197, 66%, 66%); }
+
+.form-tip-tags {
+    text-align: center;
+}
+
+.form-tip-tags-list {
+    display: inline-block;
+    padding: 0;
+}
+
+.tip-tag-placeholder {
+    cursor: default;
+    filter: grayscale(.5);
+    font-style: italic;
+}
+
+.form-buttons {
+    text-align: right;
+}
+
+.tip-tag .close {
+    cursor: pointer;
+    border-left: 1px solid #6ebad8;
+    text-align: center;
+    display: inline-block;
+    padding-left: 4px;
+}
+
+.form-tip-content {
+    resize: vertical;
+    height: 200px;
+}

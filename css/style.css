@@ -1,5 +1,9 @@
 /* Anaheim Andika */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Roboto;
     margin: 0;
@@ -52,6 +56,8 @@ code {
     border-radius: 100%;
     cursor: pointer;
     outline: none;
+    width: 20px;
+    height: 20px;
 }
 
 .search-help:hover {
@@ -73,6 +79,38 @@ code {
     width: 200px;
 }
 
+.add-tip {
+    display: inline-block;
+    background: none;
+    border: none;
+    font-size: 26px;
+    font-family: Inconsolata;
+    vertical-align: baseline;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+
+.add-tip::after,
+.add-tip::before {
+    content: "";
+    display: block;
+    border-bottom: 3px solid #444;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -50%;
+    margin-top: -1px;
+    left: 0;
+}
+
+.add-tip::before {
+    top: 0;
+    left: 50%;
+    transform: rotate(.25turn);
+}
+
 .tips {
     padding: 10px;
     width: 750px;
@@ -84,27 +122,6 @@ code {
 
 .tips.fadeOut {
     opacity: 0;
-}
-
-.arrow {
-    margin-right: 5px;
-}
-
-.arrow::after {
-    content: "";
-    display: inline-block;
-    height: 6px;
-    width: 6px;
-    border: 2px solid #444;
-    vertical-align: middle;
-    border-left: none;
-    border-bottom: none;
-    transform: rotate(45deg);
-    transition: all .2s;
-}
-
-.tip-title.active .arrow::after {
-    transform: rotate(135deg);
 }
 
 .tip-title {
