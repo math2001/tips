@@ -13,6 +13,11 @@ class Tips {
         this.element = document.getElementById('tips')
         this.bindDOM()
         this.bindEvent()
+
+        if (new URI().domain() !== 'localhost') {
+            const addTip = document.querySelector('#add-tip')
+            addTip.parentNode.removeChild(addTip)
+        }
     }
 
     static bindDOM() {
