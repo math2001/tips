@@ -131,7 +131,7 @@ code {
 }
 
 .tip-title:hover,
-.tip-title.focused {
+.tip-title.active {
     border-color: #555;
 }
 

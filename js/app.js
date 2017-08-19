@@ -12,7 +12,7 @@ class Tips {
         this.template = document.getElementById('tip-template').textContent
         this.element = document.getElementById('tips')
         this.bindDOM()
-        this.bindEvent()
+        this.bindEvents()
 
         if (new URI().domain() !== 'localhost') {
             const addTip = document.querySelector('#add-tip')
@@ -49,10 +49,14 @@ class Tips {
             return 
         }
         tip.scrollIntoView(true)
-        
+        tip.classList.add('active')
     }
 
     static render(tips, hashLocation, reRender) {
+        const activeTip = this.getActiveTip()
+        if (activeTip !== null){
+            activeTip.classList.remove('active')
+        }
         if (!reRender) {
             const slug = hashLocation.pathname().replace('"', '\\"')
             const tip = this.element.querySelector(`[data-slug="${slug}"]`)
@@ -64,7 +68,6 @@ class Tips {
         this.element.classList.add('fadeOut')
         let html = ''
         const pathname = hashLocation.pathname()
-        let activeTip
         tips.some(tip => {
             html += Mustache.render(this.template, Object.assign({baseurl,
                 active: tip.slug === pathname ? ' active' : ''}, tip))
@@ -96,7 +99,11 @@ class Tips {
         })
     }
 
-    static bindEvent() {
+    static getActiveTip() {
+        return this.element.querySelector('.tip-title.active')
+    }
+
+    static bindEvents() {
 
         EM.on('navigated', args => {
             let reRender = false
@@ -111,6 +118,34 @@ class Tips {
         EM.on('tips-received', tips => {
             this.tips = this.format(tips)
             EM.fire('navigated', {hashLocation: getHashLocation()})
+        })
+
+        EM.on('active-next-tip', () => {
+            let activeTip = this.getActiveTip()
+            if (activeTip === null) {
+                activeTip = this.element.querySelector('.tip-title')
+            }
+            let nextTip = activeTip
+                                .nextElementSibling
+                                .nextSibling
+                                .nextElementSibling
+            if (nextTip === null) {
+                nextTip = this.element.querySelector('.tip-title')
+            }
+            EM.fire('navigate', nextTip.getAttribute('data-slug'))
+        })
+        EM.on('active-prev-tip', () => {
+            let activeTip = this.getActiveTip()
+            if (activeTip === null) {
+                activeTip = this.element.querySelector('.tip-title:last-of-type')
+            }
+            let previousTip = activeTip.previousElementSibling
+            if (previousTip === null) {
+                previousTip = this.element.querySelector('.tip-title:last-of-type')
+            } else {
+                previousTip = previousTip.previousElementSibling
+            }
+            EM.fire('navigate', previousTip.getAttribute('data-slug'))
         })
     }
 
