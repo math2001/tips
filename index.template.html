@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
+    <link rel="stylesheet" type="text/css" href="css/tomorrow-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" id="google-font-testr-font-loader" href="https://fonts.googleapis.com/css?family=Carme">
+    <meta charset="utf-8">
+    <title>Tips</title>
+</head>
+<body>
+    <header>
+        <h1>Math2001's little tips <div class="header-search">
+            <input type="search" id="search-input" class="search-input" placeholder="Search a tip...">
+            <button id="search-help" class="search-help">?</button>
+            <a id="add-tip" class="add-tip" href="add-tip.html"></a>
+        </div></h1>
+    </header>
+
+    ${tips}
+
+    <script type="text/mustache" id="tip-template">
+        <h3 class="tip-title" data-slug="{{ slug }}"> {{ title }}
+            <ul class="tip-tags">
+                {{ #tags }}<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ . }}">{{ . }}</a></li> {{ /tags }}
+            </ul>
+        </h3>
+        <div class="tip-panel">
+            <div class="tip-content">{{{ content }}}</div>
+            <p class="tip-date">— Published on {{ formated_date }}</p>
+        </div>
+    </script>
+    
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script type="text/javascript" src="js/highlight.pack.js"></script>
+    <script type="text/javascript" src="js/smooth-scroll.js"></script>
+    <script type="text/javascript" src="js/strftime.js"></script>
+    <script type="text/javascript" src="js/uri.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/shortcuts.js"></script>
+    <script type="text/javascript" src="js/event-manager.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+</body>
+</html>

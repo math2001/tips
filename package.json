@@ -1,0 +1,30 @@
+{
+    "name": "tips",
+    "version": "1.0.0",
+    "description": "A little static website to share tips about anything",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/math2001/tips.git"
+    },
+    "keywords": [
+        "tips",
+        "static",
+        "website"
+    ],
+    "author": "math2001",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/math2001/tips/issues"
+    },
+    "homepage": "https://github.com/math2001/tips#readme",
+    "dependencies": {
+        "highlight.js": "^9.12.0",
+        "jsdom": "^11.1.0",
+        "showdown": "^1.7.2",
+        "strftime": "^0.10.0"
+    }
+}
