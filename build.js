@@ -9,6 +9,15 @@ function monthToInt(month) {
     return new Date(Date.parse(month + "1, 2000")).getMonth()
 }
 
+function replaceVars(string, obj) {
+    Object.keys(obj).some(key => {
+        while (string.indexOf(`\${${key}}`) !== -1) {
+            string = string.replace(`\${${key}}`, obj[key])
+        }    
+    })
+    return string
+}
+
 const tipsToObject = (function () {
 
     function parseTip(tip) {
