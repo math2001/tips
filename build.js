@@ -5,6 +5,10 @@ function getKeyValue(string) {
     return [key, values.join(':').trim()]
 }
 
+function monthToInt(month) {
+    return new Date(Date.parse(month + "1, 2000")).getMonth()
+}
+
 const tipsToObject = (function () {
 
     function parseTip(tip) {
@@ -21,11 +25,20 @@ const tipsToObject = (function () {
                 if (key === 'tags') {
                     value = value.split(',').map(tag => tag.trim())
                 }
+                if (key === 'date') {
+                    const matches = value.match(/(\w+) (\d+) (\w+) (\d+) @ (\d+):(\d+)/)
+                    value = new Date(parseInt(matches[4]),
+                                         monthToInt(matches[3]),
+                                         parseInt(matches[2]),
+                                         parseInt(matches[5]),
+                                         parseInt(matches[6])
+                                        ).getTime()
+                }
                 frontMatter.push([key, value])
+                
             } else {
                 markdownContent += line + '\n'
             }
-
         })
     }
 
