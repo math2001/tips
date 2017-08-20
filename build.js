@@ -93,7 +93,7 @@ const tipsToObject = (function () {
                 if (err) throw err
                 tips[index] = parseTip(content)
                 callbackCount -= 1
-                if (callbackCount === 0) resolve(tips)
+                if (callbackCount === 0) resolve(tips.sort((tipa, tipb) => tipb.date - tipa.date))
             }))
         })
 
