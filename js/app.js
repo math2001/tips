@@ -51,7 +51,7 @@ class Tips {
             tip.tags.some(tag => {
                 tags.push(templatr(`<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ tag }}">{{ tag }}</a></li>`, {tag, baseurl}))
             })
-            tip.tags = tags.join(' ')
+            tip.formattedtags = tags.join(' ')
         })
         return tips
     }
@@ -106,12 +106,13 @@ class Tips {
             args.withtag = args.withtag.split(',')
         }
         return this.tips.filter(tip => {
+            const tags = tip.tags.map(tag => tag.toLowerCase())
             if (args.withtag !== undefined
-                && args.withtag.every(tag => tip.tags.indexOf(tag) === -1)) {
+                && args.withtag.every(tag => tags.indexOf(tag) === -1)) {
                 return false
             }
             if (args.contains !== undefined
-                && (tip.title + tip.content).indexOf(args.contains) === -1) {
+                && (tip.title.toLowerCase() + tip.content.toLowerCase()).indexOf(args.contains) === -1) {
                 return false
             }
 

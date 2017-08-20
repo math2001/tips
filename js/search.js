@@ -7,10 +7,14 @@ class Search {
         this.help = document.getElementById('search-help')
         this.bindDOM()
         this.bindEvent()
+        this.firedNavigate = false
     }
 
     static bindDOM() {
-        this.input.addEventListener('input', e => {this.navigate(e.target.value)})
+        this.input.addEventListener('input', e => {
+            this.firedNavigate = true
+            this.navigate(e.target.value)
+        })
         this.help.addEventListener('click', () => {
             EM.emit('search', '[help]')
         })
@@ -29,6 +33,10 @@ class Search {
 
     static bindEvent() {
         EM.on('navigated', (args) => {
+            if (this.firedNavigate) {
+                this.firedNavigate = false
+                return
+            }
             this.input.value = this.objectToString(args.hashLocation)
         })
         EM.on('focus-search', e => {
@@ -38,6 +46,7 @@ class Search {
     }
 
     static searchToObject(string) {
+        string = string.toLowerCase()
         const tags = []
         let isInBracket = false, char, contains = ''
         for (var i = 0; i < string.length; i++) {
