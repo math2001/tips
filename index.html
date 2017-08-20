@@ -16,26 +16,69 @@
             <button id="search-help" class="search-help">?</button>
             <a id="add-tip" class="add-tip" href="add-tip.html"></a>
         </div></h1>
-        
     </header>
 
     <div id="tips" class="tips">
-        <div class="loader"></div>
-        <p>Hold one a sec, loading the tips...</p>
-    </div>
+        <h3 class="tip-title" data-slug="network-throttling">Network throttling
+    <ul class="tip-tags"><li class="tip-tag">devtools</li> <li class="tip-tag">chrome</li></ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content"><p>Ever wanted to simulate a slow connection? Well, the chrome's DevTools makes it
+very easy to do!</p>
+<p>Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
+<code>No throttling</code> dropdown menu, and you're good to go</p></div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:50</p>
+</div>
+<h3 class="tip-title" data-slug="string-module">The string module
+    <ul class="tip-tags"><li class="tip-tag">python</li> <li class="tip-tag">itsbuiltin</li></ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content"><p>If you want the list of every letter, just do:</p>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> string
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(string.ascii_uppercase)
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+</code></pre></div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:02</p>
+</div>
+<h3 class="tip-title" data-slug="how-to-insert-the-date-in-vim">How to insert the date in Vim?
+    <ul class="tip-tags"><li class="tip-tag">vim</li> <li class="tip-tag">date</li> <li class="tip-tag">strftime</li></ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content"><p>First off, I really don't recommend you use the <code>strftime()</code> function vim has,
+since, as it says in the help message (<code>:help strftime</code>)</p>
+<blockquote>
+  <p>The accepted {format} depends on your system, thus this is not portable!</p>
+</blockquote>
+<p>So, a somewhat better solution is to use the <code>date</code> shell command. Yes, it seems
+even less portable, but at least you know for sure if it's going to work or not
+(with <code>strftime()</code>, I don't know if vim could get mixed up about the OS when you
+use a simulate a Unix environment in your terminal)</p>
+<pre><code class="sh language-sh hljs bash">$ date +<span class="hljs-string">"%A %d %B %Y @ %H:%M"</span>
+Sunday 20 August 2017 @ 11:11
+</code></pre>
+<p>So, now, you just need to add this to your <code>.vimrc</code></p>
+<pre><code class="vim language-vim hljs"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">Insert</span><span class="hljs-params">(text)</span></span>
+    <span class="hljs-comment">" a simple function to insert text where the cursor is</span>
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">"normal! \&lt;Esc&gt;a"</span>.<span class="hljs-variable">a:text</span>
+<span class="hljs-keyword">endfunction</span>
 
-    <script type="text/mustache" id="tip-template">
-        <h3 class="tip-title" data-slug="{{ slug }}"> {{ title }}
-            <ul class="tip-tags">
-                {{ #tags }}<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ . }}">{{ . }}</a></li> {{ /tags }}
-            </ul>
-        </h3>
-        <div class="tip-panel">
-            <div class="tip-content">{{{ content }}}</div>
-            <p class="tip-date">— Published on {{ formated_date }}</p>
-        </div>
-    </script>
-    
+<span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">Strip</span><span class="hljs-params">(text)</span></span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">substitute</span>(<span class="hljs-variable">a:text</span>, <span class="hljs-string">'^\_s*\(.\{-}\)\_s*</div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:05</p>
+</div></span>, <span class="hljs-string">'\1'</span>, <span class="hljs-string">''</span>)
+<span class="hljs-keyword">endfunction</span>
+
+command! InsertDate :<span class="hljs-keyword">call</span> Insert(Strip(<span class="hljs-built_in">system</span>(<span class="hljs-string">'date +"%A %d %B %Y @ %H:%M"'</span>)))
+</code></pre>
+<p>All you need to do now is:</p>
+<pre><code class="null hljs clojure"><span class="hljs-symbol">:InsertDate</span>
+</code></pre>
+<p>And, you'll get the date inserted automatically.</p>
+<p>If you want to customize the format of the date, I'd recommend using a tool like
+<a href="https://strftime.net" target="_blank">strftime.net</a>.</p></div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:05</p>
+</div>
+    </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>

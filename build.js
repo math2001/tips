@@ -6,7 +6,7 @@ const strftime = require('strftime')
 
 const TIP_TEMPLATE = `\
 <h3 class="tip-title" data-slug="\${slug}">\${title}
-    <ul>\${tags}</ul>
+    <ul class="tip-tags">\${tags}</ul>
 </h3>
 <div class="tip-panel">
     <div class="tip-content">\${content}</div>
@@ -113,8 +113,9 @@ const tipsToObject = (function () {
 const objToHtml = (function () {
 
     return function objToHtml(tips) {
+        const li = '<li class="tip-tag">'
         return tips.map(tip => {
-            tip.tags = `<li>${tip.tags.join('</li><li>')}</li>`
+            tip.tags = `${li}${tip.tags.join('</li> ' + li)}</li>`
             tip.content = markdownToHTML(tip.markdown)
             tip.formatted_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.date))
             tip.content = markdownToHTML(tip.markdown)
@@ -124,8 +125,31 @@ const objToHtml = (function () {
 
 })()
 
-tipsToObject().then(tips => {
-    return objToHtml(tips)
-}).then(html => {
+function getTemplate() {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./index.template.html', 'utf8', (err, content) => {
+            if (err) {
+                reject(err)
+                throw err
+            }
+            resolve(content)
+        })
+    })
+}
 
+Promise.all([tipsToObject(), getTemplate()]).then(args => {
+    const [tips, template] = args
+    return templatr(template, {
+        tips: objToHtml(tips)
+    })
+}).then(html => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./index.html', html, err => {
+            if (err) reject(err)
+            console.info("Successfully written 'index.html'!")
+        })
+    })
+}).catch(err => {
+    console.error("Error while writing the file 'index.html'")
+    throw err
 })
