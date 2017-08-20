@@ -90,7 +90,7 @@ const tipsToObject = (function () {
                 markdown += line + '\n'
             }
         })
-        return Object.assign({}, frontMatter, {markdown: markdown.trim()})
+        return Object.assign({}, frontMatter, {content: markdownToHTML(markdown.trim())})
     }
 
     return function tipsToObject() {

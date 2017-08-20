@@ -9,6 +9,8 @@ function getHashLocation() {
 class Tips {
 
     static init() {
+        this.element = document.body.querySelector('#tips')
+        this.template = document.body.querySelector('#tip-template').innerHTML
         this.bindDOM()
         this.bindEvents()
 
@@ -17,7 +19,8 @@ class Tips {
             addTip.parentNode.removeChild(addTip)
         }
 
-        this.tips = TIPS
+        this.tips = this.format(TIPS)
+        EM.fire('navigated', {hashLocation: getHashLocation()})
     }
 
     static bindDOM() {
@@ -34,8 +37,7 @@ class Tips {
 
     static format(tips) {
         tips.some(tip => {
-            tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
-            tip.content = markdownToHTML(tip.content)
+            tip.formatteddate = strftime('%A %d %B %Y at %H:%M', new Date(tip.date))
         })
         return tips
     }
@@ -119,7 +121,6 @@ class Tips {
             this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
         })
 
-        EM.fire('navigated', {hashLocation: getHashLocation()})
 
         EM.on('active-next-tip', () => {
             let activeTip = this.getActiveTip()
