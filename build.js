@@ -13,9 +13,9 @@ const tipsToObject = (function () {
 
     function parseTip(tip) {
         tip = tip.trim()
-        let frontMatter = [],
+        let frontMatter = {},
             isInFrontMatter = tip.startsWith('---'),
-            markdownContent = ''
+            markdown = ''
         tip.split('\n').slice(1).some(line => {
             if (line === '---' && isInFrontMatter) {
                 return isInFrontMatter = false
@@ -34,25 +34,28 @@ const tipsToObject = (function () {
                                          parseInt(matches[6])
                                         ).getTime()
                 }
-                frontMatter.push([key, value])
+                frontMatter[key] = value
                 
             } else {
-                markdownContent += line + '\n'
+                markdown += line + '\n'
             }
         })
+        return Object.assign({}, frontMatter, {markdown: markdown.trim()})
     }
 
     return function tipsToObject() {
-        return fs.readdirSync('./tips')
+        const tips = fs.readdirSync('./tips')
             .filter(file => file.endsWith('.md'))
-            .map(file => fs.readFile(`./tips/${file}`, 'utf8', (err, content) => {
+
+        let callbackCount = tips.length
+        return new Promise(resolve => {
+            tips.some((file, index) => fs.readFile(`./tips/${file}`, 'utf8', (err, content) => {
                 if (err) throw err
-                parseTip(content)
+                tips[index] = parseTip(content)
+                callbackCount -= 1
+                if (callbackCount === 0) resolve(tips)
             }))
+        })
+
     }
-
-
 })()
-
-
-const tips = tipsToObject()
