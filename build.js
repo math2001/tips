@@ -140,7 +140,7 @@ function getTemplate() {
 Promise.all([tipsToObject(), getTemplate()]).then(args => {
     const [tips, template] = args
     return templatr(template, {
-        tips: objToHtml(tips)
+        tips: JSON.stringify(tips).replace(/\\/g, '\\\\').replace(/'/g, "\\'")
     })
 }).then(html => {
     return new Promise((resolve, reject) => {

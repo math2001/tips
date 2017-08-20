@@ -9,8 +9,6 @@ function getHashLocation() {
 class Tips {
 
     static init() {
-        this.template = document.getElementById('tip-template').textContent
-        this.element = document.getElementById('tips')
         this.bindDOM()
         this.bindEvents()
 
@@ -18,6 +16,8 @@ class Tips {
             const addTip = document.querySelector('#add-tip')
             addTip.parentNode.removeChild(addTip)
         }
+
+        this.tips = TIPS
     }
 
     static bindDOM() {
@@ -31,6 +31,7 @@ class Tips {
         })
     }
 
+
     static format(tips) {
         tips.some(tip => {
             tip.formated_date = strftime('%A %d %B %Y at %H:%M', new Date(tip.timestamp))
@@ -38,6 +39,7 @@ class Tips {
         })
         return tips
     }
+
 
     static scrollToActiveTip() {
         const slug = getHashLocation().pathname().replace('""', '\\"')
@@ -117,10 +119,7 @@ class Tips {
             this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
         })
 
-        EM.on('tips-received', tips => {
-            this.tips = this.format(tips)
-            EM.fire('navigated', {hashLocation: getHashLocation()})
-        })
+        EM.fire('navigated', {hashLocation: getHashLocation()})
 
         EM.on('active-next-tip', () => {
             let activeTip = this.getActiveTip()
@@ -153,26 +152,17 @@ class Tips {
 
 }
 
-
 EM.on('navigate', newHashLocation => {
     location.hash = '#' + newHashLocation.toString()
 })
 
-Tips.init()
-Search.init()
-Shortcuts.init()
+document.addEventListener('DOMContentLoaded', function () {
+    Tips.init()
+    Search.init()
+    Shortcuts.init()
+})
 
 window.addEventListener('hashchange', function (e) {
     EM.fire('navigated', {hashLocation: getHashLocation(), previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))})
 })
-
-
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'tips.json')
-xhr.send(null)
-xhr.addEventListener('readystatechange', function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-        EM.fire('tips-received', JSON.parse(xhr.responseText))
-    }
-}, false);
 
