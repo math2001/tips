@@ -186,5 +186,36 @@ a {
     font-size: .8rem;
 }
 
+.e404 {
+    width: 500px;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    transition: all .2s;
+}
+
+.e404.fadeOut {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+.e404.fadeOut .e404-title,
+.e404.fadeOut .e404-message {
+    display: none;
+}
+
+.e404-text {
+    display: inline-block;
+}
+.e404-text {
+    display: inline-block;
+    transform: rotate(-.25turn);
+    font-size: 50px;
+    font-weight: bold;
+    color: #999;
+}
+
 .hljs-comment,.hljs-quote{color:#8e908c}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#c82829}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#f5871f}.hljs-attribute{color:#eab700}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#718c00}.hljs-title,.hljs-section{color:#4271ae}.hljs-keyword,.hljs-selector-tag{color:#8959a8}.hljs{display:block;overflow-x:auto;background:white;color:#4d4d4c;padding:0.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
 

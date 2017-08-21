@@ -80,9 +80,6 @@ class Tips {
         let html = ''
         const pathname = hashLocation.pathname()
         tips.some(tip => {
-            if (tip.slug.startsWith('how-to-in')) {
-                debugger
-            }
             html += Mustache.render(this.template, Object.assign({ active: tip.slug === pathname ? ' active' : ''},
                 tip))
         })
