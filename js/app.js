@@ -10,6 +10,7 @@ class Tips {
 
     static init() {
         this.element = document.body.querySelector('#tips')
+        this.el404 = document.body.querySelector('#e404')
         this.template = document.body.querySelector('#tip-template').innerHTML
         this.bindDOM()
         this.bindEvents()
@@ -63,7 +64,15 @@ class Tips {
         tip.classList.add('active')
     }
 
+    static render404() {
+        this.el404.classList.remove('fadeOut')
+        this.element.classList.add('fadeOut')
+    }
+
     static render(tips, hashLocation, reRender) {
+        if (tips.length === 0) {
+            return this.render404()
+        }
         const activeTip = this.getActiveTip()
         if (activeTip !== null){
             activeTip.classList.remove('active')
