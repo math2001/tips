@@ -112,19 +112,23 @@ function getTemplate() {
     })
 }
 
-Promise.all([tipsToObject(), getTemplate()]).then(args => {
-    const [tips, template] = args
-    return templatr(template, {
-        tips: JSON.stringify(tips).replace(/\\/g, '\\\\').replace(/'/g, "\\'")
-    })
-}).then(html => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile('./index.html', html, err => {
-            if (err) reject(err)
-            console.info("Successfully written 'index.html'!")
+if (require.main === module) {
+    Promise.all([tipsToObject(), getTemplate()]).then(args => {
+        const [tips, template] = args
+        return template.replace('JSON_TIPS', JSON.stringify(tips).replace(/\\/g, '\\\\').replace(/'/g, "\\'"))
+    }).then(html => {
+        return new Promise((resolve, reject) => {
+            fs.writeFile('./index.html', html, err => {
+                if (err) reject(err)
+                console.info("Successfully written 'index.html'!")
+            })
         })
+    }).catch(err => {
+        console.error("Error while writing the file 'index.html'")
+        throw err
     })
-}).catch(err => {
-    console.error("Error while writing the file 'index.html'")
-    throw err
-})
+} else {
+    module.exports = {
+        templatr: templatr
+    }
+}

@@ -6,15 +6,6 @@ function getHashLocation() {
     return new URI(location.hash.substring(1))
 }
 
-function templatr(string, obj) {
-    Object.keys(obj).some(key => {
-        while (string.indexOf(`{{ ${key} }}`) !== -1) {
-            string = string.replace(`{{ ${key} }}`, obj[key])
-        }    
-    })
-    return string
-}
-
 class Tips {
 
     static init() {
@@ -49,7 +40,7 @@ class Tips {
             tip.formatteddate = strftime('%A %d %B %Y at %H:%M', new Date(tip.date))
             let tags = []
             tip.tags.some(tag => {
-                tags.push(templatr(`<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ tag }}">{{ tag }}</a></li>`, {tag, baseurl}))
+                tags.push(Mustache.render(`<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ tag }}">{{ tag }}</a></li>`, {tag, baseurl}))
             })
             tip.formattedtags = tags.join(' ')
         })
@@ -89,7 +80,10 @@ class Tips {
         let html = ''
         const pathname = hashLocation.pathname()
         tips.some(tip => {
-            html += templatr(this.template, Object.assign({ active: tip.slug === pathname ? ' active' : ''},
+            if (tip.slug.startsWith('how-to-in')) {
+                debugger
+            }
+            html += Mustache.render(this.template, Object.assign({ active: tip.slug === pathname ? ' active' : ''},
                 tip))
         })
 
