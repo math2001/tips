@@ -60,6 +60,14 @@ td, th { padding: 10px; }
 tr:not(:last-of-type) { border-bottom: 1px solid #DDD; }
 td:not(:last-of-type) { border-right: 1px solid #DDD; }
 
+a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid hsla(197, 58%, 75%, 1);
+    transition: border-color .2s;
+}
+
 .header-search {
     display: inline-block;
     position: absolute;
@@ -170,6 +178,7 @@ td:not(:last-of-type) { border-right: 1px solid #DDD; }
 .tip-tag a {
     color: #444;
     text-decoration: none;
+    border: none;
 }
 
 .tip-date {
