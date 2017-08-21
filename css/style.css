@@ -1,22 +1,15 @@
 /* Anaheim Andika */
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-body {
-    font-family: Roboto;
-    margin: 0;
-}
+body { font-family: Roboto; margin: 0; }
 
 header {
     background-color: #eee;
     padding: 10px;
 }
 
-h1 {
-    margin: 0;
-}
+h1 { margin: 0; }
 
 h1, h2, h3 {
     font-family: "Carme";
@@ -60,9 +53,7 @@ code {
     height: 20px;
 }
 
-.search-help:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
+.search-help:hover { background: rgba(0, 0, 0, 0.8); }
 
 .search-input {
     font-size: 1rem;
@@ -75,9 +66,7 @@ code {
     transition: all .3s;
 }
 
-.search-input:focus {
-    width: 200px;
-}
+.search-input:focus { width: 200px; }
 
 .add-tip {
     display: inline-block;
@@ -120,9 +109,7 @@ code {
     opacity: 1;
 }
 
-.tips.fadeOut {
-    opacity: 0;
-}
+.tips.fadeOut { opacity: 0; }
 
 .tip-title {
     border-bottom: 1px solid #ccc;
@@ -130,10 +117,7 @@ code {
     cursor: pointer;
 }
 
-.tip-title:hover,
-.tip-title.active {
-    border-color: #555;
-}
+.tip-title:hover, .tip-title.active { border-color: #555; }
 
 .tip-tags {
     vertical-align: middle;
@@ -153,9 +137,7 @@ code {
     padding: 3px 5px;
 }
 
-.tip-tag:hover {
-    background-color: hsla(197, 69%, 90%, 1);
-}
+.tip-tag:hover { background-color: hsla(197, 69%, 90%, 1); }
 
 .tip-tag a {
     color: #444;
