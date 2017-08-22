@@ -21,7 +21,6 @@ class Tips {
         }
 
         this.tips = this.format(TIPS)
-        EM.fire('navigated', {hashLocation: getHashLocation()})
     }
 
     static bindDOM() {
@@ -178,6 +177,8 @@ EM.on('navigate', newHashLocation => {
 Tips.init()
 Search.init()
 Shortcuts.init()
+
+EM.fire('navigated', { hashLocation: getHashLocation() })
 
 window.addEventListener('hashchange', function (e) {
     EM.fire('navigated', {hashLocation: getHashLocation(), previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))})
