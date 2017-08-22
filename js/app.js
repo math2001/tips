@@ -18,9 +18,10 @@ function hasUpperCaseLetter(string) {
 class Tips {
 
     static init() {
-        this.element = document.body.querySelector('#tips')
-        this.el404 = document.body.querySelector('#e404')
-        this.template = document.body.querySelector('#tip-template').innerHTML
+        this.element = document.querySelector('#tips')
+        this.el404 = document.querySelector('#e404')
+        this.el404searchInput = document.querySelector('#e404-search-input')
+        this.template = document.querySelector('#tip-template').innerHTML
         this.bindDOM()
         this.bindEvents()
 
@@ -77,6 +78,7 @@ class Tips {
         if (tips.length === 0) {
             this.el404.classList.remove('fadeOut')
             this.element.classList.add('fadeOut')
+            this.el404searchInput.textContent = Search.objectToString(hashLocation)
             this.e404displayed = true
             return
         } else if (this.e404displayed) {
