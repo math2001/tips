@@ -41,6 +41,9 @@ class Tips {
                 tags.push(Mustache.render(`<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ tag }}">{{ tag }}</a></li>`, {tag, baseurl}))
             })
             tip.formattedtags = tags.join(' ')
+            // The text that is used when searching
+            tip.searchable = tip.title + ' '
+                             + new DOMParser().parseFromString(tip.content, 'text/html').body.textContent
         })
         return tips
     }
@@ -59,9 +62,6 @@ class Tips {
             behavior: "smooth"
         })
         tip.classList.add('active')
-    }
-
-    static render404() {
     }
 
     static render(tips, hashLocation, reRender) {
@@ -114,7 +114,7 @@ class Tips {
                 return false
             }
             if (args.contains !== undefined
-                && (tip.title.toLowerCase() + tip.content.toLowerCase()).indexOf(args.contains) === -1) {
+                && tip.searchable.toLowerCase().indexOf(args.contains) === -1) {
                 return false
             }
 
