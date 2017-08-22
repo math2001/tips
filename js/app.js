@@ -131,7 +131,7 @@ class Tips {
                 searchable = tip.searchable.toLowerCase()
             }
             if (args.withtag !== undefined
-                && args.withtag.every(tag => tags.indexOf(tag) === -1)) {
+                && !args.withtag.every(tag => tags.indexOf(tag) !== -1)) {
                 return false
             }
             if (args.contains !== undefined
