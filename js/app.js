@@ -6,6 +6,15 @@ function getHashLocation() {
     return new URI(location.hash.substring(1))
 }
 
+function hasUpperCaseLetter(string) {
+    for (let char of string) {
+        if (char !== char.toLowerCase()) {
+            return true
+        }
+    }
+    return false
+} 
+
 class Tips {
 
     static init() {
@@ -104,17 +113,29 @@ class Tips {
 
     static getAvailableTips(hashLocation) {
         const args = hashLocation.search(true)
+        const caseSensitive = !!((args.contains && hasUpperCaseLetter(args.contains))
+                              || (args.withtag && hasUpperCaseLetter(args.withtag)))
         if (args.withtag !== undefined) {
             args.withtag = args.withtag.split(',')
         }
+        if (!caseSensitive) {
+            if (args.contains !== undefined) args.contains = args.contains.toLowerCase()
+        }
         return this.tips.filter(tip => {
-            const tags = tip.tags.map(tag => tag.toLowerCase())
+            let tags, searchable
+            if (caseSensitive) {
+                tags = tip.tags
+                searchable = tip.searchable
+            } else {
+                tags = tip.tags.map(tag => tag.toLowerCase())
+                searchable = tip.searchable.toLowerCase()
+            }
             if (args.withtag !== undefined
                 && args.withtag.every(tag => tags.indexOf(tag) === -1)) {
                 return false
             }
             if (args.contains !== undefined
-                && tip.searchable.toLowerCase().indexOf(args.contains) === -1) {
+                && searchable.indexOf(args.contains) === -1) {
                 return false
             }
 

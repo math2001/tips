@@ -50,7 +50,6 @@ class Search {
     }
 
     static searchToObject(string) {
-        string = string.toLowerCase()
         const tags = []
         let isInBracket = false, char, contains = ''
         for (var i = 0; i < string.length; i++) {
