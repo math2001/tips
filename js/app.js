@@ -25,7 +25,6 @@ class Tips {
     }
 
     static bindDOM() {
-
         document.body.addEventListener('click', (e) => {
             if (e.target.classList.contains('tip-title')) {
                 const uri = getHashLocation()
@@ -34,7 +33,6 @@ class Tips {
             }
         })
     }
-
 
     static format(tips) {
         tips.some(tip => {
@@ -65,13 +63,18 @@ class Tips {
     }
 
     static render404() {
-        this.el404.classList.remove('fadeOut')
-        this.element.classList.add('fadeOut')
     }
 
     static render(tips, hashLocation, reRender) {
         if (tips.length === 0) {
-            return this.render404()
+            this.el404.classList.remove('fadeOut')
+            this.element.classList.add('fadeOut')
+            this.e404displayed = true
+            return
+        } else if (this.e404displayed) {
+            this.el404.classList.add('fadeOut')
+            this.element.classList.remove('fadeOut')
+            this.e404displayed = false
         }
         const activeTip = this.getActiveTip()
         if (activeTip !== null){

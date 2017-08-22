@@ -143,9 +143,13 @@ a {
     max-width: 100%;
     transition: all .1s;
     opacity: 1;
+    height: auto;
 }
 
-.tips.fadeOut { opacity: 0; }
+.tips.fadeOut {
+    opacity: 0;
+    height: 0;
+}
 
 .tip-title {
     border-bottom: 1px solid #ccc;
