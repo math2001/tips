@@ -181,7 +181,8 @@ class Tips {
                     return
                 }
             }
-            if (nextTip !== null) EM.fire('navigate', nextTip.getAttribute('data-slug'))
+            if (nextTip !== null) EM.fire('navigate',
+                getHashLocation().pathname(nextTip.getAttribute('data-slug')))
         })
         EM.on('active-prev-tip', () => {
             let activeTip = this.getActiveTip(), previousTip = null
@@ -194,7 +195,8 @@ class Tips {
                     return
                 }
             }
-            if (previousTip !== null) EM.fire('navigate', previousTip.getAttribute('data-slug'))
+            if (previousTip !== null) EM.fire('navigate',
+                getHashLocation().pathname(previousTip.getAttribute('data-slug')))
         })
     }
 
