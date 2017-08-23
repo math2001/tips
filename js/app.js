@@ -165,7 +165,7 @@ class Tips {
         EM.on('active-next-tip', () => {
             let activeTip = this.getActiveTip(), nextTip = null
             if (activeTip === null) {
-                nextTip = this.element.querySelector('.tip-title')
+                nexttip = this.element.querySelector('.tip-title')
             } else {
                 try {
                     nextTip = activeTip

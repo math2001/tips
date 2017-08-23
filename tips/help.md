@@ -7,9 +7,11 @@ date: Sunday 20 August 2017 @ 18:53
 
 | Key          | Action                    |
 |--------------|---------------------------|
-| <kbd>j</kbd> | go down (to an older tip) |
-| <kbd>k</kbd> | go up (to a newer tip)    |
-| <kbd>/</kbd> | focus the search input    |
+| <kbd>j</kbd> | scroll down               |
+| <kbd>k</kbd> | scroll up                 |
+| <kbd>l</kbd> | go down *to an older tip* |
+| <kbd>h</kbd> | go up *to a newer tip*    |
+| <kbd>/</kbd> | search                    |
 
 ## Search format
 
@@ -29,5 +31,4 @@ The search becomes case *sensitive* as soon as there is one capital letter in it
 You like this little website? Let me know about it! [Star the
 repository](https://github.com/math2001/tips), or [send me a
 tweet](https://twitter.com/_math2001)!
-
 
