@@ -24,12 +24,6 @@ class Tips {
         this.template = document.querySelector('#tip-template').innerHTML
         this.bindDOM()
         this.bindEvents()
-
-        if (new URI().domain() !== 'localhost') {
-            const addTip = document.querySelector('#add-tip')
-            addTip.parentNode.removeChild(addTip)
-        }
-
         this.tips = this.format(TIPS)
     }
 
