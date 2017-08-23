@@ -163,31 +163,33 @@ class Tips {
 
 
         EM.on('active-next-tip', () => {
-            let activeTip = this.getActiveTip()
+            let activeTip = this.getActiveTip(), nextTip = null
             if (activeTip === null) {
-                activeTip = this.element.querySelector('.tip-title')
-            }
-            let nextTip = activeTip
-                                .nextElementSibling
-                                .nextSibling
-                                .nextElementSibling
-            if (nextTip === null) {
                 nextTip = this.element.querySelector('.tip-title')
+            } else {
+                try {
+                    nextTip = activeTip
+                        .nextElementSibling
+                        .nextSibling
+                        .nextElementSibling
+                } catch (e) {
+                    return
+                }
             }
-            EM.fire('navigate', nextTip.getAttribute('data-slug'))
+            if (nextTip !== null) EM.fire('navigate', nextTip.getAttribute('data-slug'))
         })
         EM.on('active-prev-tip', () => {
-            let activeTip = this.getActiveTip()
+            let activeTip = this.getActiveTip(), previousTip = null
             if (activeTip === null) {
-                activeTip = this.element.querySelector('.tip-title:last-of-type')
-            }
-            let previousTip = activeTip.previousElementSibling
-            if (previousTip === null) {
                 previousTip = this.element.querySelector('.tip-title:last-of-type')
             } else {
-                previousTip = previousTip.previousElementSibling
+                try {
+                    previousTip = activeTip.previousElementSibling.previousElementSibling
+                } catch (e) {
+                    return
+                }
             }
-            EM.fire('navigate', previousTip.getAttribute('data-slug'))
+            if (previousTip !== null) EM.fire('navigate', previousTip.getAttribute('data-slug'))
         })
     }
 
