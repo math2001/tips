@@ -63,6 +63,7 @@ class Search {
         EM.on('focus-search', e => {
             e.preventDefault()
             this.input.select()
+            window.scroll({ top: 0, left: 0, behavior: 'smooth' })
         })
     }
 
