@@ -76,14 +76,14 @@ class Tips {
 
     static render(tips, hashLocation, reRender) {
         if (tips.length === 0) {
-            this.el404.classList.remove('fadeOut')
-            this.element.classList.add('fadeOut')
+            this.el404.classList.remove('hidden')
+            this.element.classList.add('hidden')
             this.el404searchInput.textContent = Search.objectToString(hashLocation)
             this.e404displayed = true
             return
         } else if (this.e404displayed) {
-            this.el404.classList.add('fadeOut')
-            this.element.classList.remove('fadeOut')
+            this.el404.classList.add('hidden')
+            this.element.classList.remove('hidden')
             this.e404displayed = false
         }
         const activeTip = this.getActiveTip()
