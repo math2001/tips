@@ -2,6 +2,13 @@ const Shortcuts = {
 
     init() {
         this.bindDOM()
+        this.keys = {
+            j: 74,
+            k: 75,
+            h: 72,
+            l: 76,
+            slash: 191
+        }
     },
 
     bindDOM() {
@@ -9,11 +16,11 @@ const Shortcuts = {
             if (document.activeElement !== document.body) {
                 return
             }
-            if (e.which === 191) {
+            if (e.which === this.keys.slash) {
                 EM.fire('focus-search', e)
-            } else if (e.which === 74) {
+            } else if (e.which === this.keys.j) {
                 EM.fire('active-next-tip')
-            } else if (e.which === 75){
+            } else if (e.which === this.keys.h){
                 EM.fire('active-prev-tip')
             }
         }, false)
