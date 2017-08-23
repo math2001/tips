@@ -161,6 +161,11 @@ class Tips {
             this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
         })
 
+        EM.on('active-first-tip', () => {
+            const tip = this.element.querySelector('.tip-title')
+            if (tip !== null) tip.classList.add('active')
+        })
+
 
         EM.on('active-next-tip', () => {
             let activeTip = this.getActiveTip(), nextTip = null

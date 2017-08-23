@@ -11,6 +11,23 @@ class Search {
     }
 
     static bindDOM() {
+        this.input.addEventListener('keydown', e => {
+            let prevent = true
+            if (e.which ===  13) {
+                EM.emit('active-first-tip')
+                this.input.blur()
+            } else if (e.which === 27) {
+                this.navigate('')
+                this.input.blur()
+            } else {
+                prevent = false
+            }
+            if (prevent) {
+                e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
+            }
+        })
         this.input.addEventListener('input', e => {
             this.firedNavigate = true
             this.navigate(e.target.value)
@@ -45,7 +62,7 @@ class Search {
         })
         EM.on('focus-search', e => {
             e.preventDefault()
-            this.input.focus()
+            this.input.select()
         })
     }
 
