@@ -146,9 +146,7 @@ a {
     height: auto;
 }
 
-.tips.fadeOut {
-    opacity: 0;
-}
+.tips.fadeOut { opacity: 0; }
 
 .tips.hidden {
     height: 0;
@@ -160,12 +158,9 @@ a {
     padding-bottom: 5px;
     cursor: pointer;
     display: flex;
-    /* justify-content: space-between; */
 }
 
-.tip-title span {
-    flex: 1;
-}
+.tip-title span { flex: 1; }
 
 .tip-title:hover, .tip-title.active { border-color: #555; }
 
