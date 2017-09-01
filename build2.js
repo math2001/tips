@@ -2,17 +2,17 @@ const DEV = true
 if (DEV) 
 console['log']('-'.repeat(100))
 
-const fs = require('fs')
-const showdown = require('showdown')
+const {readdirSync, readFile} = require('fs')
+const {Converter: MarkdownConverter} = require('showdown')
 const hljs = require('highlight.js')
-const {JSDOM} = require('jsdom')
+const { JSDOM } = require('jsdom')
 
 const HTMLParser = function (html) {
     return new JSDOM(html).window.document
 }
 
 const markdownToHTML = (function () {
-    const converter = new showdown.Converter()
+    const converter = new MarkdownConverter()
     converter.setOption({
         simplifiedAutoLink: true,
         excludeTrailingPunctuationFromURLs: true,
@@ -26,6 +26,8 @@ const markdownToHTML = (function () {
     })
 
     return function (markdown) {
+        const html = converter.makeHtml(markdown)
+        return html
         const nodes = HTMLParser(converter.makeHtml(markdown), 'text/html')
         const codes = Array.from(nodes.getElementsByTagName('pre'))
             .map(pre => pre.getElementsByTagName('code')[0])
@@ -41,7 +43,7 @@ const markdownToHTML = (function () {
 const tips = {}
 const regexes = {
     yamlFrontMatter: /^---\n[^]*^---\n/m,
-    lineendings: /\r|\n|\r\n|\n\r/g
+    lineendings: /(\r|\n|\r\n|\n\r)+/g
 }
 
 // functions (tools)
@@ -57,21 +59,29 @@ function monthToInt(month) {
 
 function loadFile(file) {
     return new Promise((resolve, reject) => {
-        fs.readFile(`${file}`, 'utf8', (err, content) => {
+        readFile(`${file}`, 'utf8', (err, content) => {
             if (err) throw err
             resolve(content)
         })
     })
 }
 
+// functions
+
 function loadTip(file) {
+    // asyncally parse tip
     return loadFile(`./tips/${file}`).then(content => {
-        return parseTip(content, file)
+        return new Promise((resolve, reject) => {
+            setTimeout(function () {
+                resolve(parseTip(content, file))
+            }, 0)
+        })
     })
 }
 
 function loadTips() {
-    const files = fs.readdirSync('./tips').filter(file => file.endsWith('.md'))
+    const files = readdirSync('./tips').filter(file => file.endsWith('.md'))
+    console.info('Got dirs...')
     const promises = []
     for (let file of files) {
         promises.push(loadTip(file))
@@ -146,6 +156,7 @@ function fileLinks(tips) {
 }
 
 function main() {
+    console.info('Ready, start parsing...')
     loadTips().then(tips => {
         const formattedTips = {}
         for (let tip of tips) {
@@ -155,6 +166,7 @@ function main() {
         return formattedTips
     }).then(tips => {
         tips = fileLinks(tips)
+        console.info('Done parsing.')
     })
 }
 
