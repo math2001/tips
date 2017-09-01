@@ -16,19 +16,9 @@
         </div></h1>
     </header>
 
-    <div id="tips" class="tips"></div>
-
-    <script type="text/template" id="tip-template">
-        <h3 class="tip-title" data-slug="{{ slug }}"> <span>{{ title }}</span>
-        <ul class="tip-tags">
-                {{{ formattedtags }}}
-            </ul>
-        </h3>
-        <div class="tip-panel">
-            <div class="tip-content">{{{ content }}}</div>
-            <p class="tip-date">— Published on {{ formatteddate }}</p>
-        </div>
-    </script>
+    <div id="tips" class="tips">
+        INSERT_TIPS_HERE
+    </div>
 
     <div id="e404" class="e404 hidden">
         <div class="e404-title">
@@ -46,9 +36,6 @@
     <script type="text/javascript" src="js/shortcuts.js"></script>
     <script type="text/javascript" src="js/event-manager.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
-    <script type="text/javascript">
-        const TIPS = JSON.parse('JSON_TIPS')
-    </script>
     <script type="text/javascript" src="js/app.js"></script>
 
 </body>
