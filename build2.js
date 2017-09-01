@@ -13,8 +13,7 @@ const HTMLParser = function (html) {
 }
 
 const markdownToHTML = (function () {
-    const converter = new MarkdownConverter()
-    converter.setOption({
+    const converter = new MarkdownConverter({
         simplifiedAutoLink: true,
         excludeTrailingPunctuationFromURLs: true,
         tables: true,
