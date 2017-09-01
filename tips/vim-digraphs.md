@@ -33,7 +33,7 @@ You can also specify the decimal value of the symbol, like so:
 :diagraph .. 8230
 ```
 
-You might be wondering how you get the value... Well, have a look at this: <tip-link to="vim-ascii.md">
+You might be wondering how you get the value... Well, have a look at this: <tiplink to="vim-ascii.md"></tiplink>
 
 ## Little cheat sheet
 

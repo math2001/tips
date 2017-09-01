@@ -14,8 +14,8 @@ can use the special argument `silent`, like so for example:
 map <silent> <leader>r :MyCommand
 ```
 
-By the way, <tip-link to="vim-difference-map-noremap.md">you should (almost) always use
-`noremap`</tip-link>.
+By the way, <tiplink to="vim-difference-map-noremap.md">you should (almost) always use
+`noremap`</tiplink>.
 
 Learn more: `:help :map-silent`
 

@@ -1,3 +1,4 @@
+const startTime = Date.now()
 const DEV = true
 if (DEV) 
 console['log']('-'.repeat(100))
@@ -5,10 +6,10 @@ console['log']('-'.repeat(100))
 const {readdirSync, readFile} = require('fs')
 const {Converter: MarkdownConverter} = require('showdown')
 const hljs = require('highlight.js')
-const { JSDOM } = require('jsdom')
+const DOMParser = new (require('dom-parser'))()
 
 const HTMLParser = function (html) {
-    return new JSDOM(html).window.document
+    return DOMParser.parseFromString(html)
 }
 
 const markdownToHTML = (function () {
@@ -26,8 +27,24 @@ const markdownToHTML = (function () {
     })
 
     return function (markdown) {
-        const html = converter.makeHtml(markdown)
+        let html = converter.makeHtml(markdown)
         return html
+        const dom = HTMLParser(html)
+        let className, language, highlightedPre
+        for (let pre of dom.getElementsByTagName('pre')) {
+            className = pre.firstChild.getAttribute('class')
+            if (className === null) continue
+            language = className.split(' ').filter(str => str.startsWith('language-'))[0]
+            if (language !== undefined) language = language.slice(9)
+            index = html.indexOf(pre.outerHTML)
+            if (index === -1) {
+                throw new Error('Cannot find pre block')
+            }
+            highlightedPre = hljs.highlight(language, pre.firstChild.innerHTML).value
+            html = stringIndexReplace(html, index, index + pre.outerHTML.length, highlightedPre)
+        }
+        return html
+
         const nodes = HTMLParser(converter.makeHtml(markdown), 'text/html')
         const codes = Array.from(nodes.getElementsByTagName('pre'))
             .map(pre => pre.getElementsByTagName('code')[0])
@@ -66,6 +83,10 @@ function loadFile(file) {
     })
 }
 
+function stringIndexReplace(originalString, indexStart, indexEnd, string) {
+    return originalString.slice(0, indexStart) + string + originalString.slice(indexEnd)
+}
+
 // functions
 
 function loadTip(file) {
@@ -90,7 +111,6 @@ function loadTips() {
 }
 
 function parseTip(content, filename) {
-
     const parseFrontMatter = frontMatter => {
         const obj = {}
         frontMatter = frontMatter.trim().split('\n')
@@ -132,41 +152,44 @@ function fileLinks(tips) {
     let dom, to, innerHTML, actualLink, tip
     for (let filename in tips) {
         dom = HTMLParser(tips[filename].content)
-        for (let link of dom.querySelectorAll('tip-link')) {
-            actualLink = HTMLParser().createElement('a')
+        for (let link of dom.getElementsByTagName('tiplink')) {
+            actualLink = '<a href="'
             to = link.getAttribute('to')
             if (to === null) {
-                console.error(`<tip-link> hasn't got a 'to' attribute in ${filename}`)
+                console.error(`<tiplink> hasn't got a 'to' attribute in ${filename}`)
                 continue
             }
             tip = tips[to]
             if (tip === undefined) {
-                console.error(`<tip-link>'s 'to' attribute points to a ` +
+                console.error(`<tiplink>'s 'to' attribute points to a ` +
                                 `non-existing file ('${to}') in '${filename}'`)
                 continue
             }
-            if (link.innerHTML !== '') innerHTML = link.innerHTML
-            else innerHTML = tip.title
-            actualLink.href = '#' + tip.slug
-            link.outerHTML = actualLink.outerHTML
+            actualLink += '#' + tip.slug + '">'
+            if (link.innerHTML !== '') actualLink += link.innerHTML
+            else actualLink += tip.title
+            actualLink += '</a>'
+            index = tips[filename].content.indexOf(link.outerHTML)
+            if (index === -1) throw new Error('Cannot find original link to replace it with')
+            tips[filename].content = stringIndexReplace(tips[filename].content, index,
+                                                        index + link.outerHTML.length, actualLink)
         }
-        tips[filename].content = dom.body.innerHTML
     }
     return tips
 }
 
 function main() {
-    console.info('Ready, start parsing...')
     loadTips().then(tips => {
         const formattedTips = {}
         for (let tip of tips) {
             formattedTips[tip.filename] = tip
             delete formattedTips[tip.filename].filename
         }
-        return formattedTips
+        return fileLinks(formattedTips)
     }).then(tips => {
-        tips = fileLinks(tips)
-        console.info('Done parsing.')
+        console.info(`Done parsing ${Object.keys(tips).length} tips in ${Date.now() - startTime }ms.`)
+    }).catch(err => {
+        console.error(err.stack)
     })
 }
 
