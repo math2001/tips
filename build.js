@@ -103,7 +103,7 @@ function stringIndexReplace(originalString, indexStart, indexEnd, string) {
 // functions
 
 function loadTip(file) {
-    // asyncally parse tip
+    // async parse tip
     return loadFile(`./tips/${file}`).then(content => {
         return new Promise((resolve, reject) => {
             setTimeout(function () {

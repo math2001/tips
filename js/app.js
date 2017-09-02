@@ -22,6 +22,8 @@ const App = {
     init() {
         this.tips = this.parseTipsFromHTML()
         this.bindEvents()
+        this.error404 = document.querySelector('#e404')
+        this.error404input = this.error404.querySelector('#e404-search-input')
     },
 
     bindEvents() {
@@ -119,16 +121,35 @@ const App = {
     },
 
     renderTips(activeSlug, searchObject) {
-        let activeTip
+        if (this.errorShown) {
+            this.errorShown = false
+            this.error404.classList.add('hidden')
+        }
+
+        let activeTip, tipCount = 0
         for (let tip of this.tips) {
             tip.hidden = this.isHidden(tip, searchObject)
             tip.DOMElement.classList.toggle('hidden', tip.hidden)
+
             if (tip.slug === activeSlug) activeTip = tip
+
             tip.DOMElement.classList.toggle('active', tip.slug === activeSlug)
+
+            if (!tip.hidden) tipCount += 1
         }
 
         if (activeTip) activeTip.DOMElement.scrollIntoView({behavior: 'smooth'})
         else window.scrollTo({top: 0, behavior: 'smooth'})
+
+        if (tipCount === 0 && Object.keys(searchObject).length !== 0) {
+            this.show404()
+        }
+    },
+
+    show404() {
+        this.errorShown = true
+        this.error404input.textContent = Search.inputValue()
+        this.error404.classList.remove('hidden')
     }
 
 }

@@ -48,6 +48,10 @@ class Search {
         return text
     }
 
+    static inputValue() {
+        return this.input.value
+    }
+
     static bindEvent() {
         EM.on('navigated', (args) => {
             if (this.firedNavigate) {
