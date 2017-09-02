@@ -70,3 +70,4 @@ to use:
 Note: use upper cased abbreviation to get upper cased symbols
 
 To learn more: `:help digraphs`
+

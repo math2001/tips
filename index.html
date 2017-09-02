@@ -16,19 +16,542 @@
         </div></h1>
     </header>
 
-    <div id="tips" class="tips"></div>
+    <div id="tips" class="tips">
+        <h3 class="tip-title" data-slug="help"> <span>Help</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=help">help</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd>j</kbd></td>
+<td>scroll down</td>
+</tr>
+<tr>
+<td><kbd>k</kbd></td>
+<td>scroll up</td>
+</tr>
+<tr>
+<td><kbd>l</kbd></td>
+<td>go down <em>to an older tip</em></td>
+</tr>
+<tr>
+<td><kbd>h</kbd></td>
+<td>go up <em>to a newer tip</em></td>
+</tr>
+<tr>
+<td><kbd>/</kbd></td>
+<td>search</td>
+</tr>
+</tbody>
+</table>
+<h2 id="searchformat">Search format</h2>
+<p>Searching is fairly simple: everything that is between brackets is considered a
+tag.</p>
+<ul>
+<li><code>[python]</code> will show tips that have the tag <code>python</code>.</li>
+<li><code>[python][itsbuiltin]</code> will show tips that have the both tags <code>python</code> and
+<code>itsbuiltin</code></li>
+<li><code>hello</code> will show tips that have their title or their actual content containing the
+word <code>hello</code> (case insensitive)</li>
+<li><code>[vim] map</code> will show tips that have the tag <code>vim</code> and that have their title or
+content containing <code>map</code>.
+The search becomes case <em>sensitive</em> as soon as there is one capital letter in it.
+You like this little website? Let me know about it! <a href="https://github.com/math2001/tips" target="_blank">Star the
+repository</a>, or <a href="https://twitter.com/_math2001" target="_blank">send me a
+tweet</a>!</li>
+</ul>
+    </div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 18:53</p>
+</div>
+<h3 class="tip-title" data-slug="network-throttling"> <span>Network throttling</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=devtools">devtools</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=chrome">chrome</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>Ever wanted to simulate a slow connection? Well, the chrome's DevTools makes it
+very easy to do!
+Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
+<code>No throttling</code> dropdown menu, and you're good to go</p>
+    </div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:50</p>
+</div>
+<h3 class="tip-title" data-slug="string-module"> <span>The string module</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=python">python</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=itsbuiltin">itsbuiltin</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>If you want the list of every letter, just do:</p>
+<pre><code class="python language-python">&amp;gt;&amp;gt;&amp;gt; <span class="hljs-keyword">import</span> string
+&amp;gt;&amp;gt;&amp;gt; print(string.ascii_uppercase)
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+</code></pre>
+    </div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:02</p>
+</div>
+<h3 class="tip-title" data-slug="get-ascii-value-character-vim"> <span>How do I get the ASCII value of a character in vim?</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=ascii">ascii</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>To get the ASCII value of the character under the cursor, just press <code>ga</code> (or
+run <code>:ascii</code>).
+It'll print it in three format: in decimal, hexadecimal and octal.
+So, when your cursor is on an arrow and that you press <code>ga</code>: →, you'll see at the
+bottom:</p>
+<pre><code>&lt;→&gt; 8594, Hex: 2192, Octal: 20622
+</code></pre>
+<blockquote>
+  <p>Mnemonic: Get ASCII value.
+  ­ from <code>:help :ascii</code></p>
+</blockquote>
+    </div>
+    <p class="tip-date">— Published on Saturday 26 August 2017 at 08:53</p>
+</div>
+<h3 class="tip-title" data-slug="difference-vim-options-readonly-modifiable"> <span>The difference between the VIM options &#39;readonly&#39; and &#39;modifiable&#39;</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=options">options</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>All the <code>readonly</code> does, when enabled, is it prevents you from <em>writing</em> the file
+(you can bypass it by doing <code>:w!</code> though), while <code>modifiable</code>, when <em>disabled</em>
+prevents you from actually <em>editing</em> the buffer.</p>
+    </div>
+    <p class="tip-date">— Published on Saturday 26 August 2017 at 17:38</p>
+</div>
+<h3 class="tip-title" data-slug="vim-digraphs"> <span>Vim digraphs</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=symbols">symbols</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>This is a pretty good thing if you use symbols that aren't on your keyboard, like
+the copyright symbol for example (©).
+Do you know how much time it took me to insert this symbol? Less than a second...
+Do you know how much time it would have took you? Well, depending on your
+internet connection, it might be about 10 seconds.
+So, how did I do that? I just pressed <kbd>ctr+k</kbd>+<kbd>Co</kbd> (in insert
+mode).
+<kbd>ctrl+k</kbd> <em>in insert mode</em> listens for a shortcut, which will then insert
+the corresponding symbol.
+How do you know which one it is? Just look for it in the <code>:digraphs</code> list!
+You can also define your own digraph:</p>
+<pre><code class="vim language-vim">:digraph .. …
+</code></pre>
+<p>You can also specify the decimal value of the symbol, like so:</p>
+<pre><code class="vim language-vim">:diagraph .. <span class="hljs-number">8230</span>
+</code></pre>
+<p>You might be wondering how you get the value... Well, have a look at this: <a href="#get-ascii-value-character-vim">How do I get the ASCII value of a character in vim?</a></p>
+<h2 id="littlecheatsheet">Little cheat sheet</h2>
+<p>Because I'm nice (:smile:), I made a little list of the ones you might be likely
+to use:</p>
+<table>
+<thead>
+<tr>
+<th>Abbreviation</th>
+<th>Symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Co</code></td>
+<td>©</td>
+</tr>
+<tr>
+<td><code>TM</code></td>
+<td>™</td>
+</tr>
+<tr>
+<td><code>-&gt;</code></td>
+<td>→</td>
+</tr>
+<tr>
+<td><code>&lt;-</code></td>
+<td>←</td>
+</tr>
+<tr>
+<td><code>=&gt;</code></td>
+<td>⇒</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>⇐</td>
+</tr>
+<tr>
+<td><code>12</code></td>
+<td>½</td>
+</tr>
+<tr>
+<td><code>22</code></td>
+<td>²</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>«</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>»</td>
+</tr>
+<tr>
+<td><code>Eu</code></td>
+<td>€</td>
+</tr>
+<tr>
+<td><code>$$</code></td>
+<td>£</td>
+</tr>
+<tr>
+<td><code>RT</code></td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>­</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ifyourefrench">If you're french</h3>
+<table>
+<thead>
+<tr>
+<th>Abbreviation</th>
+<th>Symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e!</code></td>
+<td>è</td>
+</tr>
+<tr>
+<td><code>e'</code></td>
+<td>é</td>
+</tr>
+<tr>
+<td><code>e&gt;</code></td>
+<td>ê</td>
+</tr>
+<tr>
+<td><code>oe</code></td>
+<td>œ</td>
+</tr>
+<tr>
+<td>Note: use upper cased abbreviation to get upper cased symbols</td>
+<td></td>
+</tr>
+<tr>
+<td>To learn more: <code>:help digraphs</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+    </div>
+    <p class="tip-date">— Published on Friday 25 August 2017 at 21:12</p>
+</div>
+<h3 class="tip-title" data-slug="dynamicopen-function-vim"> <span>DynamicOpen function in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>I really open my <code>.vimrc</code> often. Too often to have to type <code>:e ~/.vimrc</code> or
+<code>:tabe ~/.vimrc</code>every time.
+Here's a little function that will open a file in a new tab if there isn't enough
+room for a new split, and, you guessed it, in a new <em>vertical</em> split if there
+is.</p>
+<pre><code class="vim language-vim">function! DynamicOpen(file)
+    if winwidth(win_getid()) &amp;gt; 160
+        execute "vsplit ".a:file
+    else
+        execute "tabe ".a:file
+    endif
+endfunction
+nnoremap &amp;lt;leader&amp;gt;ev :call DynamicOpen($MYVIMRC)&amp;lt;CR&amp;gt;
+</code></pre>
+<p>It just checks with width of the current window.
+More infos: <code>:help window-functions</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 10:11</p>
+</div>
+<h3 class="tip-title" data-slug="vim-help-index"> <span>Vim help index</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=doc">doc</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>A very strong point of vim is its documentation. There's just so much of it!!
+So, <strong>use it</strong>
+It doesn't matter if you're an experienced user of vim or a complete beginner,
+there'll be something in there for you to learn <em>for sure</em>.
+Where could you start? Well, at the index of course! Just type <code>:help</code> and hit
+<kbd>enter</kbd> and scroll down a bit.
+See that? You got a few kind of "tutorials" (I especially like the one <code>Clever
+tricks</code>). Looks like you got a lot of learning to go :smile:!</p>
+    </div>
+    <p class="tip-date">— Published on Friday 25 August 2017 at 20:48</p>
+</div>
+<h3 class="tip-title" data-slug="highlight-every-occurrences-word-under-cursor-vim"> <span>Highlight every occurrences of the word under the cursor in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>A feature of Sublime Text I really enjoyed was highlighting every occurrence of
+the selected word.
+So, here's the VIM way. It's not implemented by default, but a bit of vimscript
+never hurt anyone, right?
+So, it's going to be a bit different than Sublime Text's version, because I
+thinks it's even better, but it's up to you to tweak this if you want to ;)
+It's going to be a function that does this:</p>
+<ul>
+<li>if the cursor is on a word that has been highlighted<ul>
+<li>clear the highlights</li></ul></li>
+<li>otherwise, simply highlight the matches
+So, here's our function:</li>
+</ul>
+<pre><code class="vim language-vim">function! ToggleHighlightWordUnderCursor()
+    " get the current matches
+    let matches = getmatches()
+    " get the word under the cursor
+    let cword = expand('&amp;lt;cword&amp;gt;')
+    " if there is some matches AND the cursor is on one of them
+    if !empty(matches) &amp;amp;&amp;amp; printf('\&amp;lt;%s\&amp;gt;', cword) ==# matches[0]['pattern']
+        match none
+        echo "Matches cleared"
+    else
+        " highlight the matches with the 'scope' IncSearch (the one used when you
+        " do a regular search)
+        silent! exe printf('match IncSearch /\&amp;lt;%s\&amp;gt;/', cword)
+        " Extra: echo how many matches there is
+        redir =&amp;gt; nbmatches
+            silent! exe "%s/".cword."//gn"
+        redir END
+        let nbmatches = str2nr(Strip(split(nbmatches, ' ')[0]))
+        echo printf('Found %s match%s', nbmatches, nbmatches &amp;gt; 1 ? 'es' : '')
+        " move cursor back to its previous position, since it has been moved to
+        " the beginning of the line by :match 
+        execute "normal! \&amp;lt;C-o&amp;gt;"
+    endif
+endfunction
+</code></pre>
+<p>And now, just bind it to a shortcut:</p>
+<pre><code class="vim language-vim">nnoremap &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;w :call ToggleHighlightWordUnderCursor()&amp;lt;CR&amp;gt;
+" for convenience
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;W :match none&amp;lt;CR&amp;gt;
+</code></pre>
+<p>So now, just press <kbd>&lt;leader&gt;w</kbd>.
+Pressing <kbd>&lt;leader&gt;W</kbd> will clear the highlights, wherever you are.</p>
+    </div>
+    <p class="tip-date">— Published on Tuesday 22 August 2017 at 19:08</p>
+</div>
+<h3 class="tip-title" data-slug="how-to-insert-the-date-in-vim"> <span>How to insert the date in Vim?</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=date">date</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=strftime">strftime</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>First off, I really don't recommend you use the <code>strftime()</code> function vim has,
+since, as it says in the help message (<code>:help strftime</code>)</p>
+<blockquote>
+  <p>The accepted {format} depends on your system, thus this is not portable!
+  So, a somewhat better solution is to use the <code>date</code> shell command. Yes, it seems
+  even less portable, but at least you know for sure if it's going to work or not
+  (with <code>strftime()</code>, I don't know if vim could get mixed up about the OS when you
+  use a simulate a Unix environment in your terminal)</p>
+</blockquote>
+<pre><code class="sh language-sh">$ date +<span class="hljs-string">"%A %d %B %Y @ %H:%M"</span>
+Sunday 20 August 2017 @ 11:11
+</code></pre>
+<p>So, now, you just need to add this to your <code>.vimrc</code></p>
+<pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">Insert</span><span class="hljs-params">(text)</span></span>
+    <span class="hljs-comment">" a simple function to insert text where the cursor is</span>
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">"normal! \&amp;lt;Esc&amp;gt;a"</span>.<span class="hljs-variable">a:text</span>
+<span class="hljs-keyword">endfunction</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">Strip</span><span class="hljs-params">(text)</span></span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">substitute</span>(<span class="hljs-variable">a:text</span>, <span class="hljs-string">'^\_s*\(.\{-}\)\_s*$'</span>, <span class="hljs-string">'\1'</span>, <span class="hljs-string">''</span>)
+<span class="hljs-keyword">endfunction</span>
+command! InsertDate :<span class="hljs-keyword">call</span> Insert(Strip(<span class="hljs-built_in">system</span>(<span class="hljs-string">'date +"%A %d %B %Y @ %H:%M"'</span>)))
+</code></pre>
+<p>All you need to do now is:</p>
+<pre><code>:InsertDate
+</code></pre>
+<p>And, you'll get the date inserted automatically.
+If you want to customize the format of the date, I'd recommend using a tool like
+<a href="https://strftime.net" target="_blank">strftime.net</a>.</p>
+    </div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:05</p>
+</div>
+<h3 class="tip-title" data-slug="rerun-last-command-bang-vim"> <span>Rerun last command with bang (force) in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=bang">bang</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>Put this little vim script in your <code>.vimrc</code> to rerun the previous command with
+the bang (<code>!</code>) by just typing <code>:Please</code>.</p>
+<pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">BangLastCommand</span><span class="hljs-params">()</span></span>
+    <span class="hljs-comment">" The last command that was run is stored in the register `:` (:registers)</span>
+    <span class="hljs-keyword">let</span> lastcommand = <span class="hljs-keyword">split</span>(@:, <span class="hljs-string">' '</span>)
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">command</span> = lastcommand[<span class="hljs-number">0</span>] . <span class="hljs-string">'! '</span> . <span class="hljs-keyword">join</span>(lastcommand[<span class="hljs-number">1</span>:], <span class="hljs-string">' '</span>)
+    <span class="hljs-keyword">execute</span> <span class="hljs-keyword">command</span> 
+<span class="hljs-keyword">endfunction</span>
+command! Please <span class="hljs-keyword">call</span> BangLastCommand()
+</code></pre>
+<p>So, now, if you do:
+    :e ~/.vimrc
+And you get an error because the current file has to be save, something like:
+    E37: No write since last change (add ! to override)
+You can just do this:
+    :Please
+And it'll run
+    :e! ~/.vimrc
+Pretty cool, hey? You can change the name <code>Please</code> to whatever you want, but it
+has to start with a capitale letter. Here are a few suggestion:</p>
+<ul>
+<li><code>:Sudo</code>: <code>command! Sudo call s:RerunBangLastCommand()</code></li>
+<li><code>:Please!</code>: <code>command! -bang Sudo call s:RerunBangLastCommand()</code>
+Have fun!</li>
+</ul>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 09:09</p>
+</div>
+<h3 class="tip-title" data-slug="current-buffer-only-mapping-vim"> <span>Current buffer only mapping in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=buffer">buffer</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>If you want to set a mapping only for the current buffer in VIM, it's super
+simple: just use the <code>buffer</code> special argument, like so for example:</p>
+<pre><code class="vim language-vim">nnoremap &amp;lt;buffer&amp;gt; ,tip call InsertTipYamlFrontMatter()
+</code></pre>
+<p>Learn more: <code>:help :map-local</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 18:13</p>
+</div>
+<h3 class="tip-title" data-slug="silent-command-line-mapping-vim"> <span>Silent command-line mapping in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=command">command</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>If you want to set a mapping to run something that is echoed into the command
+line (something starting with <code>:</code> or <code>/</code> for example) to <em>not</em> be displayed, you
+can use the special argument <code>silent</code>, like so for example:</p>
+<pre><code class="vim language-vim">map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;r :MyCommand
+</code></pre>
+<p>By the way, <tiplink to="vim-difference-map-noremap.md">you should (almost) always use
+<code>noremap</code></tiplink>.
+Learn more: <code>:help :map-silent</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 17:42</p>
+</div>
+<h3 class="tip-title" data-slug="change-shell-run-external-command-vim"> <span>Change shell used to run external command in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=shell">shell</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=bash">bash</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=windows">windows</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=sh">sh</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>On windows, the cmd sucks. But if you have sh installed from git-for-windows
+for example, you can tell vim to run external commands <code>:!</code>.
+Add this to your <code>.vimrc</code></p>
+<pre><code class="vim language-vim"><span class="hljs-keyword">set</span> <span class="hljs-keyword">shell</span>=<span class="hljs-keyword">sh</span>
+<span class="hljs-keyword">set</span> shellcmdflag=-<span class="hljs-keyword">c</span>
+</code></pre>
+<p>Now, vim won't run external commands like this
+    cmd /c "your command"
+But like this:
+    sh -c "your command"
+So, you can now run Unix commands from VIM.
+To learn more: <code>:help 'shell'</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 10:02</p>
+</div>
+<h3 class="tip-title" data-slug="variable-scopes-vim"> <span>Variable scopes in vim</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=scopes">scopes</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=variable">variable</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>An interesting feature of vim script is variable scoping. Here's a copy-paste
+from the documentation, just in case you never saw it before:</p>
+<pre><code>There are several name spaces for variables.  Which one is to be used is
+specified by what is prepended:
+                 (nothing) In a function: local to a function; otherwise: global
+buffer-variable    b:      Local to the current buffer.
+window-variable    w:      Local to the current window.
+tabpage-variable   t:      Local to the current tab page.
+global-variable    g:      Global.
+local-variable     l:      Local to a function.
+script-variable    s:      Local to a :source'ed Vim script.
+function-argument  a:      Function argument (only inside a function).
+vim-variable       v:      Global, predefined by Vim.
+</code></pre>
+<p><em>From</em> <code>:help internal-variables</code>.
+So, for example, in your <code>~/.vimrc</code>, unless you're in a function, you shouldn't
+prefix plugin's options let's say with <code>g:</code>, you can just write the variable
+name.</p>
+<pre><code class="vim language-vim"><span class="hljs-comment">" no</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:indent_guides_auto_colors</span> = <span class="hljs-number">0</span>
+<span class="hljs-comment">" yes</span>
+<span class="hljs-keyword">let</span> indent_guides_auto_colors = <span class="hljs-number">0</span>
+</code></pre>
+    </div>
+    <p class="tip-date">— Published on Friday 25 August 2017 at 20:34</p>
+</div>
 
-    <script type="text/template" id="tip-template">
-        <h3 class="tip-title" data-slug="{{ slug }}"> <span>{{ title }}</span>
-        <ul class="tip-tags">
-                {{{ formattedtags }}}
-            </ul>
-        </h3>
-        <div class="tip-panel">
-            <div class="tip-content">{{{ content }}}</div>
-            <p class="tip-date">— Published on {{ formatteddate }}</p>
-        </div>
-    </script>
+    </div>
 
     <div id="e404" class="e404 hidden">
         <div class="e404-title">
@@ -46,9 +569,6 @@
     <script type="text/javascript" src="js/shortcuts.js"></script>
     <script type="text/javascript" src="js/event-manager.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
-    <script type="text/javascript">
-        const TIPS = JSON.parse('[{"title":"Current buffer only mapping in VIM","slug":"current-buffer-only-mapping-vim","tags":["vim","map","buffer"],"date":1503817980000,"place":"In a stopped car","---\\r":"","\\r":"","If you want to set a mapping only for the current buffer in VIM, it\'s super\\r":"","simple":"just use the `buffer` special argument, like so for example:","```vim\\r":"","nnoremap <buffer> ,tip call InsertTipYamlFrontMatter()\\r":"","```\\r":"","Learn more":"`:help :map-local`","content":""},{"title":"Silent command-line mapping in VIM","slug":"silent-command-line-mapping-vim","tags":["vim","map","command"],"date":1503816120000,"place":"From a very warm car","---\\r":"","\\r":"","If you want to set a mapping to run something that is echoed into the command\\r":"","line (something starting with `":"` or `/` for example) to *not* be displayed, you","can use the special argument `silent`, like so for example":"","```vim\\r":"","map <silent> <leader>r ":"MyCommand","```\\r":"","By the way, <tip-link to=\\"vim-difference-map-noremap.md\\">you should (almost) always use\\r":"","`noremap`</tip-link>.\\r":"","Learn more":"`:help :map-silent`","content":""},{"title":"DynamicOpen function in VIM","slug":"dynamicopen-function-vim","tags":["vim","vimscript"],"date":1503789060000,"place":"In the car","---\\r":"","\\r":"","I really open my `.vimrc` often. Too often to have to type `":"e ~/.vimrc` or","`":"tabe ~/.vimrc `every time.","Here\'s a little function that will open a file in a new tab if there isn\'t enough\\r":"","room for a new split, and, you guessed it, in a new *vertical* split if there\\r":"","is.\\r":"","```vim\\r":"","function! DynamicOpen(file)\\r":"","    if winwidth(win_getid()) > 160\\r":"","        execute \\"vsplit \\".a":"file","    else\\r":"","        execute \\"tabe \\".a":"file","    endif\\r":"","endfunction\\r":"","nnoremap <leader>ev ":"call DynamicOpen($MYVIMRC)<CR>","```\\r":"","It just checks with width of the current window.\\r":"","More infos":"`:help window-functions`","content":""},{"title":"Change shell used to run external command in VIM","slug":"change-shell-run-external-command-vim","tags":["vim","shell","bash","windows","sh"],"date":1503788520000,"place":"In a car, with the 4 WD on","---\\r":"","\\r":"","On windows, the cmd sucks. But if you have sh installed from git-for-windows\\r":"","for example, you can tell vim to run external commands `":"!`.","Add this to your `.vimrc`\\r":"","```vim\\r":"","set shell=sh\\r":"","set shellcmdflag=-c\\r":"","```\\r":"","Now, vim won\'t run external commands like this\\r":"","    cmd /c \\"your command\\"\\r":"","But like this":"","    sh -c \\"your command\\"\\r":"","So, you can now run Unix commands from VIM.\\r":"","To learn more":"`:help \'shell\'`","content":""},{"title":"Rerun last command with bang (force) in VIM","slug":"rerun-last-command-bang-vim","tags":["vim","vimscript","bang"],"date":1503785340000,"place":"In the car, on a snowy road","---\\r":"","\\r":"","Put this little vim script in your `.vimrc` to rerun the previous command with\\r":"","the bang (`!`) by just typing `":"Please`.","```vim\\r":"","function! BangLastCommand()\\r":"","    \\" The last command that was run is stored in the register `":"` (:registers)","    let lastcommand = split(@":", \' \')","    let command = lastcommand[0] . \'! \' . join(lastcommand[1":"], \' \')","    execute command \\r":"","endfunction\\r":"","command! Please call BangLastCommand()\\r":"","```\\r":"","So, now, if you do":"","    ":"e! ~/.vimrc","And you get an error because the current file has to be save, something like":"","    E37":"No write since last change (add ! to override)","You can just do this":"","And it\'ll run\\r":"","Pretty cool, hey? You can change the name `Please` to whatever you want, but it\\r":"","has to start with a capitale letter. Here are a few suggestion":"","- `":"Please!`: `command! -bang Sudo call s:RerunBangLastCommand()`","Have fun!":"","content":""},{"title":"The difference between the VIM options \'readonly\' and \'modifiable\'","slug":"difference-vim-options-readonly-modifiable","tags":["vim","options"],"date":1503729480000,"place":"In the car, on the way back from x-ski","---\\r":"","\\r":"","All the `readonly` does, when enabled, is it prevents you from *writing* the file\\r":"","(you can bypass it by doing `":"w!` though), while `modifiable`, when *disabled*","prevents you from actually *editing* the buffer.":"","content":""},{"title":"How do I get the ASCII value of a character in vim?","slug":"get-ascii-value-character-vim","tags":["vim","ascii"],"date":1503697980000,"place":"In the car, going to ski","---\\r":"","\\r":"","To get the ASCII value of the character under the cursor, just press `ga` (or\\r":"","run `":"ascii`).","It\'ll print it in three format":"in decimal, hexadecimal and octal.","So, when your cursor is on an arrow and that you press `ga`":"→, you\'ll see at the","bottom":"","```\\r":"","<→> 8594, Hex":"2192, Octal: 20622","> Mnemonic":"Get ASCII value.","> ­ from `":"help :ascii`","content":""},{"title":"Vim digraphs","slug":"vim-digraphs","tags":["vim","symbols"],"date":1503655920000,"---\\r":"","\\r":"","This is a pretty good thing if you use symbols that aren\'t on your keyboard, like\\r":"","the copyright symbol for example (©).\\r":"","Do you know how much time it took me to insert this symbol? Less than a second...\\r":"","Do you know how much time it would have took you? Well, depending on your\\r":"","internet connection, it might be about 10 seconds.\\r":"","So, how did I do that? I just pressed <kbd>ctr+k</kbd>+<kbd>Co</kbd> (in insert\\r":"","mode).\\r":"","<kbd>ctrl+k</kbd> *in insert mode* listens for a shortcut, which will then insert\\r":"","the corresponding symbol.\\r":"","How do you know which one it is? Just look for it in the `":"digraphs` list!","You can also define your own digraph":"","```vim\\r":"","":"diagraph .. 8230","```\\r":"","You can also specify the decimal value of the symbol, like so":"","You might be wondering how you get the value... Well, have a look at this":"<tip-link to=\\"vim-ascii.md\\">","## Little cheat sheet\\r":"","Because I\'m nice (":"smile:), I made a little list of the ones you might be likely","to use":"","| Abbreviation | Symbol |\\r":"","|--------------|--------|\\r":"","| `Co`         | ©      |\\r":"","| `TM`         | ™      |\\r":"","| `->`         | →      |\\r":"","| `<-`         | ←      |\\r":"","| `=>`         | ⇒      |\\r":"","| `<=`         | ⇐      |\\r":"","| `12`         | ½      |\\r":"","| `22`         | ²      |\\r":"","| `<<`         | «      |\\r":"","| `>>`         | »      |\\r":"","| `Eu`         | €      |\\r":"","| `$`         | £      |\\r":"","| `RT`         | √      |\\r":"","| `--`         | ­      |\\r":"","### If you\'re french\\r":"","| `e!`         | è      |\\r":"","| `e\'`         | é      |\\r":"","| `e>`         | ê      |\\r":"","| `oe`         | œ      |\\r":"","Note":"use upper cased abbreviation to get upper cased symbols","To learn more":"`:help digraphs`","content":""},{"title":"Vim help index","slug":"vim-help-index","tags":["vim","doc"],"date":1503654480000,"---\\r":"","\\r":"","A very strong point of vim is its documentation. There\'s just so much of it!!\\r":"","So, **use it**\\r":"","It doesn\'t matter if you\'re an experienced user of vim or a complete beginner,\\r":"","there\'ll be something in there for you to learn *for sure*.\\r":"","Where could you start? Well, at the index of course! Just type `":"help` and hit","<kbd>enter</kbd> and scroll down a bit.\\r":"","See that? You got a few kind of \\"tutorials\\" (I especially like the one `Clever\\r":"","tricks`). Looks like you got a lot of learning to go ":"smile:!","content":""},{"title":"Variable scopes in vim","slug":"variable-scopes-vim","tags":["vim","scopes","variable","vimscript"],"date":1503653640000,"place":"In the car on the way to the snow!","---\\r":"","\\r":"","An interesting feature of vim script is variable scoping. Here\'s a copy-paste\\r":"","from the documentation, just in case you never saw it before":"","```\\r":"","There are several name spaces for variables.  Which one is to be used is\\r":"","specified by what is prepended":"","                 (nothing) In a function":"local to a function; otherwise: global","buffer-variable    b":"Local to the current buffer.","window-variable    w":"Local to the current window.","tabpage-variable   t":"Local to the current tab page.","global-variable    g":"Global.","local-variable     l":"Local to a function.","script-variable    s":"Local to a :source\'ed Vim script.","function-argument  a":"Function argument (only inside a function).","vim-variable       v":"Global, predefined by Vim.","*From* `":"help internal-variables`.","So, for example, in your `~/.vimrc`, unless you\'re in a function, you shouldn\'t\\r":"","prefix plugin\'s options let\'s say with `g":"`, you can just write the variable","name.\\r":"","```vim\\r":"","\\" no\\r":"","let g":"indent_guides_auto_colors = 0","\\" yes\\r":"","let indent_guides_auto_colors = 0\\r":"","```":"","content":""},{"title":"Highlight every occurrences of the word under the cursor in VIM","slug":"highlight-every-occurrences-word-under-cursor-vim","tags":["vim","vimscript"],"date":1503389280000,"content":"<p>A feature of Sublime Text I really enjoyed was highlighting every occurrence of\\nthe selected word.</p>\\n<p>So, here\'s the VIM way. It\'s not implemented by default, but a bit of vimscript\\nnever hurt anyone, right?</p>\\n<p>So, it\'s going to be a bit different than Sublime Text\'s version, because I\\nthinks it\'s even better, but it\'s up to you to tweak this if you want to ;)</p>\\n<p>It\'s going to be a function that does this:</p>\\n<ul>\\n<li>if the cursor is on a word that has been highlighted<ul>\\n<li>clear the highlights</li></ul></li>\\n<li>otherwise, simply highlight the matches</li>\\n</ul>\\n<p>So, here\'s our function:</p>\\n<pre><code class=\\"vim language-vim hljs\\"><span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span>! <span class=\\"hljs-title\\">ToggleHighlightWordUnderCursor</span><span class=\\"hljs-params\\">()</span></span>\\n    <span class=\\"hljs-comment\\">\\" get the current matches</span>\\n    <span class=\\"hljs-keyword\\">let</span> matches = <span class=\\"hljs-built_in\\">getmatches</span>()\\n    <span class=\\"hljs-comment\\">\\" get the word under the cursor</span>\\n    <span class=\\"hljs-keyword\\">let</span> cword = <span class=\\"hljs-built_in\\">expand</span>(<span class=\\"hljs-string\\">\'&lt;cword&gt;\'</span>)\\n    <span class=\\"hljs-comment\\">\\" if there is some matches AND the cursor is on one of them</span>\\n    <span class=\\"hljs-keyword\\">if</span> !empty(matches) &amp;&amp; <span class=\\"hljs-built_in\\">printf</span>(<span class=\\"hljs-string\\">\'\\\\&lt;%s\\\\&gt;\'</span>, cword) ==# matches[<span class=\\"hljs-number\\">0</span>][<span class=\\"hljs-string\\">\'pattern\'</span>]\\n        <span class=\\"hljs-keyword\\">match</span> none\\n        <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">\\"Matches cleared\\"</span>\\n    <span class=\\"hljs-keyword\\">else</span>\\n        <span class=\\"hljs-comment\\">\\" highlight the matches with the \'scope\' IncSearch (the one used when you</span>\\n        <span class=\\"hljs-comment\\">\\" do a regular search)</span>\\n        silent! <span class=\\"hljs-keyword\\">exe</span> <span class=\\"hljs-built_in\\">printf</span>(<span class=\\"hljs-string\\">\'match IncSearch /\\\\&lt;%s\\\\&gt;/\'</span>, cword)\\n        <span class=\\"hljs-comment\\">\\" Extra: echo how many matches there is</span>\\n        <span class=\\"hljs-keyword\\">redir</span> =&gt; nbmatches\\n            silent! <span class=\\"hljs-keyword\\">exe</span> <span class=\\"hljs-string\\">\\"%s/\\"</span>.cword.<span class=\\"hljs-string\\">\\"//gn\\"</span>\\n        <span class=\\"hljs-keyword\\">redir</span> END\\n        <span class=\\"hljs-keyword\\">let</span> nbmatches = <span class=\\"hljs-built_in\\">str2nr</span>(Strip(<span class=\\"hljs-keyword\\">split</span>(nbmatches, <span class=\\"hljs-string\\">\' \'</span>)[<span class=\\"hljs-number\\">0</span>]))\\n        <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-built_in\\">printf</span>(<span class=\\"hljs-string\\">\'Found %s match%s\'</span>, nbmatches, nbmatches &gt; <span class=\\"hljs-number\\">1</span> ? <span class=\\"hljs-string\\">\'es\'</span> : <span class=\\"hljs-string\\">\'\'</span>)\\n        <span class=\\"hljs-comment\\">\\" move cursor back to its previous position, since it has been moved to</span>\\n        <span class=\\"hljs-comment\\">\\" the beginning of the line by :match </span>\\n        <span class=\\"hljs-keyword\\">execute</span> <span class=\\"hljs-string\\">\\"normal! \\\\&lt;C-o&gt;\\"</span>\\n    <span class=\\"hljs-keyword\\">endif</span>\\n<span class=\\"hljs-keyword\\">endfunction</span>\\n</code></pre>\\n<p>And now, just bind it to a shortcut:</p>\\n<pre><code class=\\"vim language-vim hljs\\"><span class=\\"hljs-keyword\\">nnoremap</span> <span class=\\"hljs-symbol\\">&lt;silent&gt;</span> <span class=\\"hljs-symbol\\">&lt;leader&gt;</span><span class=\\"hljs-keyword\\">w</span> :<span class=\\"hljs-keyword\\">call</span> ToggleHighlightWordUnderCursor()<span class=\\"hljs-symbol\\">&lt;CR&gt;</span>\\n<span class=\\"hljs-comment\\">\\" for convenience</span>\\n<span class=\\"hljs-keyword\\">nnoremap</span> <span class=\\"hljs-symbol\\">&lt;silent&gt;</span> <span class=\\"hljs-symbol\\">&lt;leader&gt;</span>W :<span class=\\"hljs-keyword\\">match</span> none<span class=\\"hljs-symbol\\">&lt;CR&gt;</span>\\n</code></pre>\\n<p>So now, just press <kbd>&lt;leader&gt;w</kbd>.</p>\\n<p>Pressing <kbd>&lt;leader&gt;W</kbd> will clear the highlights, wherever you are.</p>"},{"title":"Help","slug":"help","tags":["help"],"date":1503215580000,"content":"<table>\\n<thead>\\n<tr>\\n<th>Key</th>\\n<th>Action</th>\\n</tr>\\n</thead>\\n<tbody>\\n<tr>\\n<td><kbd>j</kbd></td>\\n<td>scroll down</td>\\n</tr>\\n<tr>\\n<td><kbd>k</kbd></td>\\n<td>scroll up</td>\\n</tr>\\n<tr>\\n<td><kbd>l</kbd></td>\\n<td>go down <em>to an older tip</em></td>\\n</tr>\\n<tr>\\n<td><kbd>h</kbd></td>\\n<td>go up <em>to a newer tip</em></td>\\n</tr>\\n<tr>\\n<td><kbd>/</kbd></td>\\n<td>search</td>\\n</tr>\\n</tbody>\\n</table>\\n<h2 id=\\"searchformat\\">Search format</h2>\\n<p>Searching is fairly simple: everything that is between brackets is considered a\\ntag.</p>\\n<ul>\\n<li><code>[python]</code> will show tips that have the tag <code>python</code>.</li>\\n<li><code>[python][itsbuiltin]</code> will show tips that have the both tags <code>python</code> and\\n<code>itsbuiltin</code></li>\\n<li><code>hello</code> will show tips that have their title or their actual content containing the\\nword <code>hello</code> (case insensitive)</li>\\n<li><code>[vim] map</code> will show tips that have the tag <code>vim</code> and that have their title or\\ncontent containing <code>map</code>.</li>\\n</ul>\\n<p>The search becomes case <em>sensitive</em> as soon as there is one capital letter in it.</p>\\n<p>You like this little website? Let me know about it! <a href=\\"https://github.com/math2001/tips\\" target=\\"_blank\\">Star the\\nrepository</a>, or <a href=\\"https://twitter.com/_math2001\\" target=\\"_blank\\">send me a\\ntweet</a>!</p>"},{"title":"Network throttling","slug":"network-throttling","tags":["devtools","chrome"],"date":1503190200000,"content":"<p>Ever wanted to simulate a slow connection? Well, the chrome\'s DevTools makes it\\nvery easy to do!</p>\\n<p>Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the\\n<code>No throttling</code> dropdown menu, and you\'re good to go</p>"},{"title":"How to insert the date in Vim?","slug":"how-to-insert-the-date-in-vim","tags":["vim","date","strftime"],"date":1503187500000,"content":"<p>First off, I really don\'t recommend you use the <code>strftime()</code> function vim has,\\nsince, as it says in the help message (<code>:help strftime</code>)</p>\\n<blockquote>\\n  <p>The accepted {format} depends on your system, thus this is not portable!</p>\\n</blockquote>\\n<p>So, a somewhat better solution is to use the <code>date</code> shell command. Yes, it seems\\neven less portable, but at least you know for sure if it\'s going to work or not\\n(with <code>strftime()</code>, I don\'t know if vim could get mixed up about the OS when you\\nuse a simulate a Unix environment in your terminal)</p>\\n<pre><code class=\\"sh language-sh hljs bash\\">$ date +<span class=\\"hljs-string\\">\\"%A %d %B %Y @ %H:%M\\"</span>\\nSunday 20 August 2017 @ 11:11\\n</code></pre>\\n<p>So, now, you just need to add this to your <code>.vimrc</code></p>\\n<pre><code class=\\"vim language-vim hljs\\"><span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span>! <span class=\\"hljs-title\\">Insert</span><span class=\\"hljs-params\\">(text)</span></span>\\n    <span class=\\"hljs-comment\\">\\" a simple function to insert text where the cursor is</span>\\n    <span class=\\"hljs-keyword\\">execute</span> <span class=\\"hljs-string\\">\\"normal! \\\\&lt;Esc&gt;a\\"</span>.<span class=\\"hljs-variable\\">a:text</span>\\n<span class=\\"hljs-keyword\\">endfunction</span>\\n\\n<span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span>! <span class=\\"hljs-title\\">Strip</span><span class=\\"hljs-params\\">(text)</span></span>\\n    <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">substitute</span>(<span class=\\"hljs-variable\\">a:text</span>, <span class=\\"hljs-string\\">\'^\\\\_s*\\\\(.\\\\{-}\\\\)\\\\_s*$\'</span>, <span class=\\"hljs-string\\">\'\\\\1\'</span>, <span class=\\"hljs-string\\">\'\'</span>)\\n<span class=\\"hljs-keyword\\">endfunction</span>\\n\\ncommand! InsertDate :<span class=\\"hljs-keyword\\">call</span> Insert(Strip(<span class=\\"hljs-built_in\\">system</span>(<span class=\\"hljs-string\\">\'date +\\"%A %d %B %Y @ %H:%M\\"\'</span>)))\\n</code></pre>\\n<p>All you need to do now is:</p>\\n<pre><code class=\\"null hljs clojure\\"><span class=\\"hljs-symbol\\">:InsertDate</span>\\n</code></pre>\\n<p>And, you\'ll get the date inserted automatically.</p>\\n<p>If you want to customize the format of the date, I\'d recommend using a tool like\\n<a href=\\"https://strftime.net\\" target=\\"_blank\\">strftime.net</a>.</p>"},{"title":"The string module","slug":"string-module","tags":["python","itsbuiltin"],"date":1503187320000,"content":"<p>If you want the list of every letter, just do:</p>\\n<pre><code class=\\"python language-python hljs\\"><span class=\\"hljs-meta\\">&gt;&gt;&gt; </span><span class=\\"hljs-keyword\\">import</span> string\\n<span class=\\"hljs-meta\\">&gt;&gt;&gt; </span>print(string.ascii_uppercase)\\nABCDEFGHIJKLMNOPQRSTUVWXYZ\\n</code></pre>"}]')
-    </script>
     <script type="text/javascript" src="js/app.js"></script>
 
 </body>

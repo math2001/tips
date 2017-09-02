@@ -3,10 +3,12 @@ const DEV = true
 if (DEV) 
 console['log']('-'.repeat(100))
 
-const {readdirSync, readFile} = require('fs')
+const {readdirSync, readFile, writeFile} = require('fs')
 const {Converter: MarkdownConverter} = require('showdown')
 const hljs = require('highlight.js')
 const DOMParser = new (require('dom-parser'))()
+const strftime = require('strftime')
+const Mustache = require('mustache')
 
 const HTMLParser = function (html) {
     return DOMParser.parseFromString(html)
@@ -27,20 +29,20 @@ const markdownToHTML = (function () {
 
     return function (markdown) {
         let html = converter.makeHtml(markdown)
-        return html
         const dom = HTMLParser(html)
-        let className, language, highlightedPre
+        let className, language, highlightedPre, code
         for (let pre of dom.getElementsByTagName('pre')) {
-            className = pre.firstChild.getAttribute('class')
+            pre = pre.firstChild
+            className = pre.getAttribute('class')
             if (className === null) continue
             language = className.split(' ').filter(str => str.startsWith('language-'))[0]
             if (language !== undefined) language = language.slice(9)
-            index = html.indexOf(pre.outerHTML)
+            index = html.indexOf(pre.innerHTML)
             if (index === -1) {
-                throw new Error('Cannot find pre block')
+                throw new Error('[Internal error] Cannot find pre block')
             }
-            highlightedPre = hljs.highlight(language, pre.firstChild.innerHTML).value
-            html = stringIndexReplace(html, index, index + pre.outerHTML.length, highlightedPre)
+            highlightedPre = hljs.highlight(language, pre.innerHTML).value
+            html = stringIndexReplace(html, index, index + pre.innerHTML.length, highlightedPre)
         }
         return html
 
@@ -61,9 +63,27 @@ const regexes = {
     yamlFrontMatter: /^---\n[^]*^---\n/m,
     lineendings: /(\r|\n|\r\n|\n\r)+/g
 }
+const baseurl = '/tips/'
+const tipTemplate = `\
+<h3 class="tip-title" data-slug="{{ slug }}"> <span>{{ title }}</span>
+    <ul class="tip-tags">
+        {{ #tags }}
+            <li class="tip-tag"><a href="{{ baseurl }}#?withtag={{ . }}">{{ . }}</a></li>
+        {{ /tags }}
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        {{{ content }}}
+    </div>
+    <p class="tip-date">— Published on {{ formatteddate }}</p>
+</div>`
 
 // functions (tools)
 
+function getExecTime() {
+    return (Date.now() - startTime) + 'ms'
+}
 function getKeyValue(string) {
     let [key, ...values] = string.split(':')
     return [key, values.join(':').trim()]
@@ -101,7 +121,6 @@ function loadTip(file) {
 
 function loadTips() {
     const files = readdirSync('./tips').filter(file => file.endsWith('.md'))
-    console.info('Got dirs...')
     const promises = []
     for (let file of files) {
         promises.push(loadTip(file))
@@ -138,8 +157,10 @@ function parseTip(content, filename) {
         } else {
             console.warn(`The file ${filename} doesn't have any yaml front matter`)
         }
-        content = markdownToHTML(content)
-        return Object.assign({}, frontMatter, { content: content })
+        return Object.assign({}, frontMatter, {
+            content: markdownToHTML(content),
+            formatteddate: strftime('%A %d %B %Y at %H:%M', new Date(frontMatter.date))
+        })
     }
 
     return Object.assign({
@@ -169,7 +190,7 @@ function fileLinks(tips) {
             else actualLink += tip.title
             actualLink += '</a>'
             index = tips[filename].content.indexOf(link.outerHTML)
-            if (index === -1) throw new Error('Cannot find original link to replace it with')
+            if (index === -1) throw new Error('[Internal error] Cannot find original link to replace it with')
             tips[filename].content = stringIndexReplace(tips[filename].content, index,
                                                         index + link.outerHTML.length, actualLink)
         }
@@ -178,6 +199,8 @@ function fileLinks(tips) {
 }
 
 function main() {
+    const getTemplate = loadFile('./index.template.html')
+    const tipInsertTip = 'INSERT_TIPS_HERE'
     loadTips().then(tips => {
         const formattedTips = {}
         for (let tip of tips) {
@@ -186,7 +209,19 @@ function main() {
         }
         return fileLinks(formattedTips)
     }).then(tips => {
-        console.info(`Done parsing ${Object.keys(tips).length} tips in ${Date.now() - startTime }ms.`)
+        console.info(`[${getExecTime()}] Finished parsing ${Object.keys(tips).length} tips.`)
+        let stringtips = ''
+        for (let filename in tips) {
+            stringtips += Mustache.render(tipTemplate, Object.assign({}, tips[filename], { baseurl })) + '\n'
+        }
+        if (index === -1) throw new Error(`Couldn't find '${tipInsertTip}' in template`)
+        getTemplate.then(template => {
+            const index = template.indexOf(tipInsertTip)
+            writeFile('./index.html', stringIndexReplace(template, index, index + tipInsertTip.length, stringtips), 'utf8', err => {
+                if (err) throw err
+                console.info(`[${getExecTime()}] Successfully joined and written tips from template.`)
+            })
+        })
     }).catch(err => {
         console.error(err.stack)
     })
