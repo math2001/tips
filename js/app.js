@@ -34,6 +34,16 @@ const App = {
             EM.fire('navigate', getHashLocation().pathname(this.getTip(direction) || ''))
         })
 
+        EM.on('active-first-tip', () => {
+            let slug
+            try {
+                slug = this.tips.find(tip => !tip.hidden).slug
+            } catch (e) {
+                slug = ''
+            }
+            EM.fire('navigate', getHashLocation().pathname(slug))
+        })
+
     },
 
     getActiveTipIndex() {
