@@ -49,8 +49,8 @@ can use the special argument <code>silent</code>, like so for example:</p>
 <pre><code class="vim language-vim"><span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;leader&gt;</span>r :MyCommand
 </code></pre>
 <p>By the way, <tiplink to="vim-difference-map-noremap.md">you should (almost) always use
-<code>noremap</code></tiplink>.
-Learn more: <code>:help :map-silent</code></p>
+<code>noremap</code></tiplink>.</p>
+<p>Learn more: <code>:help :map-silent</code></p>
     </div>
     <p class="tip-date">— Published on Sunday 27 August 2017 at 17:42</p>
 </div>
@@ -63,8 +63,8 @@ Learn more: <code>:help :map-silent</code></p>
 <div class="tip-panel">
     <div class="tip-content">
         <p>I really open my <code>.vimrc</code> often. Too often to have to type <code>:e ~/.vimrc</code> or
-<code>:tabe ~/.vimrc</code>every time.
-Here's a little function that will open a file in a new tab if there isn't enough
+<code>:tabe ~/.vimrc</code>every time.</p>
+<p>Here's a little function that will open a file in a new tab if there isn't enough
 room for a new split, and, you guessed it, in a new <em>vertical</em> split if there
 is.</p>
 <pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">DynamicOpen</span><span class="hljs-params">(file)</span></span>
@@ -74,10 +74,11 @@ is.</p>
         <span class="hljs-keyword">execute</span> <span class="hljs-string">"tabe "</span>.<span class="hljs-variable">a:file</span>
     <span class="hljs-keyword">endif</span>
 <span class="hljs-keyword">endfunction</span>
+
 <span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;leader&gt;</span>ev :<span class="hljs-keyword">call</span> DynamicOpen($MYVIMRC)<span class="hljs-symbol">&lt;CR&gt;</span>
 </code></pre>
-<p>It just checks with width of the current window.
-More infos: <code>:help window-functions</code></p>
+<p>It just checks with width of the current window.</p>
+<p>More infos: <code>:help window-functions</code></p>
     </div>
     <p class="tip-date">— Published on Sunday 27 August 2017 at 10:11</p>
 </div>
@@ -93,17 +94,19 @@ More infos: <code>:help window-functions</code></p>
 <div class="tip-panel">
     <div class="tip-content">
         <p>On windows, the cmd sucks. But if you have sh installed from git-for-windows
-for example, you can tell vim to run external commands <code>:!</code>.
-Add this to your <code>.vimrc</code></p>
+for example, you can tell vim to run external commands <code>:!</code>.</p>
+<p>Add this to your <code>.vimrc</code></p>
 <pre><code class="vim language-vim"><span class="hljs-keyword">set</span> <span class="hljs-keyword">shell</span>=<span class="hljs-keyword">sh</span>
 <span class="hljs-keyword">set</span> shellcmdflag=-<span class="hljs-keyword">c</span>
 </code></pre>
-<p>Now, vim won't run external commands like this
-    cmd /c "your command"
-But like this:
-    sh -c "your command"
-So, you can now run Unix commands from VIM.
-To learn more: <code>:help 'shell'</code></p>
+<p>Now, vim won't run external commands like this</p>
+<pre><code>cmd /c "your command"
+</code></pre>
+<p>But like this:</p>
+<pre><code>sh -c "your command"
+</code></pre>
+<p>So, you can now run Unix commands from VIM.</p>
+<p>To learn more: <code>:help 'shell'</code></p>
     </div>
     <p class="tip-date">— Published on Sunday 27 August 2017 at 10:02</p>
 </div>
@@ -124,23 +127,28 @@ the bang (<code>!</code>) by just typing <code>:Please</code>.</p>
     <span class="hljs-keyword">let</span> <span class="hljs-keyword">command</span> = lastcommand[<span class="hljs-number">0</span>] . <span class="hljs-string">'! '</span> . <span class="hljs-keyword">join</span>(lastcommand[<span class="hljs-number">1</span>:], <span class="hljs-string">' '</span>)
     <span class="hljs-keyword">execute</span> <span class="hljs-keyword">command</span> 
 <span class="hljs-keyword">endfunction</span>
+
 command! Please <span class="hljs-keyword">call</span> BangLastCommand()
 </code></pre>
-<p>So, now, if you do:
-    :e ~/.vimrc
-And you get an error because the current file has to be save, something like:
-    E37: No write since last change (add ! to override)
-You can just do this:
-    :Please
-And it'll run
-    :e! ~/.vimrc
-Pretty cool, hey? You can change the name <code>Please</code> to whatever you want, but it
+<p>So, now, if you do:</p>
+<pre><code>:e ~/.vimrc
+</code></pre>
+<p>And you get an error because the current file has to be save, something like:</p>
+<pre><code>E37: No write since last change (add ! to override)
+</code></pre>
+<p>You can just do this:</p>
+<pre><code>:Please
+</code></pre>
+<p>And it'll run</p>
+<pre><code>:e! ~/.vimrc
+</code></pre>
+<p>Pretty cool, hey? You can change the name <code>Please</code> to whatever you want, but it
 has to start with a capitale letter. Here are a few suggestion:</p>
 <ul>
 <li><code>:Sudo</code>: <code>command! Sudo call s:RerunBangLastCommand()</code></li>
-<li><code>:Please!</code>: <code>command! -bang Sudo call s:RerunBangLastCommand()</code>
-Have fun!</li>
+<li><code>:Please!</code>: <code>command! -bang Sudo call s:RerunBangLastCommand()</code></li>
 </ul>
+<p>Have fun!</p>
     </div>
     <p class="tip-date">— Published on Sunday 27 August 2017 at 09:09</p>
 </div>
@@ -167,9 +175,9 @@ prevents you from actually <em>editing</em> the buffer.</p>
 <div class="tip-panel">
     <div class="tip-content">
         <p>To get the ASCII value of the character under the cursor, just press <code>ga</code> (or
-run <code>:ascii</code>).
-It'll print it in three format: in decimal, hexadecimal and octal.
-So, when your cursor is on an arrow and that you press <code>ga</code>: →, you'll see at the
+run <code>:ascii</code>).</p>
+<p>It'll print it in three format: in decimal, hexadecimal and octal.</p>
+<p>So, when your cursor is on an arrow and that you press <code>ga</code>: →, you'll see at the
 bottom:</p>
 <pre><code>&lt;→&gt; 8594, Hex: 2192, Octal: 20622
 </code></pre>
@@ -189,23 +197,23 @@ bottom:</p>
 <div class="tip-panel">
     <div class="tip-content">
         <p>This is a pretty good thing if you use symbols that aren't on your keyboard, like
-the copyright symbol for example (©).
-Do you know how much time it took me to insert this symbol? Less than a second...
+the copyright symbol for example (©).</p>
+<p>Do you know how much time it took me to insert this symbol? Less than a second...
 Do you know how much time it would have took you? Well, depending on your
-internet connection, it might be about 10 seconds.
-So, how did I do that? I just pressed <kbd>ctr+k</kbd>+<kbd>Co</kbd> (in insert
-mode).
-<kbd>ctrl+k</kbd> <em>in insert mode</em> listens for a shortcut, which will then insert
-the corresponding symbol.
-How do you know which one it is? Just look for it in the <code>:digraphs</code> list!
-You can also define your own digraph:</p>
+internet connection, it might be about 10 seconds.</p>
+<p>So, how did I do that? I just pressed <kbd>ctr+k</kbd>+<kbd>Co</kbd> (in insert
+mode).</p>
+<p><kbd>ctrl+k</kbd> <em>in insert mode</em> listens for a shortcut, which will then insert
+the corresponding symbol.</p>
+<p>How do you know which one it is? Just look for it in the <code>:digraphs</code> list!</p>
+<p>You can also define your own digraph:</p>
 <pre><code class="vim language-vim">:digraph .. …
 </code></pre>
 <p>You can also specify the decimal value of the symbol, like so:</p>
 <pre><code class="vim language-vim">:diagraph .. <span class="hljs-number">8230</span>
 </code></pre>
 <p>You might be wondering how you get the value... Well, have a look at this: <a href="#get-ascii-value-character-vim">How do I get the ASCII value of a character in vim?</a></p>
-<h2 id="littlecheatsheet">Little cheat sheet</h2>
+<h4 id="littlecheatsheet">Little cheat sheet</h4>
 <p>Because I'm nice (:smile:), I made a little list of the ones you might be likely
 to use:</p>
 <table>
@@ -274,7 +282,7 @@ to use:</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ifyourefrench">If you're french</h3>
+<h5 id="ifyourefrench">If you're french</h5>
 <table>
 <thead>
 <tr>
@@ -299,16 +307,10 @@ to use:</p>
 <td><code>oe</code></td>
 <td>œ</td>
 </tr>
-<tr>
-<td>Note: use upper cased abbreviation to get upper cased symbols</td>
-<td></td>
-</tr>
-<tr>
-<td>To learn more: <code>:help digraphs</code></td>
-<td></td>
-</tr>
 </tbody>
 </table>
+<p>Note: use upper cased abbreviation to get upper cased symbols</p>
+<p>To learn more: <code>:help digraphs</code></p>
     </div>
     <p class="tip-date">— Published on Friday 25 August 2017 at 21:12</p>
 </div>
@@ -320,13 +322,13 @@ to use:</p>
 </h3>
 <div class="tip-panel">
     <div class="tip-content">
-        <p>A very strong point of vim is its documentation. There's just so much of it!!
-So, <strong>use it</strong>
-It doesn't matter if you're an experienced user of vim or a complete beginner,
-there'll be something in there for you to learn <em>for sure</em>.
-Where could you start? Well, at the index of course! Just type <code>:help</code> and hit
-<kbd>enter</kbd> and scroll down a bit.
-See that? You got a few kind of "tutorials" (I especially like the one <code>Clever
+        <p>A very strong point of vim is its documentation. There's just so much of it!!</p>
+<p>So, <strong>use it</strong></p>
+<p>It doesn't matter if you're an experienced user of vim or a complete beginner,
+there'll be something in there for you to learn <em>for sure</em>.</p>
+<p>Where could you start? Well, at the index of course! Just type <code>:help</code> and hit
+<kbd>enter</kbd> and scroll down a bit.</p>
+<p>See that? You got a few kind of "tutorials" (I especially like the one <code>Clever
 tricks</code>). Looks like you got a lot of learning to go :smile:!</p>
     </div>
     <p class="tip-date">— Published on Friday 25 August 2017 at 20:48</p>
@@ -345,6 +347,7 @@ tricks</code>). Looks like you got a lot of learning to go :smile:!</p>
 from the documentation, just in case you never saw it before:</p>
 <pre><code>There are several name spaces for variables.  Which one is to be used is
 specified by what is prepended:
+
                  (nothing) In a function: local to a function; otherwise: global
 buffer-variable    b:      Local to the current buffer.
 window-variable    w:      Local to the current window.
@@ -355,12 +358,13 @@ script-variable    s:      Local to a :source'ed Vim script.
 function-argument  a:      Function argument (only inside a function).
 vim-variable       v:      Global, predefined by Vim.
 </code></pre>
-<p><em>From</em> <code>:help internal-variables</code>.
-So, for example, in your <code>~/.vimrc</code>, unless you're in a function, you shouldn't
+<p><em>From</em> <code>:help internal-variables</code>.</p>
+<p>So, for example, in your <code>~/.vimrc</code>, unless you're in a function, you shouldn't
 prefix plugin's options let's say with <code>g:</code>, you can just write the variable
 name.</p>
 <pre><code class="vim language-vim"><span class="hljs-comment">" no</span>
 <span class="hljs-keyword">let</span> <span class="hljs-variable">g:indent_guides_auto_colors</span> = <span class="hljs-number">0</span>
+
 <span class="hljs-comment">" yes</span>
 <span class="hljs-keyword">let</span> indent_guides_auto_colors = <span class="hljs-number">0</span>
 </code></pre>
@@ -376,18 +380,18 @@ name.</p>
 <div class="tip-panel">
     <div class="tip-content">
         <p>A feature of Sublime Text I really enjoyed was highlighting every occurrence of
-the selected word.
-So, here's the VIM way. It's not implemented by default, but a bit of vimscript
-never hurt anyone, right?
-So, it's going to be a bit different than Sublime Text's version, because I
-thinks it's even better, but it's up to you to tweak this if you want to ;)
-It's going to be a function that does this:</p>
+the selected word.</p>
+<p>So, here's the VIM way. It's not implemented by default, but a bit of vimscript
+never hurt anyone, right?</p>
+<p>So, it's going to be a bit different than Sublime Text's version, because I
+thinks it's even better, but it's up to you to tweak this if you want to ;)</p>
+<p>It's going to be a function that does this:</p>
 <ul>
 <li>if the cursor is on a word that has been highlighted<ul>
 <li>clear the highlights</li></ul></li>
-<li>otherwise, simply highlight the matches
-So, here's our function:</li>
+<li>otherwise, simply highlight the matches</li>
 </ul>
+<p>So, here's our function:</p>
 <pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">ToggleHighlightWordUnderCursor</span><span class="hljs-params">()</span></span>
     <span class="hljs-comment">" get the current matches</span>
     <span class="hljs-keyword">let</span> matches = <span class="hljs-built_in">getmatches</span>()
@@ -418,8 +422,8 @@ So, here's our function:</li>
 <span class="hljs-comment">" for convenience</span>
 <span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;leader&gt;</span>W :<span class="hljs-keyword">match</span> none<span class="hljs-symbol">&lt;CR&gt;</span>
 </code></pre>
-<p>So now, just press <kbd>&lt;leader&gt;w</kbd>.
-Pressing <kbd>&lt;leader&gt;W</kbd> will clear the highlights, wherever you are.</p>
+<p>So now, just press <kbd>&lt;leader&gt;w</kbd>.</p>
+<p>Pressing <kbd>&lt;leader&gt;W</kbd> will clear the highlights, wherever you are.</p>
     </div>
     <p class="tip-date">— Published on Tuesday 22 August 2017 at 19:08</p>
 </div>
@@ -460,7 +464,7 @@ Pressing <kbd>&lt;leader&gt;W</kbd> will clear the highlights, wherever you are.
 </tr>
 </tbody>
 </table>
-<h2 id="searchformat">Search format</h2>
+<h4 id="searchformat">Search format</h4>
 <p>Searching is fairly simple: everything that is between brackets is considered a
 tag.</p>
 <ul>
@@ -470,12 +474,12 @@ tag.</p>
 <li><code>hello</code> will show tips that have their title or their actual content containing the
 word <code>hello</code> (case insensitive)</li>
 <li><code>[vim] map</code> will show tips that have the tag <code>vim</code> and that have their title or
-content containing <code>map</code>.
-The search becomes case <em>sensitive</em> as soon as there is one capital letter in it.
-You like this little website? Let me know about it! <a href="https://github.com/math2001/tips" target="_blank">Star the
-repository</a>, or <a href="https://twitter.com/_math2001" target="_blank">send me a
-tweet</a>!</li>
+content containing <code>map</code>.</li>
 </ul>
+<p>The search becomes case <em>sensitive</em> as soon as there is one capital letter in it.</p>
+<p>You like this little website? Let me know about it! <a href="https://github.com/math2001/tips" target="_blank">Star the
+repository</a>, or <a href="https://twitter.com/_math2001" target="_blank">send me a
+tweet</a>!</p>
     </div>
     <p class="tip-date">— Published on Sunday 20 August 2017 at 18:53</p>
 </div>
@@ -488,8 +492,8 @@ tweet</a>!</li>
 <div class="tip-panel">
     <div class="tip-content">
         <p>Ever wanted to simulate a slow connection? Well, the chrome's DevTools makes it
-very easy to do!
-Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
+very easy to do!</p>
+<p>Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
 <code>No throttling</code> dropdown menu, and you're good to go</p>
     </div>
     <p class="tip-date">— Published on Sunday 20 August 2017 at 11:50</p>
@@ -506,12 +510,12 @@ Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
         <p>First off, I really don't recommend you use the <code>strftime()</code> function vim has,
 since, as it says in the help message (<code>:help strftime</code>)</p>
 <blockquote>
-  <p>The accepted {format} depends on your system, thus this is not portable!
-  So, a somewhat better solution is to use the <code>date</code> shell command. Yes, it seems
-  even less portable, but at least you know for sure if it's going to work or not
-  (with <code>strftime()</code>, I don't know if vim could get mixed up about the OS when you
-  use a simulate a Unix environment in your terminal)</p>
+  <p>The accepted {format} depends on your system, thus this is not portable!</p>
 </blockquote>
+<p>So, a somewhat better solution is to use the <code>date</code> shell command. Yes, it seems
+even less portable, but at least you know for sure if it's going to work or not
+(with <code>strftime()</code>, I don't know if vim could get mixed up about the OS when you
+use a simulate a Unix environment in your terminal)</p>
 <pre><code class="sh language-sh">$ date +<span class="hljs-string">"%A %d %B %Y @ %H:%M"</span>
 Sunday 20 August 2017 @ 11:11
 </code></pre>
@@ -520,16 +524,18 @@ Sunday 20 August 2017 @ 11:11
     <span class="hljs-comment">" a simple function to insert text where the cursor is</span>
     <span class="hljs-keyword">execute</span> <span class="hljs-string">"normal! \&lt;Esc&gt;a"</span>.<span class="hljs-variable">a:text</span>
 <span class="hljs-keyword">endfunction</span>
+
 <span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">Strip</span><span class="hljs-params">(text)</span></span>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">substitute</span>(<span class="hljs-variable">a:text</span>, <span class="hljs-string">'^\_s*\(.\{-}\)\_s*$'</span>, <span class="hljs-string">'\1'</span>, <span class="hljs-string">''</span>)
 <span class="hljs-keyword">endfunction</span>
+
 command! InsertDate :<span class="hljs-keyword">call</span> Insert(Strip(<span class="hljs-built_in">system</span>(<span class="hljs-string">'date +"%A %d %B %Y @ %H:%M"'</span>)))
 </code></pre>
 <p>All you need to do now is:</p>
 <pre><code>:InsertDate
 </code></pre>
-<p>And, you'll get the date inserted automatically.
-If you want to customize the format of the date, I'd recommend using a tool like
+<p>And, you'll get the date inserted automatically.</p>
+<p>If you want to customize the format of the date, I'd recommend using a tool like
 <a href="https://strftime.net" target="_blank">strftime.net</a>.</p>
     </div>
     <p class="tip-date">— Published on Sunday 20 August 2017 at 11:05</p>

@@ -24,7 +24,8 @@ const markdownToHTML = (function () {
         ghMentionsLink: true,
         ghCodeBlocks: true,
         openLinksInNewWindow: true,
-        tasklists: true
+        tasklists: true,
+        headerLevelStart: 3
     })
 
     return function (markdown) {
@@ -54,7 +55,7 @@ const markdownToHTML = (function () {
 const tips = {}
 const regexes = {
     yamlFrontMatter: /^---\n[^]*^---\n/m,
-    lineendings: /(\r|\n|\r\n|\n\r)+/g
+    lineendings: /\r\n|\n\r|\n|\r/g
 }
 const baseurl = '/tips/'
 const tipTemplate = `\
