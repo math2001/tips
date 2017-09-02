@@ -103,6 +103,19 @@ a:hover {
 
 .search-help:hover { background: rgba(0, 0, 0, 0.8); }
 
+.show-tag-list {
+  background: none;
+  border: none;
+  padding: 0;
+  vertical-align: middle;
+  font-size: 0;
+  cursor: pointer;
+}
+
+.show-tag-list svg {
+  fill: #888;
+}
+
 .search-input {
   font-size: 1rem;
   font-family: Inconsolata;
@@ -191,14 +204,14 @@ a:hover {
 .tip-tags {
   vertical-align: middle;
   margin: 0;
-  font-size: .8rem;
-  font-weight: normal;
-  font-family: Inconsolata;
   display: inline-block;
   padding: 0;
 }
 
 .tip-tag {
+  font-size: .8rem;
+  font-weight: normal;
+  font-family: Inconsolata;
   display: inline-block;
   background-color: hsl(197, 84%, 96%);
   border: 1px solid #6ebad8;
@@ -263,6 +276,62 @@ footer a {
 
 footer a:hover {
   color: hsl(180, 2%, 80%);
+}
+
+.tag-list {
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: #fff;
+  box-shadow: 0 0 20px #ccc;
+  visibility: hidden;
+  opacity: 0;
+  margin-left: -10px;
+  transition: visibility 0s linear .2s, opacity .2s linear, margin .2s;
+}
+
+.tag-list.shown {
+  transition-delay: 0s;
+  visibility: visible;
+  opacity: 1;
+  margin-left: 0;
+}
+
+.tag-list .title {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.tag-list .tags {
+  columns: auto 4em;
+}
+
+.tag-list .tip-tag {
+  margin: 5px;
+}
+
+.tag-list ul {
+  padding: 0;
+  margin: 0;
+}
+
+.title { position: relative; }
+
+.title .close {
+  position: absolute;
+  right: -10px;
+  cursor: pointer;
+  font-size: 25px;
+  top: -25px;
+  color: #ccc;
+  user-select: none;
+}
+
+.title .close:hover {
+  color: #555;
 }
 
 .hljs-comment,.hljs-quote{color:#8e908c}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#c82829}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#f5871f}.hljs-attribute{color:#eab700}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#718c00}.hljs-title,.hljs-section{color:#4271ae}.hljs-keyword,.hljs-selector-tag{color:#8959a8}.hljs{display:block;overflow-x:auto;background:white;color:#4d4d4c;padding:0.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}

@@ -165,6 +165,7 @@ const App = {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    TagList.init()
     Shortcuts.init()
     Search.init()
     App.init()

@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carme">
-    <link rel="stylesheet" media="screen and (max-width: 500px)" href="css/phones.css">
+    <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/phones.css">
     <meta charset="utf-8">
     <title>Math2001's tips</title>
 </head>
@@ -14,6 +14,19 @@
             <span id="search-nb-result" class="header-nb-result"></span>
             <input type="search" id="search-input" class="search-input" placeholder="Search a tip...">
             <button id="search-help" class="search-help">?</button>
+            <button id="show-tag-list" class="show-tag-list">
+                <svg viewbox="0 0 25 25" width=25 height=25>
+                    <rect x=0 y=0 width=18 height=7 />
+                    <rect x=20 y=0 width=10 height=7 />
+
+                    <rect x=0 y=9 width=5 height=7 />
+                    <rect x=7 y=9 width=7 height=7 />
+                    <rect x=16 y=9 width=9 height=7 />
+
+                    <rect x=0 y=18 width=10 height=7 />
+                    <rect x=12 y=18 width=13 height=7 />
+                </svg>
+            </button>
         </div></h1>
     </header>
 
@@ -560,6 +573,36 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
     </div>
 
+    <div class="tag-list" id="tag-list">
+        <h4 class="title">Tags <span id="close-tag-list" class="close">&times;</span></h4>
+        <ul class="tags">
+            <li class="tip-tag"><a href="/tips/#?withtag=ascii">ascii</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=bang">bang</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=bash">bash</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=buffer">buffer</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=chrome">chrome</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=command">command</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=date">date</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=devtools">devtools</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=doc">doc</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=help">help</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=itsbuiltin">itsbuiltin</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=map">map</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=options">options</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=python">python</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=scopes">scopes</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=sh">sh</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=shell">shell</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=strftime">strftime</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=symbols">symbols</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=variable">variable</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=vim">vim</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=vimscript">vimscript</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=windows">windows</a></li>
+
+        </ul>
+    </div>
+
     <div id="e404" class="e404 hidden">
         <div class="e404-title">
             <h3 class="e404-text">404</h3>
@@ -579,6 +622,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
     <script type="text/javascript" src="js/shortcuts.js"></script>
     <script type="text/javascript" src="js/event-manager.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/tag-list.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
 </body>

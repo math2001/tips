@@ -194,28 +194,49 @@ function fileLinks(tips) {
 
 function main() {
     const getTemplate = loadFile('./index.template.html')
-    const tipInsertTip = 'INSERT_TIPS_HERE'
+    const insertTipsHere = 'INSERT_TIPS_HERE'
+    const insertTagsHere = 'INSERT_TAGS_HERE'
     loadTips().then(tips => {
-        const formattedTips = {}
+        const formattedTips = {},
+              tags = []
         for (let tip of tips) {
             formattedTips[tip.filename] = tip
             delete formattedTips[tip.filename].filename
+            for (let tag of tip.tags) {
+                if (!tags.includes(tag)) tags.push(tag)
+            }
         }
-        return fileLinks(formattedTips)
-    }).then(tips => {
-        console.info(`[${getExecTime()}] Finished parsing ${Object.keys(tips).length} tips.`)
+
+        tags.sort((a, b) => {
+            [a, b] = [a.toLowerCase(), b.toLowerCase()]
+            if (a < b) return -1
+            else if (a > b) return 1
+            else return 0
+        })
+
+        tips = fileLinks(formattedTips)
+
+        let stringtags = ''
+        for (let tag of tags) {
+            stringtags += `<li class="tip-tag"><a href="${baseurl}#?withtag=${tag}">${tag}</a></li>\n`
+        }
 
         let stringtips = ''
         for (let filename of Object.keys(tips).sort((a, b) => tips[b].date - tips[a].date)) {
             stringtips += Mustache.render(tipTemplate, Object.assign({}, tips[filename], { baseurl })) + '\n'
         }
 
-        if (index === -1) throw new Error(`Couldn't find '${tipInsertTip}' in template`)
+        if (index === -1) throw new Error(`Couldn't find '${insertTipsHere}' in template`)
         getTemplate.then(template => {
-            const index = template.indexOf(tipInsertTip)
-            writeFile('./index.html', stringIndexReplace(template, index, index + tipInsertTip.length, stringtips), 'utf8', err => {
+            let index = template.indexOf(insertTipsHere)
+            let fullContent = stringIndexReplace(template, index, index + insertTipsHere.length, stringtips)
+
+            index = fullContent.indexOf(insertTagsHere)
+            fullContent = stringIndexReplace(fullContent, index, index + insertTagsHere.length, stringtags)
+
+            writeFile('./index.html', fullContent, 'utf8', err => {
                 if (err) throw err
-                console.info(`[${getExecTime()}] Successfully joined and written tips from template.`)
+                console.info(`[${getExecTime()}] Successfully parsed ${Object.keys(tips).length} tips and wrote 'index.html'.`)
             })
         })
     }).catch(err => {
