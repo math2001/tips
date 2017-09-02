@@ -160,6 +160,14 @@ a {
     display: flex;
 }
 
+.tip-title.hidden {
+    display: none;
+}
+
+.tip-title.hidden + .tip-panel {
+    display: none;
+}
+
 .tip-title span { flex: 1; }
 
 .tip-title:hover, .tip-title.active { border-color: #555; }
