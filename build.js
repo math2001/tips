@@ -203,10 +203,12 @@ function main() {
         return fileLinks(formattedTips)
     }).then(tips => {
         console.info(`[${getExecTime()}] Finished parsing ${Object.keys(tips).length} tips.`)
+
         let stringtips = ''
-        for (let filename in tips) {
+        for (let filename of Object.keys(tips).sort((a, b) => tips[b].date - tips[a].date)) {
             stringtips += Mustache.render(tipTemplate, Object.assign({}, tips[filename], { baseurl })) + '\n'
         }
+
         if (index === -1) throw new Error(`Couldn't find '${tipInsertTip}' in template`)
         getTemplate.then(template => {
             const index = template.indexOf(tipInsertTip)

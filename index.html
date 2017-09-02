@@ -17,92 +17,146 @@
     </header>
 
     <div id="tips" class="tips">
-        <h3 class="tip-title" data-slug="help"> <span>Help</span>
+        <h3 class="tip-title" data-slug="current-buffer-only-mapping-vim"> <span>Current buffer only mapping in VIM</span>
     <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=help">help</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=buffer">buffer</a></li>
     </ul>
 </h3>
 <div class="tip-panel">
     <div class="tip-content">
-        <table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><kbd>j</kbd></td>
-<td>scroll down</td>
-</tr>
-<tr>
-<td><kbd>k</kbd></td>
-<td>scroll up</td>
-</tr>
-<tr>
-<td><kbd>l</kbd></td>
-<td>go down <em>to an older tip</em></td>
-</tr>
-<tr>
-<td><kbd>h</kbd></td>
-<td>go up <em>to a newer tip</em></td>
-</tr>
-<tr>
-<td><kbd>/</kbd></td>
-<td>search</td>
-</tr>
-</tbody>
-</table>
-<h2 id="searchformat">Search format</h2>
-<p>Searching is fairly simple: everything that is between brackets is considered a
-tag.</p>
+        <p>If you want to set a mapping only for the current buffer in VIM, it's super
+simple: just use the <code>buffer</code> special argument, like so for example:</p>
+<pre><code class="vim language-vim"><span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> ,tip <span class="hljs-keyword">call</span> InsertTipYamlFrontMatter()
+</code></pre>
+<p>Learn more: <code>:help :map-local</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 18:13</p>
+</div>
+<h3 class="tip-title" data-slug="silent-command-line-mapping-vim"> <span>Silent command-line mapping in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=command">command</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>If you want to set a mapping to run something that is echoed into the command
+line (something starting with <code>:</code> or <code>/</code> for example) to <em>not</em> be displayed, you
+can use the special argument <code>silent</code>, like so for example:</p>
+<pre><code class="vim language-vim"><span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;leader&gt;</span>r :MyCommand
+</code></pre>
+<p>By the way, <tiplink to="vim-difference-map-noremap.md">you should (almost) always use
+<code>noremap</code></tiplink>.
+Learn more: <code>:help :map-silent</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 17:42</p>
+</div>
+<h3 class="tip-title" data-slug="dynamicopen-function-vim"> <span>DynamicOpen function in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>I really open my <code>.vimrc</code> often. Too often to have to type <code>:e ~/.vimrc</code> or
+<code>:tabe ~/.vimrc</code>every time.
+Here's a little function that will open a file in a new tab if there isn't enough
+room for a new split, and, you guessed it, in a new <em>vertical</em> split if there
+is.</p>
+<pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">DynamicOpen</span><span class="hljs-params">(file)</span></span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">winwidth</span>(win_getid()) &gt; <span class="hljs-number">160</span>
+        <span class="hljs-keyword">execute</span> <span class="hljs-string">"vsplit "</span>.<span class="hljs-variable">a:file</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">execute</span> <span class="hljs-string">"tabe "</span>.<span class="hljs-variable">a:file</span>
+    <span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">endfunction</span>
+<span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;leader&gt;</span>ev :<span class="hljs-keyword">call</span> DynamicOpen($MYVIMRC)<span class="hljs-symbol">&lt;CR&gt;</span>
+</code></pre>
+<p>It just checks with width of the current window.
+More infos: <code>:help window-functions</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 10:11</p>
+</div>
+<h3 class="tip-title" data-slug="change-shell-run-external-command-vim"> <span>Change shell used to run external command in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=shell">shell</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=bash">bash</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=windows">windows</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=sh">sh</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>On windows, the cmd sucks. But if you have sh installed from git-for-windows
+for example, you can tell vim to run external commands <code>:!</code>.
+Add this to your <code>.vimrc</code></p>
+<pre><code class="vim language-vim"><span class="hljs-keyword">set</span> <span class="hljs-keyword">shell</span>=<span class="hljs-keyword">sh</span>
+<span class="hljs-keyword">set</span> shellcmdflag=-<span class="hljs-keyword">c</span>
+</code></pre>
+<p>Now, vim won't run external commands like this
+    cmd /c "your command"
+But like this:
+    sh -c "your command"
+So, you can now run Unix commands from VIM.
+To learn more: <code>:help 'shell'</code></p>
+    </div>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 10:02</p>
+</div>
+<h3 class="tip-title" data-slug="rerun-last-command-bang-vim"> <span>Rerun last command with bang (force) in VIM</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=bang">bang</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>Put this little vim script in your <code>.vimrc</code> to rerun the previous command with
+the bang (<code>!</code>) by just typing <code>:Please</code>.</p>
+<pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">BangLastCommand</span><span class="hljs-params">()</span></span>
+    <span class="hljs-comment">" The last command that was run is stored in the register `:` (:registers)</span>
+    <span class="hljs-keyword">let</span> lastcommand = <span class="hljs-keyword">split</span>(@:, <span class="hljs-string">' '</span>)
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">command</span> = lastcommand[<span class="hljs-number">0</span>] . <span class="hljs-string">'! '</span> . <span class="hljs-keyword">join</span>(lastcommand[<span class="hljs-number">1</span>:], <span class="hljs-string">' '</span>)
+    <span class="hljs-keyword">execute</span> <span class="hljs-keyword">command</span> 
+<span class="hljs-keyword">endfunction</span>
+command! Please <span class="hljs-keyword">call</span> BangLastCommand()
+</code></pre>
+<p>So, now, if you do:
+    :e ~/.vimrc
+And you get an error because the current file has to be save, something like:
+    E37: No write since last change (add ! to override)
+You can just do this:
+    :Please
+And it'll run
+    :e! ~/.vimrc
+Pretty cool, hey? You can change the name <code>Please</code> to whatever you want, but it
+has to start with a capitale letter. Here are a few suggestion:</p>
 <ul>
-<li><code>[python]</code> will show tips that have the tag <code>python</code>.</li>
-<li><code>[python][itsbuiltin]</code> will show tips that have the both tags <code>python</code> and
-<code>itsbuiltin</code></li>
-<li><code>hello</code> will show tips that have their title or their actual content containing the
-word <code>hello</code> (case insensitive)</li>
-<li><code>[vim] map</code> will show tips that have the tag <code>vim</code> and that have their title or
-content containing <code>map</code>.
-The search becomes case <em>sensitive</em> as soon as there is one capital letter in it.
-You like this little website? Let me know about it! <a href="https://github.com/math2001/tips" target="_blank">Star the
-repository</a>, or <a href="https://twitter.com/_math2001" target="_blank">send me a
-tweet</a>!</li>
+<li><code>:Sudo</code>: <code>command! Sudo call s:RerunBangLastCommand()</code></li>
+<li><code>:Please!</code>: <code>command! -bang Sudo call s:RerunBangLastCommand()</code>
+Have fun!</li>
 </ul>
     </div>
-    <p class="tip-date">— Published on Sunday 20 August 2017 at 18:53</p>
+    <p class="tip-date">— Published on Sunday 27 August 2017 at 09:09</p>
 </div>
-<h3 class="tip-title" data-slug="network-throttling"> <span>Network throttling</span>
+<h3 class="tip-title" data-slug="difference-vim-options-readonly-modifiable"> <span>The difference between the VIM options &#39;readonly&#39; and &#39;modifiable&#39;</span>
     <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=devtools">devtools</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=chrome">chrome</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=options">options</a></li>
     </ul>
 </h3>
 <div class="tip-panel">
     <div class="tip-content">
-        <p>Ever wanted to simulate a slow connection? Well, the chrome's DevTools makes it
-very easy to do!
-Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
-<code>No throttling</code> dropdown menu, and you're good to go</p>
+        <p>All the <code>readonly</code> does, when enabled, is it prevents you from <em>writing</em> the file
+(you can bypass it by doing <code>:w!</code> though), while <code>modifiable</code>, when <em>disabled</em>
+prevents you from actually <em>editing</em> the buffer.</p>
     </div>
-    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:50</p>
-</div>
-<h3 class="tip-title" data-slug="string-module"> <span>The string module</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=python">python</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=itsbuiltin">itsbuiltin</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>If you want the list of every letter, just do:</p>
-<pre><code class="python language-python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> string
-<span class="hljs-meta">&gt;&gt;&gt; </span>print(string.ascii_uppercase)
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-</code></pre>
-    </div>
-    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:02</p>
+    <p class="tip-date">— Published on Saturday 26 August 2017 at 17:38</p>
 </div>
 <h3 class="tip-title" data-slug="get-ascii-value-character-vim"> <span>How do I get the ASCII value of a character in vim?</span>
     <ul class="tip-tags">
@@ -125,20 +179,6 @@ bottom:</p>
 </blockquote>
     </div>
     <p class="tip-date">— Published on Saturday 26 August 2017 at 08:53</p>
-</div>
-<h3 class="tip-title" data-slug="difference-vim-options-readonly-modifiable"> <span>The difference between the VIM options &#39;readonly&#39; and &#39;modifiable&#39;</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=options">options</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>All the <code>readonly</code> does, when enabled, is it prevents you from <em>writing</em> the file
-(you can bypass it by doing <code>:w!</code> though), while <code>modifiable</code>, when <em>disabled</em>
-prevents you from actually <em>editing</em> the buffer.</p>
-    </div>
-    <p class="tip-date">— Published on Saturday 26 August 2017 at 17:38</p>
 </div>
 <h3 class="tip-title" data-slug="vim-digraphs"> <span>Vim digraphs</span>
     <ul class="tip-tags">
@@ -272,33 +312,6 @@ to use:</p>
     </div>
     <p class="tip-date">— Published on Friday 25 August 2017 at 21:12</p>
 </div>
-<h3 class="tip-title" data-slug="dynamicopen-function-vim"> <span>DynamicOpen function in VIM</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>I really open my <code>.vimrc</code> often. Too often to have to type <code>:e ~/.vimrc</code> or
-<code>:tabe ~/.vimrc</code>every time.
-Here's a little function that will open a file in a new tab if there isn't enough
-room for a new split, and, you guessed it, in a new <em>vertical</em> split if there
-is.</p>
-<pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">DynamicOpen</span><span class="hljs-params">(file)</span></span>
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">winwidth</span>(win_getid()) &gt; <span class="hljs-number">160</span>
-        <span class="hljs-keyword">execute</span> <span class="hljs-string">"vsplit "</span>.<span class="hljs-variable">a:file</span>
-    <span class="hljs-keyword">else</span>
-        <span class="hljs-keyword">execute</span> <span class="hljs-string">"tabe "</span>.<span class="hljs-variable">a:file</span>
-    <span class="hljs-keyword">endif</span>
-<span class="hljs-keyword">endfunction</span>
-<span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;leader&gt;</span>ev :<span class="hljs-keyword">call</span> DynamicOpen($MYVIMRC)<span class="hljs-symbol">&lt;CR&gt;</span>
-</code></pre>
-<p>It just checks with width of the current window.
-More infos: <code>:help window-functions</code></p>
-    </div>
-    <p class="tip-date">— Published on Sunday 27 August 2017 at 10:11</p>
-</div>
 <h3 class="tip-title" data-slug="vim-help-index"> <span>Vim help index</span>
     <ul class="tip-tags">
             <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
@@ -317,6 +330,42 @@ See that? You got a few kind of "tutorials" (I especially like the one <code>Cle
 tricks</code>). Looks like you got a lot of learning to go :smile:!</p>
     </div>
     <p class="tip-date">— Published on Friday 25 August 2017 at 20:48</p>
+</div>
+<h3 class="tip-title" data-slug="variable-scopes-vim"> <span>Variable scopes in vim</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=scopes">scopes</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=variable">variable</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>An interesting feature of vim script is variable scoping. Here's a copy-paste
+from the documentation, just in case you never saw it before:</p>
+<pre><code>There are several name spaces for variables.  Which one is to be used is
+specified by what is prepended:
+                 (nothing) In a function: local to a function; otherwise: global
+buffer-variable    b:      Local to the current buffer.
+window-variable    w:      Local to the current window.
+tabpage-variable   t:      Local to the current tab page.
+global-variable    g:      Global.
+local-variable     l:      Local to a function.
+script-variable    s:      Local to a :source'ed Vim script.
+function-argument  a:      Function argument (only inside a function).
+vim-variable       v:      Global, predefined by Vim.
+</code></pre>
+<p><em>From</em> <code>:help internal-variables</code>.
+So, for example, in your <code>~/.vimrc</code>, unless you're in a function, you shouldn't
+prefix plugin's options let's say with <code>g:</code>, you can just write the variable
+name.</p>
+<pre><code class="vim language-vim"><span class="hljs-comment">" no</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:indent_guides_auto_colors</span> = <span class="hljs-number">0</span>
+<span class="hljs-comment">" yes</span>
+<span class="hljs-keyword">let</span> indent_guides_auto_colors = <span class="hljs-number">0</span>
+</code></pre>
+    </div>
+    <p class="tip-date">— Published on Friday 25 August 2017 at 20:34</p>
 </div>
 <h3 class="tip-title" data-slug="highlight-every-occurrences-word-under-cursor-vim"> <span>Highlight every occurrences of the word under the cursor in VIM</span>
     <ul class="tip-tags">
@@ -374,6 +423,77 @@ Pressing <kbd>&lt;leader&gt;W</kbd> will clear the highlights, wherever you are.
     </div>
     <p class="tip-date">— Published on Tuesday 22 August 2017 at 19:08</p>
 </div>
+<h3 class="tip-title" data-slug="help"> <span>Help</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=help">help</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd>j</kbd></td>
+<td>scroll down</td>
+</tr>
+<tr>
+<td><kbd>k</kbd></td>
+<td>scroll up</td>
+</tr>
+<tr>
+<td><kbd>l</kbd></td>
+<td>go down <em>to an older tip</em></td>
+</tr>
+<tr>
+<td><kbd>h</kbd></td>
+<td>go up <em>to a newer tip</em></td>
+</tr>
+<tr>
+<td><kbd>/</kbd></td>
+<td>search</td>
+</tr>
+</tbody>
+</table>
+<h2 id="searchformat">Search format</h2>
+<p>Searching is fairly simple: everything that is between brackets is considered a
+tag.</p>
+<ul>
+<li><code>[python]</code> will show tips that have the tag <code>python</code>.</li>
+<li><code>[python][itsbuiltin]</code> will show tips that have the both tags <code>python</code> and
+<code>itsbuiltin</code></li>
+<li><code>hello</code> will show tips that have their title or their actual content containing the
+word <code>hello</code> (case insensitive)</li>
+<li><code>[vim] map</code> will show tips that have the tag <code>vim</code> and that have their title or
+content containing <code>map</code>.
+The search becomes case <em>sensitive</em> as soon as there is one capital letter in it.
+You like this little website? Let me know about it! <a href="https://github.com/math2001/tips" target="_blank">Star the
+repository</a>, or <a href="https://twitter.com/_math2001" target="_blank">send me a
+tweet</a>!</li>
+</ul>
+    </div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 18:53</p>
+</div>
+<h3 class="tip-title" data-slug="network-throttling"> <span>Network throttling</span>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=devtools">devtools</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=chrome">chrome</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>Ever wanted to simulate a slow connection? Well, the chrome's DevTools makes it
+very easy to do!
+Open it up (<kbd>ctrl+shift+i</kbd>), in the <code>Network</code> tab, find the
+<code>No throttling</code> dropdown menu, and you're good to go</p>
+    </div>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:50</p>
+</div>
 <h3 class="tip-title" data-slug="how-to-insert-the-date-in-vim"> <span>How to insert the date in Vim?</span>
     <ul class="tip-tags">
             <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
@@ -414,141 +534,21 @@ If you want to customize the format of the date, I'd recommend using a tool like
     </div>
     <p class="tip-date">— Published on Sunday 20 August 2017 at 11:05</p>
 </div>
-<h3 class="tip-title" data-slug="rerun-last-command-bang-vim"> <span>Rerun last command with bang (force) in VIM</span>
+<h3 class="tip-title" data-slug="string-module"> <span>The string module</span>
     <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=bang">bang</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=python">python</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=itsbuiltin">itsbuiltin</a></li>
     </ul>
 </h3>
 <div class="tip-panel">
     <div class="tip-content">
-        <p>Put this little vim script in your <code>.vimrc</code> to rerun the previous command with
-the bang (<code>!</code>) by just typing <code>:Please</code>.</p>
-<pre><code class="vim language-vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">BangLastCommand</span><span class="hljs-params">()</span></span>
-    <span class="hljs-comment">" The last command that was run is stored in the register `:` (:registers)</span>
-    <span class="hljs-keyword">let</span> lastcommand = <span class="hljs-keyword">split</span>(@:, <span class="hljs-string">' '</span>)
-    <span class="hljs-keyword">let</span> <span class="hljs-keyword">command</span> = lastcommand[<span class="hljs-number">0</span>] . <span class="hljs-string">'! '</span> . <span class="hljs-keyword">join</span>(lastcommand[<span class="hljs-number">1</span>:], <span class="hljs-string">' '</span>)
-    <span class="hljs-keyword">execute</span> <span class="hljs-keyword">command</span> 
-<span class="hljs-keyword">endfunction</span>
-command! Please <span class="hljs-keyword">call</span> BangLastCommand()
-</code></pre>
-<p>So, now, if you do:
-    :e ~/.vimrc
-And you get an error because the current file has to be save, something like:
-    E37: No write since last change (add ! to override)
-You can just do this:
-    :Please
-And it'll run
-    :e! ~/.vimrc
-Pretty cool, hey? You can change the name <code>Please</code> to whatever you want, but it
-has to start with a capitale letter. Here are a few suggestion:</p>
-<ul>
-<li><code>:Sudo</code>: <code>command! Sudo call s:RerunBangLastCommand()</code></li>
-<li><code>:Please!</code>: <code>command! -bang Sudo call s:RerunBangLastCommand()</code>
-Have fun!</li>
-</ul>
-    </div>
-    <p class="tip-date">— Published on Sunday 27 August 2017 at 09:09</p>
-</div>
-<h3 class="tip-title" data-slug="current-buffer-only-mapping-vim"> <span>Current buffer only mapping in VIM</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=buffer">buffer</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>If you want to set a mapping only for the current buffer in VIM, it's super
-simple: just use the <code>buffer</code> special argument, like so for example:</p>
-<pre><code class="vim language-vim"><span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> ,tip <span class="hljs-keyword">call</span> InsertTipYamlFrontMatter()
-</code></pre>
-<p>Learn more: <code>:help :map-local</code></p>
-    </div>
-    <p class="tip-date">— Published on Sunday 27 August 2017 at 18:13</p>
-</div>
-<h3 class="tip-title" data-slug="silent-command-line-mapping-vim"> <span>Silent command-line mapping in VIM</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=command">command</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>If you want to set a mapping to run something that is echoed into the command
-line (something starting with <code>:</code> or <code>/</code> for example) to <em>not</em> be displayed, you
-can use the special argument <code>silent</code>, like so for example:</p>
-<pre><code class="vim language-vim"><span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;leader&gt;</span>r :MyCommand
-</code></pre>
-<p>By the way, <tiplink to="vim-difference-map-noremap.md">you should (almost) always use
-<code>noremap</code></tiplink>.
-Learn more: <code>:help :map-silent</code></p>
-    </div>
-    <p class="tip-date">— Published on Sunday 27 August 2017 at 17:42</p>
-</div>
-<h3 class="tip-title" data-slug="change-shell-run-external-command-vim"> <span>Change shell used to run external command in VIM</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=shell">shell</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=bash">bash</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=windows">windows</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=sh">sh</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>On windows, the cmd sucks. But if you have sh installed from git-for-windows
-for example, you can tell vim to run external commands <code>:!</code>.
-Add this to your <code>.vimrc</code></p>
-<pre><code class="vim language-vim"><span class="hljs-keyword">set</span> <span class="hljs-keyword">shell</span>=<span class="hljs-keyword">sh</span>
-<span class="hljs-keyword">set</span> shellcmdflag=-<span class="hljs-keyword">c</span>
-</code></pre>
-<p>Now, vim won't run external commands like this
-    cmd /c "your command"
-But like this:
-    sh -c "your command"
-So, you can now run Unix commands from VIM.
-To learn more: <code>:help 'shell'</code></p>
-    </div>
-    <p class="tip-date">— Published on Sunday 27 August 2017 at 10:02</p>
-</div>
-<h3 class="tip-title" data-slug="variable-scopes-vim"> <span>Variable scopes in vim</span>
-    <ul class="tip-tags">
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=scopes">scopes</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=variable">variable</a></li>
-            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
-    </ul>
-</h3>
-<div class="tip-panel">
-    <div class="tip-content">
-        <p>An interesting feature of vim script is variable scoping. Here's a copy-paste
-from the documentation, just in case you never saw it before:</p>
-<pre><code>There are several name spaces for variables.  Which one is to be used is
-specified by what is prepended:
-                 (nothing) In a function: local to a function; otherwise: global
-buffer-variable    b:      Local to the current buffer.
-window-variable    w:      Local to the current window.
-tabpage-variable   t:      Local to the current tab page.
-global-variable    g:      Global.
-local-variable     l:      Local to a function.
-script-variable    s:      Local to a :source'ed Vim script.
-function-argument  a:      Function argument (only inside a function).
-vim-variable       v:      Global, predefined by Vim.
-</code></pre>
-<p><em>From</em> <code>:help internal-variables</code>.
-So, for example, in your <code>~/.vimrc</code>, unless you're in a function, you shouldn't
-prefix plugin's options let's say with <code>g:</code>, you can just write the variable
-name.</p>
-<pre><code class="vim language-vim"><span class="hljs-comment">" no</span>
-<span class="hljs-keyword">let</span> <span class="hljs-variable">g:indent_guides_auto_colors</span> = <span class="hljs-number">0</span>
-<span class="hljs-comment">" yes</span>
-<span class="hljs-keyword">let</span> indent_guides_auto_colors = <span class="hljs-number">0</span>
+        <p>If you want the list of every letter, just do:</p>
+<pre><code class="python language-python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> string
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(string.ascii_uppercase)
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
 </code></pre>
     </div>
-    <p class="tip-date">— Published on Friday 25 August 2017 at 20:34</p>
+    <p class="tip-date">— Published on Sunday 20 August 2017 at 11:02</p>
 </div>
 
     </div>
