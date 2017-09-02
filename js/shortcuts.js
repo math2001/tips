@@ -19,9 +19,9 @@ const Shortcuts = {
             if (e.which === this.keys.slash) {
                 EM.fire('focus-search', e)
             } else if (e.which === this.keys.l) {
-                EM.fire('active-next-tip')
+                EM.fire('active-tip', 'next')
             } else if (e.which === this.keys.h){
-                EM.fire('active-prev-tip')
+                EM.fire('active-tip', 'prev')
             } else if (e.which === this.keys.j) {
                 window.scrollBy({ top: 200, left: 0, behavior: 'smooth' })
             } else if (e.which === this.keys.k) {

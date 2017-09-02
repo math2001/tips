@@ -29,6 +29,34 @@ const App = {
             const {hashLocation} = args
             this.renderTips(hashLocation.pathname(), this.formatSearchObject(hashLocation.search(true)))
         })
+
+        EM.on('active-tip', direction => {
+            EM.fire('navigate', getHashLocation().pathname(this.getTip(direction) || ''))
+        })
+
+    },
+
+    getActiveTipIndex() {
+        return (this.tips.findIndex(tip => tip.active))
+    },
+
+    getTip(direction) {
+        const currentTipIndex = this.getActiveTipIndex()
+        if (currentTipIndex === this.tips.length - 1 && direction === 'next')
+            return this.tips[currentTipIndex].slug
+        if (this.tips[currentTipIndex]) this.tips[currentTipIndex].active = false
+        try {
+            let activeTip
+            if (direction == 'next') {
+                activeTip = this.tips[currentTipIndex+1]
+            } else if (direction == 'prev') {
+                activeTip = this.tips[currentTipIndex-1]
+            }
+            activeTip.active = true
+            return activeTip.slug
+        } catch (e) {
+            return false
+        }
     },
 
     formatSearchObject(searchObject) {
@@ -47,7 +75,6 @@ const App = {
     },
 
     parseTipsFromHTML() {
-        // return list of { title, wordcontent, tags, DOMElement }
         const tipElements = document.querySelectorAll('.tip-title')
         const tips = []
         for (let tipElement of tipElements) {
@@ -55,7 +82,8 @@ const App = {
                 DOMElement: tipElement,
                 title: tipElement.firstElementChild.textContent,
                 wordcontent: tipElement.nextElementSibling.firstElementChild.textContent.trim(),
-                tags: tipElement.lastElementChild.textContent.trim().split('\n').map(tag => tag.trim())
+                tags: tipElement.lastElementChild.textContent.trim().split('\n').map(tag => tag.trim()),
+                slug: tipElement.getAttribute('data-slug')
             })
         }
         return tips
@@ -75,10 +103,14 @@ const App = {
     },
 
     renderTips(activeSlug, searchObject) {
+        let activeTip
         for (let tip of this.tips) {
             tip.DOMElement.classList.toggle('hidden', this.isHidden(tip, searchObject))
+            if (tip.slug === activeSlug) activeTip = tip
             tip.DOMElement.classList.toggle('active', tip.slug === activeSlug)
         }
+        if (activeTip) activeTip.DOMElement.scrollIntoView({behavior: 'smooth'})
+        else window.scrollTo({top: 0, behavior: 'smooth'})
     }
 
 }
