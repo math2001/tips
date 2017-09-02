@@ -154,21 +154,25 @@ const App = {
 
 }
 
-App.init()
-Search.init()
-Shortcuts.init()
+document.addEventListener('DOMContentLoaded', function () {
 
-EM.on('navigate', uri => {
-    // uri is an URI object, not just a string
-    if (typeof uri === 'string')
-        throw new Error('[Internal error] navigate event takes an URI object, not a string')
-    location.hash = '#' + uri.toString()
-})
+    Shortcuts.init()
+    Search.init()
+    App.init()
 
-window.addEventListener('hashchange', (e) => {
-    EM.fire('navigated', {
-        hashLocation: getHashLocation(),
-        previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))
+    EM.on('navigate', uri => {
+        // uri is an URI object, not just a string
+        if (typeof uri === 'string')
+            throw new Error('[Internal error] navigate event takes an URI object, not a string')
+        location.hash = '#' + uri.toString()
     })
-})
 
+    window.addEventListener('hashchange', (e) => {
+        EM.fire('navigated', {
+            hashLocation: getHashLocation(),
+            previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))
+        })
+    })
+
+    EM.fire('navigated', { hashLocation: getHashLocation() })
+})
