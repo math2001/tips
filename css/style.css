@@ -168,7 +168,10 @@ a {
     display: none;
 }
 
-.tip-title span { flex: 1; }
+.tip-title a {
+  flex: 1;
+  border: none;
+}
 
 .tip-title:hover, .tip-title.active { border-color: #555; }
 

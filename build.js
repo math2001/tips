@@ -59,7 +59,7 @@ const regexes = {
 }
 const baseurl = '/tips/'
 const tipTemplate = `\
-<h3 class="tip-title" data-slug="{{ slug }}"> <span>{{ title }}</span>
+<h3 class="tip-title" data-slug="{{ slug }}"> <a href="{{ baseurl }}#{{ slug }}">{{ title }}</a>
     <ul class="tip-tags">
         {{ #tags }}
             <li class="tip-tag"><a href="{{ baseurl }}#?withtag={{ . }}">{{ . }}</a></li>
