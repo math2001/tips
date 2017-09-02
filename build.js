@@ -30,31 +30,24 @@ const markdownToHTML = (function () {
     return function (markdown) {
         let html = converter.makeHtml(markdown)
         const dom = HTMLParser(html)
-        let className, language, highlightedPre, code
+        let className, language, highlightedPre, toHighlight
         for (let pre of dom.getElementsByTagName('pre')) {
             pre = pre.firstChild
+            toHighlight = pre.innerHTML
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&amp;/g, '&')
             className = pre.getAttribute('class')
             if (className === null) continue
             language = className.split(' ').filter(str => str.startsWith('language-'))[0]
-            if (language !== undefined) language = language.slice(9)
+            if (language === undefined) continue
+            language = language.slice(9)
             index = html.indexOf(pre.innerHTML)
-            if (index === -1) {
-                throw new Error('[Internal error] Cannot find pre block')
-            }
-            highlightedPre = hljs.highlight(language, pre.innerHTML).value
+            if (index === -1) throw new Error('[Internal error] Cannot find pre block')
+            highlightedPre = hljs.highlight(language, toHighlight).value
             html = stringIndexReplace(html, index, index + pre.innerHTML.length, highlightedPre)
         }
         return html
-
-        const nodes = HTMLParser(converter.makeHtml(markdown), 'text/html')
-        const codes = Array.from(nodes.getElementsByTagName('pre'))
-            .map(pre => pre.getElementsByTagName('code')[0])
-            .filter(code => code !== null)
-        for (var i = codes.length - 1; i >= 0; i--) {
-            codes[i].className = codes[i].getAttribute('class')
-            hljs.highlightBlock(codes[i])
-        }
-        return nodes.body.innerHTML
     }
 })()
 
