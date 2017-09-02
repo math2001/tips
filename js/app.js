@@ -32,8 +32,8 @@ const App = {
     },
 
     formatSearchObject(searchObject) {
-        const caseSensitive = hasUpperCaseLetter(searchObject.contains)
-                              || (searchObject.tags && searchObject.tags.some(tag => hasUpperCaseLetter(tag)))
+        const caseSensitive = !!(hasUpperCaseLetter(searchObject.contains)
+                              || (searchObject.tags && searchObject.tags.some(tag => hasUpperCaseLetter(tag))))
         searchObject.caseSensitive = caseSensitive
         if (searchObject.withtag !== undefined) 
             searchObject.withtag = (caseSensitive ?
@@ -68,8 +68,9 @@ const App = {
             return true
         }
         if (searchObject.contains !== undefined
-            && !(searchObject.caseSensitive ? tip.wordcontent :
-                 tip.wordcontent.toLowerCase()).indexOf(searchObject.contains))
+            && (searchObject.caseSensitive ? tip.wordcontent :
+                tip.wordcontent.toLowerCase()).indexOf(searchObject.contains) === -1)
+            return true
         return false
     },
 
