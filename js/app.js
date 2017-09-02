@@ -42,21 +42,27 @@ const App = {
 
     getTip(direction) {
         const currentTipIndex = this.getActiveTipIndex()
-        if (currentTipIndex === this.tips.length - 1 && direction === 'next')
+        if (currentTipIndex === this.tips.filter(tip => !tip.hidden).length - 1 && direction === 'next')
             return this.tips[currentTipIndex].slug
         if (this.tips[currentTipIndex]) this.tips[currentTipIndex].active = false
         try {
             let activeTip
-            if (direction == 'next') {
-                activeTip = this.tips[currentTipIndex+1]
-            } else if (direction == 'prev') {
-                activeTip = this.tips[currentTipIndex-1]
+            for (let i=1;i<this.tips.length;i++) {
+                if (direction == 'next') {
+                    activeTip = this.tips[currentTipIndex+1]
+                } else if (direction == 'prev') {
+                    activeTip = this.tips[currentTipIndex-1]
+                }
+                if (!activeTip.hidden) {
+                    activeTip.active = true
+                    return activeTip.slug
+                }
             }
-            activeTip.active = true
-            return activeTip.slug
+            // here, no tip has been found
         } catch (e) {
             return false
         }
+        return false
     },
 
     formatSearchObject(searchObject) {
@@ -105,10 +111,12 @@ const App = {
     renderTips(activeSlug, searchObject) {
         let activeTip
         for (let tip of this.tips) {
-            tip.DOMElement.classList.toggle('hidden', this.isHidden(tip, searchObject))
+            tip.hidden = this.isHidden(tip, searchObject)
+            tip.DOMElement.classList.toggle('hidden', tip.hidden)
             if (tip.slug === activeSlug) activeTip = tip
             tip.DOMElement.classList.toggle('active', tip.slug === activeSlug)
         }
+
         if (activeTip) activeTip.DOMElement.scrollIntoView({behavior: 'smooth'})
         else window.scrollTo({top: 0, behavior: 'smooth'})
     }
