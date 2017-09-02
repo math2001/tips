@@ -1,212 +1,102 @@
-"use strict";
+// Events
+// - navigate -> changes the hash
+// - navigated -> the hash has been change
 
-const baseurl = '/tips/#'
+// The advantage is that navigated can be fired by the user
+// (if he edits the hash manually) or by JavaScript, and it has
+// the exact same effect
+
+function hasUpperCaseLetter(string, default_=false) {
+    if (typeof string !== 'string') return default_
+    for (let char of string)
+        if (char !== char.toLowerCase()) return true
+    return false
+} 
 
 function getHashLocation() {
     return new URI(location.hash.substring(1))
 }
 
-function hasUpperCaseLetter(string) {
-    for (let char of string) {
-        if (char !== char.toLowerCase()) {
-            return true
-        }
-    }
-    return false
-} 
+const App = {
 
-class Tips {
-
-    static init() {
-        this.element = document.querySelector('#tips')
-        this.el404 = document.querySelector('#e404')
-        this.el404searchInput = document.querySelector('#e404-search-input')
-        this.template = document.querySelector('#tip-template').innerHTML
-        this.bindDOM()
+    init() {
+        this.tips = this.parseTipsFromHTML()
         this.bindEvents()
-        this.tips = this.format(TIPS)
-    }
+    },
 
-    static bindDOM() {
-        document.body.addEventListener('click', (e) => {
-            if (e.target.classList.contains('tip-title')) {
-                const uri = getHashLocation()
-                uri.pathname(e.target.getAttribute('data-slug'))
-                EM.fire('navigate', uri)
-            }
-        })
-    }
-
-    static format(tips) {
-        tips.some(tip => {
-            tip.formatteddate = strftime('%A %d %B %Y at %H:%M', new Date(tip.date))
-            let tags = []
-            tip.tags.some(tag => {
-                tags.push(Mustache.render(`<li class="tip-tag"><a href="{{ baseurl }}?withtag={{ tag }}">{{ tag }}</a></li>`, {tag, baseurl}))
-            })
-            tip.formattedtags = tags.join(' ')
-            // The text that is used when searching
-            tip.searchable = tip.title + ' '
-                             + new DOMParser().parseFromString(tip.content, 'text/html').body.textContent
-        })
-        return tips
-    }
-
-
-    static scrollToActiveTip() {
-        const slug = getHashLocation().pathname().replace('""', '\\"')
-        if (slug === "") {
-            return 
-        }
-        const tip = document.querySelector('.tip-title[data-slug="%s"]'.replace('%s', slug))
-        if (tip === null) {
-            return 
-        }
-        tip.scrollIntoView({
-            behavior: "smooth"
-        })
-        tip.classList.add('active')
-    }
-
-    static render(tips, hashLocation, reRender) {
-        if (tips.length === 0) {
-            this.el404.classList.remove('hidden')
-            this.element.classList.add('hidden')
-            this.el404searchInput.textContent = Search.objectToString(hashLocation)
-            this.e404displayed = true
-            return
-        } else if (this.e404displayed) {
-            this.el404.classList.add('hidden')
-            this.element.classList.remove('hidden')
-            this.e404displayed = false
-        }
-        const activeTip = this.getActiveTip()
-        if (activeTip !== null){
-            activeTip.classList.remove('active')
-        }
-        if (!reRender) {
-            const slug = hashLocation.pathname().replace('"', '\\"')
-            const tip = this.element.querySelector(`[data-slug="${slug}"]`)
-            if (tip === null) return
-            tip.classList.add('active')
-            this.scrollToActiveTip()
-            return
-        }
-        this.element.classList.add('fadeOut')
-        let html = ''
-        const pathname = hashLocation.pathname()
-        tips.some(tip => {
-            html += Mustache.render(this.template, Object.assign({ active: tip.slug === pathname ? ' active' : ''},
-                tip))
-        })
-
-        setTimeout(() => {
-            this.element.classList.remove('fadeOut')
-            this.element.innerHTML = html
-            this.scrollToActiveTip()
-        }, 100)
-    }
-
-    static getAvailableTips(hashLocation) {
-        const args = hashLocation.search(true)
-        const caseSensitive = !!((args.contains && hasUpperCaseLetter(args.contains))
-                              || (args.withtag && hasUpperCaseLetter(args.withtag)))
-        if (args.withtag !== undefined) {
-            args.withtag = args.withtag.split(',')
-        }
-        if (!caseSensitive) {
-            if (args.contains !== undefined) args.contains = args.contains.toLowerCase()
-        }
-        return this.tips.filter(tip => {
-            let tags, searchable
-            if (caseSensitive) {
-                tags = tip.tags
-                searchable = tip.searchable
-            } else {
-                tags = tip.tags.map(tag => tag.toLowerCase())
-                searchable = tip.searchable.toLowerCase()
-            }
-            if (args.withtag !== undefined
-                && !args.withtag.every(tag => tags.indexOf(tag) !== -1)) {
-                return false
-            }
-            if (args.contains !== undefined
-                && searchable.indexOf(args.contains) === -1) {
-                return false
-            }
-
-            return true
-        })
-    }
-
-    static getActiveTip() {
-        return this.element.querySelector('.tip-title.active')
-    }
-
-    static bindEvents() {
-
+    bindEvents() {
         EM.on('navigated', args => {
-            let reRender = false
-            if (typeof args.previousHashLocation === 'undefined') {
-                reRender = true
-            } else if (args.hashLocation.search() !== args.previousHashLocation.search()) {
-                reRender = true
-            }
-            this.render(this.getAvailableTips(args.hashLocation), args.hashLocation, reRender)
+            const {hashLocation} = args
+            this.renderTips(hashLocation.pathname(), this.formatSearchObject(hashLocation.search(true)))
         })
+    },
 
-        EM.on('active-first-tip', () => {
-            const tip = this.element.querySelector('.tip-title')
-            if (tip !== null) tip.classList.add('active')
-        })
+    formatSearchObject(searchObject) {
+        const caseSensitive = hasUpperCaseLetter(searchObject.contains)
+                              || (searchObject.tags && searchObject.tags.some(tag => hasUpperCaseLetter(tag)))
+        searchObject.caseSensitive = caseSensitive
+        if (searchObject.withtag !== undefined) 
+            searchObject.withtag = (caseSensitive ?
+                                    searchObject.withtag :
+                                    searchObject.withtag.toLowerCase()).split(',')
 
+        if (searchObject.contains !== undefined && !caseSensitive)
+            searchObject.contains = searchObject.contains.toLowerCase()
 
-        EM.on('active-next-tip', () => {
-            let activeTip = this.getActiveTip(), nextTip = null
-            if (activeTip === null) {
-                nextTip = this.element.querySelector('.tip-title')
-            } else {
-                try {
-                    nextTip = activeTip
-                        .nextElementSibling
-                        .nextSibling
-                        .nextElementSibling
-                } catch (e) {
-                    return
-                }
-            }
-            if (nextTip !== null) EM.fire('navigate',
-                getHashLocation().pathname(nextTip.getAttribute('data-slug')))
-        })
-        EM.on('active-prev-tip', () => {
-            let activeTip = this.getActiveTip(), previousTip = null
-            if (activeTip === null) {
-                previousTip = this.element.querySelector('.tip-title:last-of-type')
-            } else {
-                try {
-                    previousTip = activeTip.previousElementSibling.previousElementSibling
-                } catch (e) {
-                    return
-                }
-            }
-            if (previousTip !== null) EM.fire('navigate',
-                getHashLocation().pathname(previousTip.getAttribute('data-slug')))
-        })
+        return searchObject
+    },
+
+    parseTipsFromHTML() {
+        // return list of { title, wordcontent, tags, DOMElement }
+        const tipElements = document.querySelectorAll('.tip-title')
+        const tips = []
+        for (let tipElement of tipElements) {
+            tips.push({
+                DOMElement: tipElement,
+                title: tipElement.firstElementChild.textContent,
+                wordcontent: tipElement.nextElementSibling.firstElementChild.textContent.trim(),
+                tags: tipElement.lastElementChild.textContent.trim().split('\n').map(tag => tag.trim())
+            })
+        }
+        return tips
+    },
+
+    isHidden(tip, searchObject) {
+        if (searchObject.withtag !== undefined
+            && !searchObject.withtag.every(tag =>
+                tip.tags.includes(searchObject.caseSensitive ? tag : tag.toLowerCase()))) {
+            return true
+        }
+        if (searchObject.contains !== undefined
+            && !(searchObject.caseSensitive ? tip.wordcontent :
+                 tip.wordcontent.toLowerCase()).indexOf(searchObject.contains))
+        return false
+    },
+
+    renderTips(activeSlug, searchObject) {
+        for (let tip of this.tips) {
+            tip.DOMElement.classList.toggle('hidden', this.isHidden(tip, searchObject))
+            tip.DOMElement.classList.toggle('active', tip.slug === activeSlug)
+        }
     }
 
 }
 
-EM.on('navigate', newHashLocation => {
-    location.hash = '#' + newHashLocation.toString()
-})
-
-Tips.init()
+App.init()
 Search.init()
 Shortcuts.init()
 
-EM.fire('navigated', { hashLocation: getHashLocation() })
+EM.on('navigate', uri => {
+    // uri is an URI object, not just a string
+    if (typeof uri === 'string')
+        throw new Error('[Internal error] navigate event takes an URI object, not a string')
+    location.hash = '#' + uri.toString()
+})
 
-window.addEventListener('hashchange', function (e) {
-    EM.fire('navigated', {hashLocation: getHashLocation(), previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))})
+window.addEventListener('hashchange', (e) => {
+    EM.fire('navigated', {
+        hashLocation: getHashLocation(),
+        previousHashLocation: new URI(new URI(e.oldURL).hash().slice(1))
+    })
 })
 
