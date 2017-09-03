@@ -1,6 +1,9 @@
-h1 {
-    text-align: center;
+header {
+  display: block;
+  text-align: center;
 }
+
+.header-title { margin: 10px 0 20px 0; }
 
 .header-search {
     display: block;
@@ -12,7 +15,6 @@ h1 {
 }
 
 .tips pre {
-  /* white-space: pre-wrap; */
   overflow: auto;
   padding: 20px 0;
 }
