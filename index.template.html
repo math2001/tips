@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carme">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carme">
+    </noscript>
     <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/phones.css">
     <link rel="icon" type="image/png" href="img/mt.png">
+    <style type="text/css">
+        INSERT_CSS_HERE
+    </style>
     <meta charset="utf-8">
     <title>Math2001's tips</title>
 </head>
@@ -65,6 +69,7 @@
         ga('set', 'page', args.hashLocation.toString())
         ga('send', 'pageview')
     })
+    document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carme">'
     </script>
 
 </body>

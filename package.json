@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "node build.js"
+        "build": "node build.js",
+        "server": "browser-sync start --server --files 'index.html, **/*.css, js/*.js' --startPath '../' --no-notify"
     },
     "repository": {
         "type": "git",
@@ -22,7 +23,8 @@
         "url": "https://github.com/math2001/tips/issues"
     },
     "homepage": "https://github.com/math2001/tips#readme",
-    "dependencies": {
+    "devDependencies": {
+        "clean-css": "^4.1.8",
         "dom-parser": "^0.1.5",
         "highlight.js": "^9.12.0",
         "jsdom": "^11.1.0",

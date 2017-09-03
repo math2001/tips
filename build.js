@@ -9,6 +9,7 @@ const hljs = require('highlight.js')
 const DOMParser = new (require('dom-parser'))()
 const strftime = require('strftime')
 const Mustache = require('mustache')
+const CSSCleaner = new (require('clean-css'))({})
 
 const HTMLParser = function (html) {
     return DOMParser.parseFromString(html)
@@ -196,9 +197,15 @@ function main() {
     const getTemplate = loadFile('./index.template.html')
     const insertTipsHere = 'INSERT_TIPS_HERE'
     const insertTagsHere = 'INSERT_TAGS_HERE'
-    loadTips().then(tips => {
+    const insertCSSHere = 'INSERT_CSS_HERE'
+    Promise.all([loadTips(), loadFile('./index.template.html'), loadFile('./css/style.css')]).then(args => {
+        let [tips, template, CSS] = args
+
+        CSS = CSSCleaner.minify(CSS).styles
+
         const formattedTips = {},
               tags = []
+
         for (let tip of tips) {
             formattedTips[tip.filename] = tip
             delete formattedTips[tip.filename].filename
@@ -226,18 +233,25 @@ function main() {
             stringtips += Mustache.render(tipTemplate, Object.assign({}, tips[filename], { baseurl })) + '\n'
         }
 
+
+        let index = template.indexOf(insertTipsHere)
+        let fullContent = stringIndexReplace(template, index, index + insertTipsHere.length, stringtips)
+
         if (index === -1) throw new Error(`Couldn't find '${insertTipsHere}' in template`)
-        getTemplate.then(template => {
-            let index = template.indexOf(insertTipsHere)
-            let fullContent = stringIndexReplace(template, index, index + insertTipsHere.length, stringtips)
 
-            index = fullContent.indexOf(insertTagsHere)
-            fullContent = stringIndexReplace(fullContent, index, index + insertTagsHere.length, stringtags)
+        index = fullContent.indexOf(insertTagsHere)
+        fullContent = stringIndexReplace(fullContent, index, index + insertTagsHere.length, stringtags)
 
-            writeFile('./index.html', fullContent, 'utf8', err => {
-                if (err) throw err
-                console.info(`[${getExecTime()}] Successfully parsed ${Object.keys(tips).length} tips and wrote 'index.html'.`)
-            })
+        if (index === -1) throw new Error(`Couldn't find '${insertTagsHere}' in template`)
+
+        index = fullContent.indexOf(insertCSSHere)
+        fullContent = stringIndexReplace(fullContent, index, index + insertTagsHere.length, CSS)
+
+        if (index === -1) throw new Error(`Couldn't find '${insertCSSHere}' in template`)
+
+        writeFile('./index.html', fullContent, 'utf8', err => {
+            if (err) throw err
+            console.info(`[${getExecTime()}] Successfully parsed ${Object.keys(tips).length} tips and wrote 'index.html'.`)
         })
     }).catch(err => {
         console.error(err.stack)
