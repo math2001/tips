@@ -1,7 +1,22 @@
 h1 {
     text-align: center;
 }
+
 .header-search {
     display: block;
     position: static;
 }
+
+.tips {
+  max-width: 100%;
+}
+
+.tips pre {
+  /* white-space: pre-wrap; */
+  overflow: auto;
+  padding: 20px 0;
+}
+
+.tip-title a { display: inline; }
+.tip-title { display: block; }
+.tip-tags { display: inline; padding-left: 5px; vertical-align: bottom;}
