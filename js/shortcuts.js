@@ -13,7 +13,8 @@ const Shortcuts = {
 
     bindDOM() {
         document.body.addEventListener('keydown', e => {
-            if (document.activeElement !== document.body) {
+            if (document.activeElement !== document.body
+                || e.ctrlKey || e.shiftKey || e.altKey) {
                 return
             }
             if (e.which === this.keys.slash) {
