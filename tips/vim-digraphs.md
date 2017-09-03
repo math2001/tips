@@ -40,32 +40,31 @@ You might be wondering how you get the value... Well, have a look at this: <tipl
 Because I'm nice (:smile:), I made a little list of the ones you might be likely
 to use:
 
-| Abbreviation | Symbol |
-|--------------|--------|
-| `Co`         | ©      |
-| `TM`         | ™      |
-| `->`         | →      |
-| `<-`         | ←      |
-| `=>`         | ⇒      |
-| `<=`         | ⇐      |
-| `12`         | ½      |
-| `22`         | ²      |
-| `<<`         | «      |
-| `>>`         | »      |
-| `Eu`         | €      |
-| `$$`         | £      |
-| `RT`         | √      |
-| `--`         | ­      |
+    Abbreviation → Symbol 
+    Co → ©
+    TM → ™
+    -> → →
+    <- → ←
+    => → ⇒
+    <= → ⇐
+    12 → ½
+    22 → ²
+    << → «
+    >> → »
+    Eu → €
+    $$ → £
+    RT → √
+    -- → ­
 
 
 ### If you're french
 
-| Abbreviation | Symbol |
-|--------------|--------|
-| `e!`         | è      |
-| `e'`         | é      |
-| `e>`         | ê      |
-| `oe`         | œ      |
+    Abbreviation → Symbol
+    e! → è
+    e' → é
+    e> → ê
+    e" → ë
+    oe → œ
 
 Note: use upper cased abbreviation to get upper cased symbols
 
