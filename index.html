@@ -545,7 +545,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
     <script type="text/javascript" src="js/tag-list.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
-    <script>
+    <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -553,6 +553,12 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
     ga('create', 'UA-105735012-1', 'auto');
     ga('send', 'pageview');
+
+    EM.on('navigated', args => { 
+        debugger
+        ga('set', 'page', args.hashLocation.toString())
+        ga('send', 'pageview')
+    })
 
     </script>
 
