@@ -1,0 +1,18 @@
+---
+title: Great resources for VIM users 
+slug: great-resources-for-vim-users
+tags: vim, vimscript, resources
+date: Sunday 03 September 2017 @ 13:38
+---
+
+If you're a VIM user, have a look at these resources, they're pretty good (you
+probably will know some ­ if not all ­ of them)
+
+- [vimcast.org](vimcast.org) Just awesome screencasts and tips in general
+- [vimcolors.com](vimcolors.com) A list of color schemes
+- [vimawesome.com](vimawesome.com) A website listing vim plugin
+- [vi.stackexchange.com](vi.stackexchange.com) The stack exchange website for VIM
+
+
+
+

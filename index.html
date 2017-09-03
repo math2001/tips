@@ -21,7 +21,54 @@
     </header>
 
     <div id="tips" class="tips">
-        <h3 class="tip-title" data-slug="current-buffer-only-mapping-vim"> <a href="&#x2F;tips&#x2F;#current-buffer-only-mapping-vim">Current buffer only mapping in VIM</a>
+        <h3 class="tip-title" data-slug="config-option-vim"> <a href="&#x2F;tips&#x2F;#config-option-vim">The confirm option on VIM</a>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=option">option</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>This is probably one of my favorite option in VIM. Just add this to your <code>.vimrc</code>:</p>
+<pre><code>set confirm
+</code></pre>
+<p>This will affect different command in VIM: instead of just failing (and telling
+you to use force if you want to overwrite), it'll show a confirm "popup" at the
+bottom and you'll be good to do.</p>
+<h4 id="quickexample">Quick example</h4>
+<p>When you want to quit a file that isn't saved, here's what you get:</p>
+<pre><code>E37: No write since last change (add ! to override)
+</code></pre>
+<p>With the <code>confirm</code> option on, you get</p>
+<pre><code>Save changes to "tips/vim-confirm.md"?
+[Y]es, (N)o, (C)ancel:
+</code></pre>
+<p>You just need to press the corresponding letter (not even <kbd>enter</kbd>), and
+you'll be good to go!</p>
+    </div>
+    <p class="tip-date">— Published on Sunday 03 September 2017 at 14:51</p>
+</div>
+<h3 class="tip-title" data-slug="great-resources-for-vim-users"> <a href="&#x2F;tips&#x2F;#great-resources-for-vim-users">Great resources for VIM users</a>
+    <ul class="tip-tags">
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vimscript">vimscript</a></li>
+            <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=resources">resources</a></li>
+    </ul>
+</h3>
+<div class="tip-panel">
+    <div class="tip-content">
+        <p>If you're a VIM user, have a look at these resources, they're pretty good (you
+probably will know some ­ if not all ­ of them)</p>
+<ul>
+<li><a href="vimcast.org" target="_blank">vimcast.org</a> Just awesome screencasts and tips in general</li>
+<li><a href="vimcolors.com" target="_blank">vimcolors.com</a> A list of color schemes</li>
+<li><a href="vimawesome.com" target="_blank">vimawesome.com</a> A website listing vim plugin</li>
+<li><a href="vi.stackexchange.com" target="_blank">vi.stackexchange.com</a> The stack exchange website for VIM</li>
+</ul>
+    </div>
+    <p class="tip-date">— Published on Sunday 03 September 2017 at 13:38</p>
+</div>
+<h3 class="tip-title" data-slug="current-buffer-only-mapping-vim"> <a href="&#x2F;tips&#x2F;#current-buffer-only-mapping-vim">Current buffer only mapping in VIM</a>
     <ul class="tip-tags">
             <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=vim">vim</a></li>
             <li class="tip-tag"><a href="&#x2F;tips&#x2F;#?withtag=map">map</a></li>
@@ -509,8 +556,10 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
 <li class="tip-tag"><a href="/tips/#?withtag=help">help</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=itsbuiltin">itsbuiltin</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=map">map</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=option">option</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=options">options</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=python">python</a></li>
+<li class="tip-tag"><a href="/tips/#?withtag=resources">resources</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=scopes">scopes</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=sh">sh</a></li>
 <li class="tip-tag"><a href="/tips/#?withtag=shell">shell</a></li>
