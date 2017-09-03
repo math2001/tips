@@ -10,6 +10,7 @@ const DOMParser = new (require('dom-parser'))()
 const strftime = require('strftime')
 const Mustache = require('mustache')
 const CSSCleaner = new (require('clean-css'))({})
+const UglifyJS = require('uglify-es')
 
 const HTMLParser = function (html) {
     return DOMParser.parseFromString(html)
@@ -95,6 +96,10 @@ function loadFile(file) {
             resolve(content)
         })
     })
+}
+
+function loadFiles(...filenames) {
+    return Promise.all(filenames.map(filename => loadFile(filename)))
 }
 
 function stringIndexReplace(originalString, indexStart, indexEnd, string) {
@@ -198,8 +203,21 @@ function main() {
     const insertTipsHere = 'INSERT_TIPS_HERE'
     const insertTagsHere = 'INSERT_TAGS_HERE'
     const insertCSSHere = 'INSERT_CSS_HERE'
-    Promise.all([loadTips(), loadFile('./index.template.html'), loadFile('./css/style.css')]).then(args => {
-        let [tips, template, CSS] = args
+    const insertJsHere = 'INSERT_JS_HERE'
+    const files = ['./index.template.html', './css/style.css',
+            'js/smooth-scroll.js', 'js/uri.js', 'js/shortcuts.js', 'js/event-manager.js',
+            'js/search.js', 'js/tag-list.js', 'js/app.js']
+    Promise.all([loadTips(), loadFiles(...files)]).then(args => {
+        let [tips, files] = args
+
+        let [template, CSS, ...jscontent] = files
+        const jsfiles = {}
+
+        for (let index in files.slice(2)) {
+            jsfiles[files[index]] = jscontent[index]
+        }
+
+        const minifiedJs = UglifyJS.minify(jsfiles).code
 
         CSS = CSSCleaner.minify(CSS).styles
 
@@ -247,7 +265,12 @@ function main() {
         index = fullContent.indexOf(insertCSSHere)
         fullContent = stringIndexReplace(fullContent, index, index + insertTagsHere.length, CSS)
 
-        if (index === -1) throw new Error(`Couldn't find '${insertCSSHere}' in template`)
+        if (index === -1) throw new Error(`Couldn't find '${insertTagsHere}' in template`)
+
+        index = fullContent.indexOf(insertJsHere)
+        fullContent = stringIndexReplace(fullContent, index, index + insertJsHere.length, minifiedJs)
+
+        if (index === -1) throw new Error(`Couldn't find '${insertJsHere}' in template`)
 
         writeFile('./index.html', fullContent, 'utf8', err => {
             if (err) throw err
