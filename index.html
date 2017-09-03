@@ -555,11 +555,9 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
     ga('send', 'pageview');
 
     EM.on('navigated', args => { 
-        debugger
         ga('set', 'page', args.hashLocation.toString())
         ga('send', 'pageview')
     })
-
     </script>
 
 </body>
