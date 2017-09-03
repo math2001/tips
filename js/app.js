@@ -50,23 +50,32 @@ const App = {
     },
 
     getActiveTipIndex() {
-        return (this.tips.findIndex(tip => tip.active))
+        return this.tips.findIndex(tip => tip.active)
     },
 
     getTip(direction) {
-        const currentTipIndex = this.getActiveTipIndex()
-        if (currentTipIndex === this.tips.filter(tip => !tip.hidden).length - 1 && direction === 'next')
-            return this.tips[currentTipIndex].slug
-        if (this.tips[currentTipIndex]) this.tips[currentTipIndex].active = false
+        // return slug of next/previous tip
+
+        const tips = this.tips.filter(tip => !tip.hidden)
+        const nbShownTips = tips.length
+
+        const currentTipIndex = tips.findIndex(tip => tip.active)
+        if (currentTipIndex === -1) return tips[0].slug
+
+        if (nbShownTips === 0) return ''
+
+        if (currentTipIndex === nbShownTips - 1 && direction === 'next')
+            return tips[currentTipIndex].slug
+
         try {
             let activeTip
-            for (let i=1;i<this.tips.length;i++) {
+            for (let i=1;i<tips.length;i++) {
                 if (direction == 'next') {
-                    activeTip = this.tips[currentTipIndex+1]
+                    activeTip = tips[currentTipIndex+i]
                 } else if (direction == 'prev') {
-                    activeTip = this.tips[currentTipIndex-1]
+                    activeTip = tips[currentTipIndex-i]
                 }
-                if (!activeTip.hidden) {
+                if (activeTip.hidden === false) {
                     activeTip.active = true
                     return activeTip.slug
                 }
@@ -102,7 +111,9 @@ const App = {
                 title: tipElement.firstElementChild.textContent,
                 wordcontent: tipElement.nextElementSibling.firstElementChild.textContent.trim(),
                 tags: tipElement.lastElementChild.textContent.trim().split('\n').map(tag => tag.trim()),
-                slug: tipElement.getAttribute('data-slug')
+                slug: tipElement.getAttribute('data-slug'),
+                active: tipElement.classList.contains('active'),
+                hidden: tipElement.classList.contains('hidden')
             })
         }
         return tips
@@ -126,6 +137,7 @@ const App = {
     },
 
     renderTips(activeSlug, searchObject) {
+        // render tips and update this.tips
         if (this.errorShown) {
             this.errorShown = false
             this.error404.classList.add('hidden')
@@ -133,6 +145,7 @@ const App = {
 
         let activeTip, tipCount = 0
         for (let tip of this.tips) {
+            tip.active = false
             tip.hidden = this.isHidden(tip, searchObject)
             tip.DOMElement.classList.toggle('hidden', tip.hidden)
 
@@ -143,8 +156,10 @@ const App = {
             if (!tip.hidden) tipCount += 1
         }
 
-        if (activeTip) activeTip.DOMElement.scrollIntoView({behavior: 'smooth'})
-        else window.scrollTo({top: 0, behavior: 'smooth'})
+        if (activeTip) {
+            activeTip.DOMElement.scrollIntoView({behavior: 'smooth'})
+            activeTip.active = true
+        } else window.scrollTo({top: 0, behavior: 'smooth'})
 
         if (this.isSearching(searchObject)) {
             if (tipCount === 0) this.show404()
