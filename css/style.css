@@ -277,10 +277,6 @@ footer a {
   border: none;
 }
 
-footer a:hover {
-  color: hsl(180, 2%, 80%);
-}
-
 .tag-list {
   padding: 20px;
   position: fixed;
