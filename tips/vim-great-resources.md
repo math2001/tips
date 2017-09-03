@@ -8,10 +8,10 @@ date: Sunday 03 September 2017 @ 13:38
 If you're a VIM user, have a look at these resources, they're pretty good (you
 probably will know some ­ if not all ­ of them)
 
-- [vimcast.org](vimcast.org) Just awesome screencasts and tips in general
-- [vimcolors.com](vimcolors.com) A list of color schemes
-- [vimawesome.com](vimawesome.com) A website listing vim plugin
-- [vi.stackexchange.com](vi.stackexchange.com) The stack exchange website for VIM
+- [vimcast.org](http://vimcast.org) Just awesome screencasts and tips in general
+- [vimcolors.com](http://vimcolors.com) A list of color schemes
+- [vimawesome.com](http://vimawesome.com) A website listing vim plugin
+- [vi.stackexchange.com](http://vi.stackexchange.com) The stack exchange website for VIM
 
 
 
